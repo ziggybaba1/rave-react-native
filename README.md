@@ -1,5 +1,5 @@
 # Rave By Flutterwave React Native Component
-This is the react native SDK for [Rave By Flutterwave.](https://rave.flutterwave.com)
+This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave.com)
 
 <img src="https://raw.githubusercontent.com/kingflamez/Rave-React-Native-Component/master/img/rnapp.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
 
@@ -38,7 +38,7 @@ This is the react native SDK for [Rave By Flutterwave.](https://rave.flutterwave
 
 ## How It Works
 
-This is a simple demonstration of how to set up rave react native SDK for your app.
+This is a simple demonstration of how to set up a simple react native App and integrate `rave react native SDK` into it.
 
 To set up rave react native SDK into your application, follow the process below;
 
@@ -53,23 +53,25 @@ To set up rave react native SDK into your application, follow the process below;
 
 - Install the Expo client or mobile application from [Apple Store](https://itunes.apple.com/app/apple-store/id982107779) or [Playstore](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)
 
-- Open the Expo client app you installed on your mobile phone, then scan the barcode displaying on your terminal
+- Open the Expo client app you installed on your mobile phone, then scan the barcode displaying on the terminal on your PC.
 
--
+- If successfully scanned and built, your app should load up on your mobile phone with the result in the image below;
 
+<img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/app-working.png" style="text-align: center; max-height: 400;" alt="React Native Test UI">
 
-[Yarn](https://yarnpkg.com/en/docs/install) or [Node](https://nodejs.org/en/)
+### Integrating Rave React Native
 
-You can pull in react-native-rave via npm:
+You can pull in react-native-rave into app with the steps below;
 
-> npm install react-native-rave --save
+- Change directory into your current project directory from your terminal and enter this command:
+  > npm install react-native-rave --save
+  ### OR
+  > yarn add react-native-rave
 
-### OR
+  <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/npm-install-rave.PNG" style="text-align: center; max-height: 150;" alt="npm-install-rave image">
 
-> yarn add react-native-rave
-
-`Note:` To use yarn on your machine [click here](https://yarnpkg.com/en/docs/install)
-
+  `Note:` To use `Yarn` on your machine [Click Here](https://yarnpkg.com/en/docs/install)
+  
 ## Deployment
 
 > To Implement Rave By Flutterwave easily with React Native
