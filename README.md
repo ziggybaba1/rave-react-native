@@ -36,7 +36,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 - To ensure you have `Node` and `npm` installed, enter the following command into your terminal/command prompt `node -v` and `npm -v` respectively.
 
-- To install `react native` on your machine you can use `npm install -g expo-cli` to install the [Expo CLI](https://expo.io/) command line utility to get you started quickly or use this command `npm install -g react-native-cli` to install the [react native CLI](https://facebook.github.io/react-native/docs/getting-started.html).
+- To run `react native` on your machine you can use `npm install -g expo-cli` to install [Expo CLI](https://expo.io/) a command line utility to get you started quickly or use this command `npm install -g react-native-cli` to install the [react native CLI](https://facebook.github.io/react-native/docs/getting-started.html).
 
 ## Deployment
 
@@ -49,11 +49,10 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 ## How It Works
 
-This is a simple demonstration of how to set up a simple react native App and integrate `rave react native SDK` into it.
+This is a simple demonstration of how to set up a simple react native app and integrate `rave react native SDK` into it.
 
-To set up rave react native SDK into your application, follow the process below;
+Using the [Expo CLI](https://expo.io/) command line utility, Enter the following command to get started:
 
-- Using the [Expo CLI](https://expo.io/) command line utility, enter the following:
   - `expo init AwesomeProject`
   - `cd AwesomeProject`
   - `npm start`
@@ -552,7 +551,7 @@ app.post("/webhook-url", function (req, res) {
 ## Contributions
 
 - You can contribute to this project by forking it.
-- In case of any found bug, you are welcome to fix and send a PR.
+- In case of any found bug, you are welcome to report the issue or fix and send a PR.
 
 
 
