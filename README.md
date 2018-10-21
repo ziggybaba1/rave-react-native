@@ -45,6 +45,8 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 - Go to [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis) to get your **`LIVE`** public and private key
 - Go to [Flutterwave Rave Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) to get your **`TEST`** public and private key
 
+`NOTE: ` Set the production option to `true` or `false` depending on your deployment environment.
+
 ## How It Works
 
 This is a simple demonstration of how to set up a simple react native App and integrate `rave react native SDK` into it.
