@@ -8,12 +8,14 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 ## Table Of Content
 
 - [Getting Started](#getting-started)
-- [How It Works](#how-it-works)
-- [Installation](#installation)
+- [Installations](#installations)
 - [Deployment](#deployment)
+- [How It Works](#how-it-works)
 - [Payment Options](#payment-options)
 - [Usage](#usage)
 - [Parameters Table](#parameters-table)
+- [Setting up a Simple Webhook with NodeJs and ngrok](#setting-up-a-simple-webhook-with-nodejs-and-ngrok)
+- [Contributions](#contributions)
 
 ## Getting Started
 
@@ -35,6 +37,13 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 - To ensure you have `Node` and `npm` installed, enter the following command into your terminal/command prompt `node -v` and `npm -v` respectively.
 
 - To install `react native` on your machine you can use `npm install -g expo-cli` to install the [Expo CLI](https://expo.io/) command line utility to get you started quickly or use this command `npm install -g react-native-cli` to install the [react native CLI](https://facebook.github.io/react-native/docs/getting-started.html).
+
+## Deployment
+
+> To Implement Rave By Flutterwave easily with React Native
+
+- Go to [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis) to get your **`LIVE`** public and private key
+- Go to [Flutterwave Rave Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) to get your **`TEST`** public and private key
 
 ## How It Works
 
@@ -77,18 +86,13 @@ You can pull in react-native-rave into app with the steps below;
 <p>
 
   `Note:` To use `Yarn` on your machine [Click Here](https://yarnpkg.com/en/docs/install)
-  
-## Deployment
 
-> To Implement Rave By Flutterwave easily with React Native
-
-- Go to [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis) to get your **`LIVE`** public and private key
-- Go to [Flutterwave Rave Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) to get your **`TEST`** public and private key
+  Next use any of the payment options by following the processes  [below](#payment-options).
 
 
 ## Payment Options
 
-### The payment option includes:
+### The payment options includes:
 - Card Payments
 - Account Payments
 - Mpesa 
@@ -98,13 +102,15 @@ You can pull in react-native-rave into app with the steps below;
 
 ## Usage
 
-### 1.  import Rave Component
+### Card Payments
+
+#### 1.  import Rave Component 
 
 ```javascript
 import Rave from 'react-native-rave';
 ```
 
-### 2. Set your success and failure methods
+#### 2. Set your success and failure methods
 
 ```javascript
  constructor(props) {
@@ -123,11 +129,7 @@ import Rave from 'react-native-rave';
   }
 ```
 
-### 3. Use the rave component with any of the payment props options displayed below
-
-#### Card Payments
-
-To process card transactions, use this payment props
+#### 3. Use component with the card payment props
 
 ```javascript
 render() {
@@ -152,9 +154,34 @@ render() {
 }
 ```
 
-#### Account Payments
+### Account Payments
 
-To process account payments, use this payment props option.
+#### 1.  import Rave Component 
+
+```javascript
+import Rave from 'react-native-rave';
+```
+
+#### 2. Set your success and failure methods
+
+```javascript
+ constructor(props) {
+    super(props);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
+  }
+
+  onSuccess(data) {
+    console.log("success", data);
+
+  }
+
+  onFailure(data) {
+    console.log("error", data);
+  }
+```
+
+#### 3. Use component with the account payment props
 
 ```javascript
 render() {
@@ -169,7 +196,7 @@ render() {
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
         paymenttype="account" // or set to both for card and account transactions
-        page="card"
+        page="account"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
@@ -178,11 +205,37 @@ render() {
   );
 }
 ```
-#### Mpesa
 
-To process mpesa transactions, use this payment props option.
+### Mpesa
 
 `Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa).
+
+#### 1.  import Rave Component 
+
+```javascript
+import Rave from 'react-native-rave';
+```
+
+#### 2. Set your success and failure methods
+
+```javascript
+ constructor(props) {
+    super(props);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
+  }
+
+  onSuccess(data) {
+    console.log("success", data);
+
+  }
+
+  onFailure(data) {
+    console.log("error", data);
+  }
+```
+
+#### 3. Use component with the mpesa payment props
 
 ```javascript
 render() {
@@ -196,6 +249,7 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
+        redirect_url = "https://rave-webhook.herokuapp.com/receivepayment" // set your webhook url here to receive the webhook request from rave server for handling
         paymenttype="mpesa" // or set to both for card and mpesa transactions
         page="mpesa"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -206,11 +260,36 @@ render() {
   );
 }
 ```
-#### Ghana Mobile Money
-
-To process ghana mobile money transactions, use this payment props option.
+### Ghana Mobile Money
 
 `Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney)
+
+#### 1.  import Rave Component 
+
+```javascript
+import Rave from 'react-native-rave';
+```
+
+#### 2. Set your success and failure methods
+
+```javascript
+ constructor(props) {
+    super(props);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
+  }
+
+  onSuccess(data) {
+    console.log("success", data);
+
+  }
+
+  onFailure(data) {
+    console.log("error", data);
+  }
+```
+
+#### 3. Use component with the Ghana Mobile Money payment props
 
 ```javascript
 render() {
@@ -224,7 +303,7 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
-        redirect_url = "https://rave-webhook.herokuapp.com/receivepayment"
+        redirect_url = "https://rave-webhook.herokuapp.com/receivepayment" // set your webhook url here to receive the webhook request from rave server for handling
         paymenttype="mobilemoneygh" // or set to both for card and mobile money transactions
         page="mobilemoneygh"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -236,9 +315,10 @@ render() {
 }
 ```
 
-#### USSD Payments
+### USSD Payments
 
 `Note:` This is still in development.
+
 
 ## Parameters Table
 
@@ -263,4 +343,214 @@ render() {
 | production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
 | redirect_url      |   Set your webhook url here if you want rave to send you webhook request to the provided webhook url to check the transaction status when a customer completes a transaction  | `String` | Required for Mpesa and Ghana Mobile Money ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
+
+
+## Setting up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request
+
+#### `Note:` You might need to set up a webhook in any language of your choice mostly for mpesa and ghana mobile money to receive webhook request from Rave to verify transactions that occurs on your mobile application.
+
+- Ensure you have `node` and `npm`, if not [refer to this for guide](#installation).
+- Next register and download `ngrok` [here](https://ngrok.com/download).
+- Extract the downloaded `ngrok` zip file.
+- Set your extracted ngrok file to be globally available i.e set it to the environment variable by following this steps:
+  - For Windows Users - On the search box on the taskbar of your desktop, search for System (control panel).
+  - Click the advanced settings and then click on the environment settings, like this:
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/env-variable.PNG" style="max-height: 400;" alt="Environment variable settings">
+  </p>
+
+  - Next copy the ngrok file path and add it to the enviroment variable by selecting the path option and clicking on the edit option like this: 
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-settings.PNG" style="max-height: 400;" alt="Adding ngrok to the environment variable">
+  </p>
+
+- For MacOS users, to have ngrok up and running on your machine, follow the process:
+  - Download `ngrok` [here](https://ngrok.com/download)
+  - Extract/Unzip it to your Applications directory
+  - Create a symlink to ngrok with this commands from your terminal:
+    -  cd into your local bin directory
+
+        `cd /usr/local/bin`
+    - create symlink
+    
+    `ln -s /project/ngrok ngrok`
+    - now cd into your project directory and reference it like this from you terminal
+    - /project/ngrok `[your-port-number]`
+
+- To ensure this successfully done, enter the command `ngrok -v` in your Terminal, it should return the version of ngrok you are currently running.
+
+- Next create a new project directory, change directory into it and create a new project file like this:
+
+  - `mkdir test-webhook`
+  - `cd test-webhook`
+  - `touch app.js`
+- Next run `npm init` command to initialize your package.json file
+- From your project directory install the following `npm` dependencies:
+
+  - `npm install body-parser --save`
+  - `npm install express --save`
+  - `npm install express-winston --save`
+  - `npm install winson --save`
+  - `npm install -g nodemon` - an npm package for debugging node applications.
+
+  Or Simply: `npm install body-parser express express-winston winston --save`
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/npm-packages.PNG" style="max-height: 400;" alt="Adding ngrok to the environment variable">
+  </p>
+
+
+- Next we add the following code into our `app.js` file.
+
+```
+
+'use strict';
+
+var express = require('express'); // required to create http server
+
+var bodyParser = require('body-parser'); // required to parse incoming request bodies
+
+var app = express().use(bodyParser.json()); // creates http server
+
+var winston = require('winston'); // data logger
+
+var expressWinston = require('express-winston'); // required to create middleware that log http requests
+
+expressWinston.requestWhitelist.push('body');
+
+var port = process.env.PORT || 3000 // setting the port the server should listen to
+
+process.env.SECRET_HASH = "your-rave-secret-hash" // making the secret hash you set in your dashboard available to the environment variable
+
+app.set('port', port);
+
+
+/*
+
+using expressWinston to parse webhook http requests to display in the console 
+and also write into a .txt file called combined.log.
+
+*/
+
+app.use(expressWinston.logger({
+    transports: [
+        new winston.transports.Console({
+            json: true,
+            colorize: true
+        }),
+        new winston.transports.File({
+            filename: 'combined.log',
+            level: 'info'
+        })
+    ]
+}));
+
+
+//  Set the port the server is listening to 
+
+app.listen(port, () => console.log('Webhook is listening to port: ' + port));
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+
+/* 
+
+Set your webhook url that will be listening for webhook requests from rave server,
+This is required to receive requests from rave server, verify the data received from the server 
+and give your customer value.
+
+*/
+
+app.post("/webhook-url", function (req, res) {
+    /* It is a good idea to log all events received. Add code *
+     * here to log the signature and body to db or file       */
+
+    // retrieve the signature from the header
+    var hash = req.headers["verif-hash"];
+
+    if (!hash) {
+        // discard the request,only a post with rave signature header gets our attention 
+        res.send({
+            status: "error"
+        });
+        process.exit(0)
+        // console.log("no hash sent");
+    }
+
+    // Get signature stored as env variable on your server
+    const secret_hash = process.env.SECRET_HASH;
+
+    // check if signatures match
+
+    if (hash !== secret_hash) {
+        // silently exit, or check that you are passing the write hash on your server.
+        res.send({
+            status: "error"
+        });
+        process.exit(0)
+        // console.log("has is not equal sent");
+    }
+
+    // Retrieve the request's body
+    var request_json = req.body;
+
+    // Give value to your customer but don't give any output
+    // Remember that this is a call from rave's servers and 
+    // Your customer is not seeing the response here at all
+
+    res.send(200);
+});
+
+```
+- Now let's make our webhook url from our local server available to public on the internet with `ngrok`, we are using this method for this project.
+  `Note:` This can also be achieved by making your webhook url available to live cloud services like `heroku`, `AWS`, `netlify` and `so on`.
+
+- First we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-dashboard-auth.PNG" style="max-height: 400;" alt="authorization-token image">
+  </p>
+
+- Then from the terminal change directory into the project directory and run the following command:
+  - `ngrok authtoken <your-authorization-token>` 
+  - `ngrok http <the-port-number-your-node-app-is-listening-to>`
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-auth.PNG" style="max-height: 400;" alt="ngrok-auth-token">
+  </p>
+
+- If successfully setup, your webhook url should be up live with this result: 
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-start.PNG" style="max-height: 400;" alt="ngrok-start">
+  </p>
+
+- Now we add our webhook url to our rave dashboard here:
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/rave-webhook-url.png" style="max-height: 400;" alt="rave-webhook-url">
+  </p>
+
+- Then from the terminal we need to run `nodemon app.js` to start our application and ensure it is listening to the port like this:
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/nodemon-listening.png" style="max-height: 400;" alt="nodemon listening">
+  </p>
+- Our webhook is now up and running to receive webhook requests from rave.
+
+### Example of a webhook request sent by `Rave` to our Node App running on ngrok from a Ghana Mobile Money Transaction
+
+  <p align="center">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/webhook-req.png" style="max-height: 400;" alt="webhook-request">
+  </p>
+
+
+## Contributions
+
+- You can contribute to this project by forking it.
+- In case of any found bug, you are welcome to fix and send a PR.
+
+
 
