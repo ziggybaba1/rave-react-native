@@ -14,7 +14,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 - [Payment Options](#payment-options)
 - [Usage](#usage)
 - [Parameters Table](#parameters-table)
-- [Setting up a Simple Webhook with NodeJs and ngrok](#setting-up-a-simple-webhook-with-nodejs-and-ngrok)
+- [Setting Up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request](#setting-up-a-simple-webhook-with-nodejs-and-ngrok-to-receive-rave-webhook-request)
 - [Contributions](#contributions)
 
 ## Getting Started
@@ -345,9 +345,9 @@ render() {
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
 
 
-## Setting up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request
+## Setting Up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request
 
-#### `Note:` You might need to set up a webhook in any language of your choice mostly for mpesa and ghana mobile money to receive webhook request from Rave to verify transactions that occurs on your mobile application.
+#### `Note:` You might need to set up a webhook mostly for mpesa and ghana mobile money to receive webhook request from Rave to verify transactions that occurs on your mobile application.
 
 - Ensure you have `node` and `npm`, if not [refer to this for guide](#installation).
 - Next register and download `ngrok` [here](https://ngrok.com/download).
@@ -510,7 +510,7 @@ app.post("/webhook-url", function (req, res) {
 - First we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-dashboard-auth.PNG" style="max-height: 400;" alt="authorization-token image">
+    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-dashboard-auth.png" style="max-height: 400;" alt="ngrok authorization token">
   </p>
 
 - Then from the terminal change directory into the project directory and run the following command:
@@ -540,7 +540,7 @@ app.post("/webhook-url", function (req, res) {
   </p>
 - Our webhook is now up and running to receive webhook requests from rave.
 
-### Example of a webhook request sent by `Rave` to our Node App running on ngrok from a Ghana Mobile Money Transaction
+### Example of a Webhook request sent by `Rave` to our Node App running on ngrok from a Ghana Mobile Money Transaction
 
   <p align="center">
     <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/webhook-req.png" style="max-height: 400;" alt="webhook-request">
