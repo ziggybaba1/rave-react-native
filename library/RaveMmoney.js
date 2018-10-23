@@ -3,7 +3,7 @@ import encryption from 'react-native-rave/library/encryption';
 import Axios from 'axios';
 
 export default class RaveMmoney {
-  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, redirect_url, is_mobile_money_gh = true }) {
+  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_gh = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -37,9 +37,6 @@ export default class RaveMmoney {
     this.getLastname = function () {
       return lastname;
     }
-    this.getRedirect = function () {
-      return redirect_url;
-    }
     this.getMmoney = function () {
       return is_mobile_money_gh;
     }
@@ -56,7 +53,6 @@ export default class RaveMmoney {
       payload.email = this.getEmail();
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
-      payload.redirect_url = this.getRedirect();
       payload.is_mobile_money_gh = this.getMmoney();
       
 

@@ -250,7 +250,6 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
-        redirect_url = "https://rave-webhook.herokuapp.com/receivepayment" // set your webhook url here to receive the webhook request from rave server for handling
         paymenttype="mpesa" // or set to both for card and mpesa transactions
         page="mpesa"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -304,7 +303,6 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
-        redirect_url = "https://rave-webhook.herokuapp.com/receivepayment" // set your webhook url here to receive the webhook request from rave server for handling
         paymenttype="mobilemoneygh" // or set to both for card and mobile money transactions
         page="mobilemoneygh"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -342,13 +340,12 @@ render() {
 | paymenttype      |  This is the payment type ['both','card', 'account', 'mpesa', 'mobilemoneygh'] | `String` | Required ('if non set, it sets a default payment type to both')
 | page      |  This sets the current state of payment page based on the payment type currently implemented ['both','card', 'account', 'mpesa', 'mobilemoneygh']  | `String` | Required ('If no value is set, card page is set by default')
 | production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
-| redirect_url      |   Set your webhook url here if you want rave to send you webhook request to the provided webhook url to check the transaction status when a customer completes a transaction  | `String` | Required for Mpesa and Ghana Mobile Money ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
 
 
 ## Setting Up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request
 
-#### `Note:` You might need to set up a webhook mostly for mpesa and ghana mobile money to receive webhook request from Rave to verify transactions that occurs on your mobile application.
+#### `Note:` You might need to set up a webhook for all your transactions but mostly for mpesa and ghana mobile money to receive webhook request from Rave to verify transactions that occurs on your mobile application.
 
 - Ensure you have `node` and `npm`, if not [refer to this for guide](#installation).
 - Next register and download `ngrok` [here](https://ngrok.com/download).
