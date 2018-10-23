@@ -2,8 +2,8 @@ import React from 'react'
 import encryption from './encryption';
 import Axios from 'axios';
 
-export default class RavePayment {
-  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, email, firstname, lastname }) {
+export default class RaveMpesa {
+  constructor({ publicKey, secretKey, production = false, currency = "KES", country = "KE", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, is_mpesa = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -34,6 +34,9 @@ export default class RavePayment {
     this.getLastname = function () {
       return lastname;
     }
+    this.getMpesa = function () {
+      return is_mpesa;
+    }
 
 
     this.charge = function (payload) {
@@ -46,6 +49,7 @@ export default class RavePayment {
       payload.email = this.getEmail();
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
+      payload.is_mpesa = this.getMpesa();
       
 
       return new Promise((resolve, reject) => {
@@ -81,103 +85,6 @@ export default class RavePayment {
       }).catch((e) => {
         reject(e);
       })
-    })
-  }
-
-  pinCharge(payload) {
-    payload.suggested_auth = "PIN";
-
-    return new Promise((resolve, reject) => {
-      this.charge(payload).then((response) => {
-        resolve(response);
-      }).catch((e) => {
-        reject(e);
-      })
-    })
-  }
-
-  avsCharge(payload, suggested_auth) {
-    payload.suggested_auth = suggested_auth;
-
-    return new Promise((resolve, reject) => {
-      this.charge(payload).then((response) => {
-        resolve(response);
-      }).catch((e) => {
-        reject(e);
-      })
-    })
-  }
-
-  validate({ transaction_reference, otp }) {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/validatecharge',
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          PBFPubKey: this.getPublicKey(),
-          transaction_reference,
-          otp
-        },
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
-
-  validateAccount({ transactionreference, otp }) {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/validate',
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          PBFPubKey: this.getPublicKey(),
-          transactionreference,
-          otp
-        },
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
-
-  getCardFees({ amount, currency, card6 }) {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/fee',
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          PBFPubKey: this.getPublicKey(),
-          amount,
-          currency,
-          card6
-        },
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
     })
   }
 
@@ -228,25 +135,5 @@ export default class RavePayment {
         });
     })
   }
-
-  listBanks() {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/flwpbf-banks.js?json=1',
-        method: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
-
 
 }
