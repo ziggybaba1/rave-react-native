@@ -77,7 +77,8 @@ export default class index extends Component {
               [{
                   text: 'Ok',
                   onPress: () => this.setState({
-                    loading: false
+                    loading: false,
+                    phonenumber: ''
                   })
                 },
               ], {
@@ -108,7 +109,8 @@ export default class index extends Component {
           [{
             text: 'Ok',
             onPress: () => this.setState({
-              loading: false
+              loading: false,
+              phonenumber: ''
             })
           }, ], {
             cancelable: false
@@ -121,7 +123,8 @@ export default class index extends Component {
           [{
             text: 'Retry',
             onPress: () => this.setState({
-              loading: false
+              loading: false,
+              phonenumber: ''
             })
           }, ], {
             cancelable: false
@@ -133,6 +136,18 @@ export default class index extends Component {
         loading: false
       })
       this.props.onFailure(e);
+      Alert.alert(
+        e.status,
+        e.message,
+        [{
+            text: 'Ok',
+            onPress: () => this.setState({
+              loading: false,
+              phonenumber: ''
+            })
+          },
+        ]
+      )
     })
 
   }

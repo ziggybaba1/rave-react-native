@@ -3,7 +3,7 @@ import encryption from './encryption';
 import Axios from 'axios';
 
 export default class RaveMpesa {
-  constructor({ publicKey, secretKey, production = false, currency = "KES", country = "KE", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, is_mpesa = true }) {
+  constructor({ publicKey, secretKey, production = false, currency = "KES", country = "KE", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, is_mpesa = true, is_mpesa_lipa = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -37,6 +37,9 @@ export default class RaveMpesa {
     this.getMpesa = function () {
       return is_mpesa;
     }
+    this.getMpesaLipa = function () {
+      return is_mpesa_lipa;
+    }
 
 
     this.charge = function (payload) {
@@ -50,6 +53,7 @@ export default class RaveMpesa {
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
       payload.is_mpesa = this.getMpesa();
+      payload.is_mpesa_lipa = this.getMpesaLipa();
       
 
       return new Promise((resolve, reject) => {
