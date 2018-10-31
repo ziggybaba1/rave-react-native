@@ -1,9 +1,9 @@
 # Rave By Flutterwave React Native Component
 This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave.com)
 
-<img src="https://raw.githubusercontent.com/kingflamez/Rave-React-Native-Component/master/img/rnapp.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/rnapp.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
 
-<img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/GhMoney-Mpesa.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/GhMoney-Mpesa.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
 
 ## Table Of Content
 
@@ -60,7 +60,7 @@ Using the [Expo CLI](https://expo.io/) command line utility, Enter the following
 - You should get this from your terminal:
 
 <p align="center">
-  <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/expo-barcode.PNG" style="max-height: 400;" alt="Expo Terminal Image">
+  <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752765/rave-react-native/expo-barcode.png" style="max-height: 400;" alt="Expo Terminal Image">
 </p>
 
 - Install the Expo client or mobile application from [Apple Store](https://itunes.apple.com/app/apple-store/id982107779) or [Playstore](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)
@@ -70,7 +70,7 @@ Using the [Expo CLI](https://expo.io/) command line utility, Enter the following
 - If successfully scanned and built, your app should load up on your mobile phone with the result in the image below;
 
 <p align="center">
-<img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/app-working.png" style="max-height: 400;" alt="React Native Test UI">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/app-working.png" style="max-height: 400;" alt="React Native Test UI">
 </p>
 
 ### Integrating Rave React Native
@@ -83,7 +83,7 @@ You can pull in react-native-rave into app with the steps below;
   > yarn add react-native-rave
 
 <p align="center">
-  <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/npm-install-rave.PNG" style="max-height: 150;" alt="npm-install-rave image">
+  <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/npm-install-rave.png" style="max-height: 150;" alt="npm-install-rave image">
 <p>
 
   `Note:` To use `Yarn` on your machine [Click Here](https://yarnpkg.com/en/docs/install)
@@ -355,13 +355,13 @@ render() {
   - Click the advanced settings and then click on the environment settings, like this:
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/env-variable.PNG" style="max-height: 400;" alt="Environment variable settings">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/env-variable.png" style="max-height: 400;" alt="Environment variable settings">
   </p>
 
   - Next copy the ngrok file path and add it to the enviroment variable by selecting the path option and clicking on the edit option like this: 
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-settings.PNG" style="max-height: 400;" alt="Adding ngrok to the environment variable">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/ngrok-settings.png" style="max-height: 400;" alt="Adding ngrok to the environment variable">
   </p>
 
 - For MacOS users, to have ngrok up and running on your machine, follow the process:
@@ -396,7 +396,7 @@ render() {
   Or Simply: `npm install body-parser express express-winston winston --save`
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/npm-packages.PNG" style="max-height: 400;" alt="Adding ngrok to the environment variable">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/npm-packages.png" style="max-height: 400;" alt="Adding ngrok to the environment variable">
   </p>
 
 
@@ -508,7 +508,7 @@ app.post("/webhook-url", function (req, res) {
 - First we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-dashboard-auth.png" style="max-height: 400;" alt="ngrok authorization token">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752763/rave-react-native/ngrok-dashboard-auth.png" style="max-height: 400;" alt="ngrok authorization token">
   </p>
 
 - Then from the terminal change directory into the project directory and run the following command:
@@ -516,32 +516,32 @@ app.post("/webhook-url", function (req, res) {
   - `ngrok http <the-port-number-your-node-app-is-listening-to>`
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-auth.PNG" style="max-height: 400;" alt="ngrok-auth-token">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752763/rave-react-native/ngrok-auth.png" style="max-height: 400;" alt="ngrok-auth-token">
   </p>
 
 - If successfully setup, your webhook url should be up live with this result: 
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/ngrok-start.PNG" style="max-height: 400;" alt="ngrok-start">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/ngrok-start.png" style="max-height: 400;" alt="ngrok-start">
   </p>
 
 - Now we add our webhook url to our rave dashboard here:
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/rave-webhook-url.png" style="max-height: 400;" alt="rave-webhook-url">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/rave-webhook-url.png" style="max-height: 400;" alt="rave-webhook-url">
   </p>
 
 - Then from the terminal we need to run `nodemon app.js` to start our application and ensure it is listening to the port like this:
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/nodemon-listening.png" style="max-height: 400;" alt="nodemon listening">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/nodemon-listening.png" style="max-height: 400;" alt="nodemon listening">
   </p>
 - Our webhook is now up and running to receive webhook requests from rave.
 
 ### Example of a Webhook request sent by `Rave` to our Node App running on ngrok from a Ghana Mobile Money Transaction
 
   <p align="center">
-    <img src="https://github.com/MaestroJolly/rave-react-native/blob/master/img/webhook-req.png" style="max-height: 400;" alt="webhook-request">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752765/rave-react-native/webhook-req.png" style="max-height: 400;" alt="webhook-request">
   </p>
 
 
