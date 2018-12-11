@@ -100,6 +100,7 @@ You can pull in react-native-rave into app with the steps below;
 - Account Payments
 - Mpesa 
 - Ghana Mobile Money Payments
+- Uganda Mobile Money Payments
 - USSD Payments
 
 
