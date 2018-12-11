@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Header from 'react-native-rave/src/components/Header';
 
-export default class CardMpesaHeader extends Component {
+export default class CardUgMobileMoneyHeader extends Component {
   constructor(props) {
     super(props);
-    this.state = { page: 'mpesa' };
+    this.state = { page: 'mobilemoneyuganda' };
     this.switchToCard = this.switchToCard.bind(this);
-    this.switchToMpesa = this.switchToMpesa.bind(this);
+    this.switchToUgMobileMoney = this.switchToUgMobileMoney.bind(this);
   }
 
   switchToCard() {
@@ -17,27 +17,33 @@ export default class CardMpesaHeader extends Component {
     })
   }
 
-  switchToMpesa() {
-    this.props.page("mpesa");
+  switchToUgMobileMoney() {
+    this.props.page("mobilemoneyuganda");
     this.setState({
-      page: "mpesa"
+      page: "mobilemoneyuganda"
     })
   }
 
-
   render() {
-
     return (
       <View>
         {/* <Header /> */}
         <View style={styles.container}>
           <View style={styles.nav}>
-            <TouchableOpacity style={{width: '49.5%'}} onPress={this.switchToCard}>
+            <TouchableOpacity
+              style={{
+                width: '49.5%'}}
+                onPress={this.switchToCard}>
               <Text style={{ fontSize: 16, textAlign: 'center', paddingVertical: 15, color: this.props.secondarycolor, fontWeight: (this.state.page == "card") ? "bold" : "normal", borderBottomColor: this.props.secondarycolor, borderBottomWidth: (this.state.page == "card") ? 2 : 1}}>Card</Text>
             </TouchableOpacity>
             <View style={{ width: '1%', marginVertical: 10, borderRightWidth: 1, borderRightColor: this.props.secondarycolor }}></View>
-            <TouchableOpacity style={{width: '49.5%'}}onPress={this.switchToMpesa}>
-                <Text style={{ fontSize: 16, textAlign: 'center', paddingVertical: 15, color: this.props.secondarycolor, fontWeight: (this.state.page == "mpesa") ? "bold" : "normal", borderBottomColor:this.props.secondarycolor, borderBottomWidth: (this.state.page == "mpesa") ? 2 : 1 }}>Mpesa</Text>
+            <TouchableOpacity
+
+              style={{
+                width: '49.5%'
+              }}
+              onPress={this.switchToUgMobileMoney}>
+              <Text style={{ fontSize: 16, textAlign: 'center', paddingVertical: 15, color: this.props.secondarycolor, fontWeight: (this.state.page == "mobilemoneyuganda") ? "bold" : "normal", borderBottomColor:this.props.secondarycolor, borderBottomWidth: (this.state.page == "mobilemoneyuganda") ? 2 : 1 }}>Uganda Mobile Money</Text>
             </TouchableOpacity>
           </View>
         </View>

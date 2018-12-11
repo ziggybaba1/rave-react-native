@@ -4,23 +4,27 @@ import PropTypes from 'prop-types';
 import CardAccountHeader from 'react-native-rave/src/components/payment-headers/CardAccountHeader';
 import CardMpesaHeader from 'react-native-rave/src/components/payment-headers/CardMpesaHeader';
 import CardMmoneyHeader from 'react-native-rave/src/components/payment-headers/CardMmoneyHeader';
+import CardUgMobileMoneyHeader from 'react-native-rave/src/components/payment-headers/CardUgMobileMoneyHeader';
 import Card from './src/components/Card';
 import Account from './src/components/Account';
 import Mpesa from './src/components/Mpesa';
 import Mmoney from './src/components/Mmoney';
+import UgandaMobileMoney from './src/components/UgandaMobileMoney';
 // import Ussd from './src/components/Ussd';
 import RavePayment from './library/RavePayment';
 import RaveMpesa from './library/RaveMpesa';
 import RaveUssd from './library/RaveUssd';
 import RaveMmoney from './library/RaveMmoney';
+import RaveUgandaMobileMoney from './library/RaveUgandaMobileMoney';
 
 
 export default class Rave extends React.Component {
   constructor(props) {
     super(props);
     this.rave = new RavePayment({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.ravempesa = new RaveMpesa({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_mpesa: props.is_mpesa, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_ussd: props.is_ussd, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.ravempesa = new RaveMpesa({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.raveugandamobilemoney = new RaveUgandaMobileMoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.raveussd = new RaveUssd({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, phone: props.phone, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.state = { page: props.page };
     this.getPage = this.getPage.bind(this);
@@ -37,7 +41,7 @@ export default class Rave extends React.Component {
     header = <View></View>;
     paymentHeader = this.props.paymenttype.charAt(0).toUpperCase();
     paymentHeader = paymentHeader + this.props.paymenttype.substr(1);
-    singlePageHeader = <Text style={{ fontSize: 22, textAlign: 'center', paddingVertical: 25, color: this.props.secondarycolor, fontWeight: "bold", borderBottomColor: this.props.secondarycolor, borderBottomWidth: 2}}>{(paymentHeader) == "Mobilemoneygh" ? 'Mobile Money' : paymentHeader}</Text>;
+    singlePageHeader = <Text style={{ fontSize: 22, textAlign: 'center', paddingTop: 20, paddingVertical: 10, color: this.props.secondarycolor, fontWeight: "bold", borderBottomColor: this.props.secondarycolor, borderBottomWidth: 2}}>{(paymentHeader) == "Mobilemoneygh" ? 'Mobile Money' : (paymentHeader) == "Mobilemoneyuganda" ? 'Uganda Mobile Money' : paymentHeader}</Text>;
 
     if (this.props.paymenttype == 'both' && this.props.currency == 'NGN') {
       header = <CardAccountHeader page={this.getPage} />;
@@ -65,6 +69,13 @@ export default class Rave extends React.Component {
       }else {
         page = <Card rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
       }
+    }else if (this.props.paymenttype == 'both' && this.props.currency == 'UGX') {
+        header = <CardUgMobileMoneyHeader page={this.getPage} />;
+        if (this.state.page == "mobilemoneyuganda") {
+          page = <UgandaMobileMoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        }else {
+          page = <Card rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        }
     } else if (this.props.paymenttype == 'mpesa' && this.props.currency == 'KES') {
       header = singlePageHeader;
       if (this.state.page == "mpesa") {
@@ -74,6 +85,11 @@ export default class Rave extends React.Component {
       header = singlePageHeader;
       if (this.state.page == "mobilemoneygh") {
         page = <Mmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      }
+    } else if (this.props.paymenttype == 'mobilemoneyuganda' && this.props.currency == 'UGX') {
+      header = singlePageHeader;
+      if (this.state.page == "mobilemoneyuganda") {
+        page = <UgandaMobileMoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
       }
     // } else if (this.props.paymenttype == "ussd") {
     //     header = <CardAccountHeader page={this.getPage} />;
