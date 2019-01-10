@@ -92,7 +92,7 @@ export default class index extends Component {
       // Check for charge status
       if (res.data.status === "success-pending-validation" && res.data.chargeResponseCode === "02") {
         this.setState({
-          loading: false
+          loading: false,
         })
         // A check to return a response with further instructions to the user based on selected network
           if (this.state.network === "MTN") {
@@ -157,30 +157,35 @@ export default class index extends Component {
               }
             )
           }
-      }else if(res.data.status === "successful"){
-        Alert.alert(
-          '',
-          'Transaction Successfully Completed',
-          [{
-              text: 'Ok',
-              onPress: () => this.setState({
-                loading: false,
-                phonenumber: "",
-                network: "Select Network"
-              })
-            },
-          ], {
-            cancelable: false
-          }
-        )
-      }
+          this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
+            this.props.onSuccess(resp);
+            if (resp.data.status.toUpperCase() === "SUCCESSFUL" && resp.data.chargecode === "00") {
+              Alert.alert(
+                '',
+                'Transaction Successfully Completed',
+                [{
+                    text: 'Ok',
+                    onPress: () => this.setState({
+                      loading: false,
+                      phonenumber: "",
+                      network: "Select Network"
+                    })
+                  },
+                ], {
+                  cancelable: false
+                }
+              )
+            }
+          }).catch((error) => {
+            this.props.onFailure(error);
+          })
+        }
     }).catch((e) => {
       this.setState({
         loading: false
       })
       this.props.onFailure(e);
     })
-
   }
 
 
@@ -224,7 +229,7 @@ export default class index extends Component {
     const styles = StyleSheet.create({
       container: {
         paddingHorizontal: 25,
-        marginTop: 40,
+        marginTop: 10,
         paddingBottom: 50,
         height: '100%'
       },

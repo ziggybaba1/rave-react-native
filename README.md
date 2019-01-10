@@ -5,6 +5,8 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/GhMoney-Mpesa.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
 
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544536889/rave-react-native/Uganda_Mobile_Money.png" style="text-align: center; max-height: 400;" alt="Uganda Mobile Money">
+
 ## Table Of Content
 
 - [Getting Started](#getting-started)
@@ -98,6 +100,7 @@ You can pull in react-native-rave into app with the steps below;
 - Account Payments
 - Mpesa 
 - Ghana Mobile Money Payments
+- Uganda Mobile Money Payments
 - USSD Payments
 
 
@@ -314,6 +317,60 @@ render() {
 }
 ```
 
+### Uganda Mobile Money
+
+`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money)
+
+#### 1.  import Rave Component 
+
+```javascript
+import Rave from 'react-native-rave';
+```
+
+#### 2. Set your success and failure methods
+
+```javascript
+ constructor(props) {
+    super(props);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
+  }
+
+  onSuccess(data) {
+    console.log("success", data);
+
+  }
+
+  onFailure(data) {
+    console.log("error", data);
+  }
+```
+
+#### 3. Use component with the Uganda Mobile Money payment props
+
+```javascript
+render() {
+  return (
+    <Rave 
+        amount="10" 
+        country="NG" 
+        currency="UGX" 
+        email="test@mail.com" 
+        firstname="Oluwole" 
+        lastname="Adebiyi" 
+        publickey="FLWPUBK-**************************-X" 
+        secretkey="FLWSECK-**************************-X"
+        paymenttype="mobilemoneyuganda" // or set to both for card and uganda mobile money transactions
+        page="mobilemoneyuganda"
+        meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
+        production={false} 
+        onSuccess={res => this.onSuccess(res)} 
+        onFailure={e => this.onFailure(e)}
+        />
+  );
+}
+```
+
 ### USSD Payments
 
 `Note:` This is still in development.
@@ -332,15 +389,36 @@ render() {
 | lastname      |  This is the lastname of the customer | `String` | Required
 | onSuccess      |  This is the function that receives data for a successful transaction | `Function` | Required
 | onFailure      |  This is the function that receives data for a failed transaction | `Function` | Required
-| country      |  This is the country you are transacting from eg. NG, GH, KE, ZA | `String` | Not Required (defaults to NG)
-| currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, ZAR | `String` | Not Required (defaults to NGN)
+| country      |  This is the country you are transacting from eg. NG, GH,KE, ZA | `String` | Not Required (defaults to NG)
+| currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, ZAR | `String` | Not Required (defaults to NGN)
 | txref      |  This is a unique reference for the transaction | `String` | Not Required (will be generated automatically)
 | primarycolor      |  This is to override the primary colour of the component | `String` | Not Required
 | secondarycolor      |  This is to override the secondary colour of the component | `String` | Not Required
-| paymenttype      |  This is the payment type ['both','card', 'account', 'mpesa', 'mobilemoneygh'] | `String` | Required ('if non set, it sets a default payment type to both')
-| page      |  This sets the current state of payment page based on the payment type currently implemented ['both','card', 'account', 'mpesa', 'mobilemoneygh']  | `String` | Required ('If no value is set, card page is set by default')
+| paymenttype      |  This is the payment type ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda'] | `String` | Required ('if non set, it sets a default payment type to both')
+| page      |  This sets the current state of payment page based on the payment type currently implemented ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda']  | `String` | Required ('If no value is set, card page is set by default')
 | production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
+
+
+## `NOTE:`
+
+ <p align="center">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544537282/rave-react-native/Issues.png" style="max-height: 400;" alt="React Native Version Issues">
+  </p>
+
+
+### If you encounter any of the error above when trying to load the rave react native SDK in your App, it is occurs in newer versions of react native.
+
+> ### FIX:
+- To fix the issue, simply open your react native app node modules folder and locate rave react native module.
+- Next thing you need to do is to locate the node modules folder inside the rave react native module folder.
+- After locating it, Simply delete it and the issue would be resolved.
+
+### See Screenshots Below:
+
+ <p align="center">
+    <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544536606/rave-react-native/Error_Fix.png" style="max-height: 400;" alt="React Version Issues Fix">
+  </p>
 
 
 ## Setting Up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request
