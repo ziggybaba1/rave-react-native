@@ -11,8 +11,9 @@ export default class VBVSecure extends Component {
 
   _onNavigationStateChange(webViewState) {
 
-      // check if it's the redirected url
-    if (webViewState.url.includes("https://ravenative.herokuapp.com/")) {
+    // check if it's the redirected url
+    if (webViewState.url.includes("txRef")) {
+      // if (webViewState.url.includes("https://ravenative.herokuapp.com/")) {
       // convert to JSON and pass back for validation.
       this.props.confirm(false, JSON.parse(this.getParameterByName('response', webViewState.url)));
     }
