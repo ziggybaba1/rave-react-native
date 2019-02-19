@@ -21,7 +21,7 @@ import RaveUgandaMobileMoney from './library/RaveUgandaMobileMoney';
 export default class Rave extends React.Component {
   constructor(props) {
     super(props);
-    this.rave = new RavePayment({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.rave = new RavePayment({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, subaccounts: props.subaccounts, meta: props.meta, redirectUrl: props.redirecturl});
     this.ravempesa = new RaveMpesa({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.raveugandamobilemoney = new RaveUgandaMobileMoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
@@ -133,8 +133,10 @@ Rave.propTypes = {
   secondarycolor: PropTypes.string, 
   paymenttype: PropTypes.string.isRequired,
   production: PropTypes.bool,
+  subaccounts: PropTypes.array,
   meta: PropTypes.array,
-  page: PropTypes.string
+  page: PropTypes.string,
+  redirecturl: PropTypes.string
 }
 
 let transactionReference = "txref-"+Date.now();
@@ -150,7 +152,8 @@ Rave.defaultProps = {
   paymenttype: 'both',
   production: false,
   meta: [],
-  page: "card"
+  page: "card",
+  redirecturl: "https://rave-loader.herokuapp.com/index.html"
 };
 
 const styles = StyleSheet.create({

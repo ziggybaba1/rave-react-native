@@ -3,7 +3,7 @@ import encryption from './encryption';
 import Axios from 'axios';
 
 export default class RavePayment {
-  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, paymenttype, email, firstname, lastname, meta }) {
+  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, paymenttype, email, firstname, lastname, meta, subaccounts, redirectUrl }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -41,7 +41,12 @@ export default class RavePayment {
     this.getMeta = function () {
       return meta;
     }
-
+    this.getRedirectUrl = function () {
+      return redirectUrl;
+    }
+    this.getSubaccounts = function () {
+      return subaccounts;
+    }
 
     this.charge = function (payload) {
       //insert constant data
@@ -55,6 +60,8 @@ export default class RavePayment {
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
       payload.meta = this.getMeta();
+      payload.redirect_url = this.getRedirectUrl();
+      payload.subaccounts = this.getSubaccounts();
       
 
       return new Promise((resolve, reject) => {
