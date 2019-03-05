@@ -1,11 +1,11 @@
 # Rave By Flutterwave React Native Component
 This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave.com)
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/rnapp.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1551801430/rave-react-native/rnapphome.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/GhMoney-Mpesa.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1551801445/rave-react-native/momo.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544536889/rave-react-native/Uganda_Mobile_Money.png" style="text-align: center; max-height: 400;" alt="Uganda Mobile Money">
+<!-- <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544536889/rave-react-native/Uganda_Mobile_Money.png" style="text-align: center; max-height: 400;" alt="Uganda Mobile Money"> -->
 
 ## Table Of Content
 
@@ -106,7 +106,8 @@ You can pull in react-native-rave into app with the steps below;
 
 ## Usage
 
-### Card Payments
+
+### Payments
 
 #### 1.  import Rave Component 
 
@@ -114,13 +115,14 @@ You can pull in react-native-rave into app with the steps below;
 import Rave from 'react-native-rave';
 ```
 
-#### 2. Set your success and failure methods
+#### 2. Set your success, failure and close methods
 
 ```javascript
  constructor(props) {
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -131,9 +133,14 @@ import Rave from 'react-native-rave';
   onFailure(data) {
     console.log("error", data);
   }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
+  }
 ```
 
-#### 3. Use component with the card payment props
+#### 3. Use component (ensure to set currency for the desired payment method to display)
 
 ```javascript
 render() {
@@ -147,60 +154,6 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
-        paymenttype="card" // or set to both for card and account transactions
-        page="card"
-        meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
-        onSuccess={res => this.onSuccess(res)} 
-        onFailure={e => this.onFailure(e)}
-        />
-  );
-}
-```
-
-### Account Payments
-
-#### 1.  import Rave Component 
-
-```javascript
-import Rave from 'react-native-rave';
-```
-
-#### 2. Set your success and failure methods
-
-```javascript
- constructor(props) {
-    super(props);
-    this.onSuccess = this.onSuccess.bind(this);
-    this.onFailure = this.onFailure.bind(this);
-  }
-
-  onSuccess(data) {
-    console.log("success", data);
-
-  }
-
-  onFailure(data) {
-    console.log("error", data);
-  }
-```
-
-#### 3. Use component with the account payment props
-
-```javascript
-render() {
-  return (
-    <Rave 
-        amount="500" 
-        country="NG" 
-        currency="NGN" 
-        email="test@mail.com" 
-        firstname="Oluwole" 
-        lastname="Adebiyi" 
-        publickey="FLWPUBK-**************************-X" 
-        secretkey="FLWSECK-**************************-X"
-        paymenttype="account" // or set to both for card and account transactions
-        page="account"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
@@ -212,7 +165,7 @@ render() {
 
 ### Mpesa
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa).
+`Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa). Ensure to set currency to KES and country to KE
 
 #### 1.  import Rave Component 
 
@@ -227,6 +180,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -236,6 +190,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -254,7 +213,6 @@ render() {
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
         paymenttype="mpesa" // or set to both for card and mpesa transactions
-        page="mpesa"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
@@ -265,7 +223,8 @@ render() {
 ```
 ### Ghana Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney)
+`Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney). Ensure to set currency to GHS and country to GH
+
 
 #### 1.  import Rave Component 
 
@@ -280,6 +239,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -289,6 +249,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -306,8 +271,6 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
-        paymenttype="mobilemoneygh" // or set to both for card and mobile money transactions
-        page="mobilemoneygh"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
@@ -334,6 +297,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -343,6 +307,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -360,8 +329,6 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         secretkey="FLWSECK-**************************-X"
-        paymenttype="mobilemoneyuganda" // or set to both for card and uganda mobile money transactions
-        page="mobilemoneyuganda"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
