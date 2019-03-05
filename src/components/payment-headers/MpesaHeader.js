@@ -58,7 +58,6 @@ export default class MpesaHeader extends Component {
             text: {
                 fontSize: 16,
                 textAlign: 'center',
-                paddingVertical: 15,
                 color: this.props.colorOne
             }
         });
