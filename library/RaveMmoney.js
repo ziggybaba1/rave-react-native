@@ -3,7 +3,7 @@ import encryption from 'react-native-rave/library/encryption';
 import Axios from 'axios';
 
 export default class RaveMmoney {
-  constructor({ publicKey, secretKey, production = false, currency = "GHS", country = "GH", txRef = "txref-" + Date.now(), amount, paymenttype, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_gh = true, meta }) {
+  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_gh = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -22,11 +22,6 @@ export default class RaveMmoney {
     this.getTransactionReference = function () {
       return txRef;
     }
-
-    this.getPaymentType = function () {
-      return paymenttype;
-    }
-
     this.getAmount = function () {
       return amount;
     }
@@ -45,9 +40,6 @@ export default class RaveMmoney {
     this.getMmoney = function () {
       return is_mobile_money_gh;
     }
-    this.getMeta = function () {
-      return meta;
-    }
 
 
     this.charge = function (payload) {
@@ -59,11 +51,9 @@ export default class RaveMmoney {
       payload.amount = this.getAmount();
       payload.orderRef = this.getOrderReference();
       payload.email = this.getEmail();
-      payload.paymenttype = this.getPaymentType();
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
       payload.is_mobile_money_gh = this.getMmoney();
-      payload.meta = this.getMeta();
       
 
       return new Promise((resolve, reject) => {

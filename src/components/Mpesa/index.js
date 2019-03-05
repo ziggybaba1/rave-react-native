@@ -9,7 +9,7 @@ export default class index extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {phonenumber: (this.props.phone == null) ? '' : this.props.phone, status: "", chargeResponseMessage: '', phonenumberErr: 'none', flwRef: "", loading: false, phone: (this.props.phone == null) ? '' : this.props.phone };
+    this.state = {phonenumber: (this.props.phone == null) ? '' : this.props.phone, status: "", chargeResponseMessage: '', phonenumberErr: 'none', flwRef: "", loading: false, phone: (this.props.phone == null) ? '' : this.props.phone, inputErr: '#fff' };
 
     this.pay = this.pay.bind(this);
     this.check = this.check.bind(this);
@@ -20,12 +20,14 @@ export default class index extends Component {
   // Performs a check on the card form
    check() {
     this.setState({
-      phonenumberErr: 'none'
+      phonenumberErr: 'none',
+      inputErr: '#fff'
     })
     
     if (this.state.phonenumber.length < 3) {
       this.setState({
-        phonenumberErr: 'flex'
+        phonenumberErr: 'flex',
+        inputErr: this.props.primarycolor
       })
     }else{
       if (Number(this.props.amount) < 10) {
@@ -193,23 +195,35 @@ export default class index extends Component {
     const styles = StyleSheet.create({
       container: {
         paddingHorizontal: 25,
-        marginTop: 40,
-        paddingBottom: 50,
+        paddingTop: 120,
+        backgroundColor: '#f2f2f2',
         height: '100%'
       },
       label: {
-        color: "#ACACAC"
+        color: "#12122c",
+        fontWeight: '400',
+        textAlign: 'center',
+        paddingBottom: 20
       },
       input: {
-        borderBottomWidth: 2,
-        borderBottomColor: this.props.secondarycolor
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: this.state.inputErr,
+        backgroundColor: '#fff',
+        shadowColor: '#ccc',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 7,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        elevation: 2
       },
       formGroup: {
         marginBottom: 20,
       }
     });
 
-    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY</Text>;
+    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY {this.props.currency} {this.props.amount}</Text>;
     
 
     if (this.state.loading) {
@@ -223,27 +237,29 @@ export default class index extends Component {
         <KeyboardAwareScrollView keyboardShouldPersistTaps='always'>
           <View style={{ flex: 1 }}>
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Phone Number</Text>
+            <Text style={[styles.label, { fontSize: 20 }]}>Please enter your mpesa number</Text>
               <View style={styles.input}>
+              <Text style={{ color: '#999999', fontSize: 16 }}>PHONE NUMBER</Text>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
                     autoCorrect={false}
                     editable={(this.state.loading) ? false : true}
                     keyboardType="phone-pad"
-                    style={{ fontSize: 20, paddingHorizontal: 10, minWidth: "100%" }}
+                    style={{ fontSize: 16, paddingHorizontal: 10, minWidth: "95%" }}
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(phonenumber) => this.setState({phonenumber})}
                     value={this.state.phonenumber}
+                    placeholder='0926420185'
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.phonenumberErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid phone number</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.phonenumberErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid phone number</Text> */}
             </View>
             
 
           </View>
 
-          <TouchableOpacity onPress={this.pay} style={{ width: "100%", marginTop: 25 }} disabled={(this.state.loading == false) ? false : true}>
+          <TouchableOpacity onPress={this.pay} style={{ width: "100%", marginTop: 30 }} disabled={(this.state.loading == false) ? false : true}>
             <View style={{ backgroundColor: this.props.primarycolor, paddingVertical: 15, borderRadius: 5, opacity: (this.state.loading == false) ? 1 : 0.6 }}>
               {btnText}
             </View>
