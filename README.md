@@ -361,8 +361,6 @@ render() {
 | txref      |  This is a unique reference for the transaction | `String` | Not Required (will be generated automatically)
 | primarycolor      |  This is to override the primary colour of the component | `String` | Not Required
 | secondarycolor      |  This is to override the secondary colour of the component | `String` | Not Required
-| paymenttype      |  This is the payment type ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda'] | `String` | Required ('if non set, it sets a default payment type to both')
-| page      |  This sets the current state of payment page based on the payment type currently implemented ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda']  | `String` | Required ('If no value is set, card page is set by default')
 | production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
 
