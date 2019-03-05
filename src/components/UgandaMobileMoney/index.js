@@ -63,6 +63,7 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
+          this.props.onSuccess(res);
           Alert.alert(
           '',
           'A push notification has been sent to your phone, please complete the transaction by entering your pin',
@@ -78,31 +79,6 @@ export default class index extends Component {
           }
         )
       }
-
-
-      this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
-        this.props.onSuccess(resp);
-      if (resp.data.status.toUpperCase() === "SUCCESSFUL" && resp.data.chargecode === "00") {
-        Alert.alert(
-          '',
-          'Transaction Successfully Completed',
-          [{
-              text: 'Ok',
-              onPress: () => this.setState({
-                loading: false,
-                phonenumber: "",
-                txRef: ""
-              })
-            },
-          ], {
-            cancelable: false
-          }
-        )
-      }
-    }).catch((error) => {
-      this.props.onFailure(error);
-    })
-  
     }).catch((e) => {
       this.setState({
         loading: false

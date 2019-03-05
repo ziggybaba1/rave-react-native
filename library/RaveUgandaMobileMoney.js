@@ -3,15 +3,15 @@ import encryption from 'react-native-rave/library/encryption';
 import Axios from 'axios';
 
 export default class RaveUgandaMobileMoney {
-  constructor({ publicKey, secretKey, production = false, currency = "UGX", country = "NG", txRef = "txref-" + Date.now(), network = "UGX", amount, paymenttype, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_ug = true, meta }) {
+  constructor({ publicKey, encryptionKey, production = false, currency = "UGX", country = "NG", txRef = "txref-" + Date.now(), network = "UGX", amount, paymenttype, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_ug = true, meta }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
     this.getPublicKey = function () {
       return publicKey;
     }
-    this.getSecretKey = function () {
-      return secretKey;
+    this.getEncryptionKey = function () {
+      return encryptionKey;
     }
     this.getCountry = function () {
       return country;
@@ -72,7 +72,7 @@ export default class RaveUgandaMobileMoney {
       
 
       return new Promise((resolve, reject) => {
-        var client = encryption({ payload, secretkey: this.getSecretKey() });
+        var client = encryption({ payload, encryptionkey: this.getEncryptionKey() });
 
         Axios({
           url: this.baseUrl + 'flwv3-pug/getpaidx/api/charge',
@@ -157,28 +157,28 @@ export default class RaveUgandaMobileMoney {
     })
   }
 
-  verifyTransaction(txref) {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/v2/verify',
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          txref,
-          SECKEY: this.getSecretKey()
-        },
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
+  // verifyTransaction(txref) {
+  //   return new Promise((resolve, reject) => {
+  //     Axios({
+  //       url: this.baseUrl + 'flwv3-pug/getpaidx/api/v2/verify',
+  //       method: 'post',
+  //       headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       data: {
+  //         txref,
+  //         SECKEY: this.getSecretKey()
+  //       },
+  //     })
+  //       .then(function (response) {
+  //         resolve(response.data);
+  //       })
+  //       .catch(function (error) {
+  //         reject(error.response.data);
+  //       });
+  //   })
+  // }
 
 
 }

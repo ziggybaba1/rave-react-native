@@ -84,13 +84,8 @@ export default class index extends Component {
           this.setState({
             loading: false
           })
-          this.props.rave.verifyTransaction(response.data.txRef).then((resp) => {
-            this.setState({ cardno: '', cvv: '', expirymonth: '', expiryyear: ''})
-            this.props.onSuccess(resp);
-          }).catch((error) => {
-            this.props.onFailure(error);
-          })
-          
+          this.setState({ cardno: '', cvv: '', expirymonth: '', expiryyear: ''})
+          this.props.onSuccess(response);
         } else {
           this.setState({
             loading: false
@@ -117,11 +112,8 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        
-        this.props.rave.verifyTransaction(res.data.tx.txRef).then((resp) => {
           this.setState({ cardno: '', cvv: '', expirymonth: '', expiryyear: '' })
-          this.props.onSuccess(resp);
-           if (resp.data.status.toUpperCase() === "SUCCESSFUL" && resp.data.chargecode === "00") {
+          this.props.onSuccess(res);
              Alert.alert(
                '',
                'Transaction Successful',
@@ -139,10 +131,13 @@ export default class index extends Component {
                  cancelable: false
                }
              )
-           } else {
-             Alert.alert(
+      } else {
+        this.setState({
+          loading: false
+        })
+        Alert.alert(
                '',
-               'Transaction Not Successful\n' + resp.data.chargemessage,
+               'Transaction Not Successful\n' + res.data.chargeResponseMessage,
                [{
                  text: 'Ok',
                  onPress: () => this.setState({
@@ -157,14 +152,6 @@ export default class index extends Component {
                  cancelable: false
                }
              )
-           }
-        }).catch((error) => {
-          this.props.onFailure(error);
-        })
-      } else {
-        this.setState({
-          loading: false
-        })
         this.props.onFailure(res);
       }
     }).catch((e) => {
@@ -184,14 +171,9 @@ export default class index extends Component {
     })
 
     if (data.status == "successful") {
-      this.props.rave.verifyTransaction(data.txRef).then((resp) => {
         this.setState({ cardno: '', cvv: '', expirymonth: '', expiryyear: '' })
-        this.props.onSuccess(resp);
-      }).catch((error) => {
-        this.props.onFailure(error);
-      })
-    }
-    else {
+        this.props.onSuccess(data);
+    }else {
       this.props.onFailure(data);
     }
   }
@@ -219,12 +201,8 @@ export default class index extends Component {
           this.setState({ vbvModal: true, vbvurl: response.data.authurl });
         }
       } else {
-        this.props.rave.verifyTransaction(response.data.txRef).then((resp) => {
           this.setState({ cardno: '', cvv: '', expirymonth: '', expiryyear: '' })
-          this.props.onSuccess(resp);
-        }).catch((error) => {
-          this.props.onFailure(error);
-        })
+          this.props.onSuccess(response);
       }
 
       }).catch((e) => {
@@ -298,19 +276,10 @@ export default class index extends Component {
         if (res.data.status.toUpperCase() === "SUCCESSFUL") {
           this.setState({
             loading: false,
-            flwRef: res.data.flwRef
+            flwRef: res.data.flwRef,
+            cardno: '', cvv: '', expirymonth: '', expiryyear: ''
           })
-          this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
-            this.setState({
-              loading: false,
-              flwRef: res.data.flwRef,
-              cardno: '', cvv: '', expirymonth: '', expiryyear: ''
-            })
-            this.props.onSuccess(resp);
-          }).catch((error) => {
-            this.props.onFailure(error);
-          })
-          
+          this.props.onSuccess(res);
         } else if (res.data.chargeResponseCode === "02") {
           if (res.data.authModelUsed.toUpperCase() === "ACCESS_OTP" || res.data.authModelUsed.toUpperCase() === "GTB_OTP") {
             this.setState({

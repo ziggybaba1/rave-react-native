@@ -16,6 +16,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 - [Payment Options](#payment-options)
 - [Usage](#usage)
 - [Parameters Table](#parameters-table)
+- [Sample Transaction Verification Method Using Nodejs BackEnd](#sample-transaction-verification-method-using-nodejs-backEnd)
 - [Setting Up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request](#setting-up-a-simple-webhook-with-nodejs-and-ngrok-to-receive-rave-webhook-request)
 - [Contributions](#contributions)
 
@@ -23,8 +24,8 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 ### Prerequisites
 
-- [Rave Test Public And Private Keys](https://ravesandbox.flutterwave.com/dashboard/settings/apis)
-- [Rave Live Public And Private Keys](https://rave.flutterwave.com/dashboard/settings/apis)
+- [Rave Test Public And Encryption Keys](https://ravesandbox.flutterwave.com/dashboard/settings/apis)
+- [Rave Live Public And Encryption Keys](https://rave.flutterwave.com/dashboard/settings/apis)
 - [Node](https://nodejs.org/en/)
 - [NPM](https://www.npmjs.com/get-npm)
 - [React Native](https://facebook.github.io/react-native/docs/getting-started.html)
@@ -44,8 +45,8 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 > To Implement Rave By Flutterwave easily with React Native
 
-- Go to [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis) to get your **`LIVE`** public and private key
-- Go to [Flutterwave Rave Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) to get your **`TEST`** public and private key
+- Go to [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis) to get your **`LIVE`** public and encryption key
+- Go to [Flutterwave Rave Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) to get your **`TEST`** public and encryption key
 
 `NOTE: ` Set the production option to `true` or `false` depending on your deployment environment.
 
@@ -125,6 +126,7 @@ import Rave from 'react-native-rave';
 
   onSuccess(data) {
     console.log("success", data);
+    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
 
   }
 
@@ -146,7 +148,7 @@ render() {
         firstname="Oluwole" 
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
-        secretkey="FLWSECK-**************************-X"
+        encryptionkey="****************"
         paymenttype="card" // or set to both for card and account transactions
         page="card"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -177,6 +179,7 @@ import Rave from 'react-native-rave';
 
   onSuccess(data) {
     console.log("success", data);
+    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
 
   }
 
@@ -198,7 +201,7 @@ render() {
         firstname="Oluwole" 
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
-        secretkey="FLWSECK-**************************-X"
+        encryptionkey="****************"
         paymenttype="account" // or set to both for card and account transactions
         page="account"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -231,6 +234,7 @@ import Rave from 'react-native-rave';
 
   onSuccess(data) {
     console.log("success", data);
+    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
 
   }
 
@@ -252,7 +256,7 @@ render() {
         firstname="Oluwole" 
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
-        secretkey="FLWSECK-**************************-X"
+        encryptionkey="****************"
         paymenttype="mpesa" // or set to both for card and mpesa transactions
         page="mpesa"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -284,6 +288,7 @@ import Rave from 'react-native-rave';
 
   onSuccess(data) {
     console.log("success", data);
+    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
 
   }
 
@@ -305,7 +310,7 @@ render() {
         firstname="Oluwole" 
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
-        secretkey="FLWSECK-**************************-X"
+        encryptionkey="****************"
         paymenttype="mobilemoneygh" // or set to both for card and mobile money transactions
         page="mobilemoneygh"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -338,7 +343,7 @@ import Rave from 'react-native-rave';
 
   onSuccess(data) {
     console.log("success", data);
-
+    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
   }
 
   onFailure(data) {
@@ -359,7 +364,7 @@ render() {
         firstname="Oluwole" 
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
-        secretkey="FLWSECK-**************************-X"
+        encryptionkey="****************"
         paymenttype="mobilemoneyuganda" // or set to both for card and uganda mobile money transactions
         page="mobilemoneyuganda"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
@@ -381,7 +386,7 @@ render() {
 | props        | parameter           | type | required  |
 | ------------- |:-------------:| -----:| -----:|
 | publickey      |  This is the publickey gotten from your [Live](https://rave.flutterwave.com/dashboard/settings/apis) or [Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) dashboard | `String` | Required
-| secretkey      |  This is the secretkey gotten from your [Live](https://rave.flutterwave.com/dashboard/settings/apis) or [Test]
+| encryptionkey      |  This is the encryption key that can be gotten from your [Live](https://rave.flutterwave.com/dashboard/settings/apis) or [Test]
 | amount      |  This is the amount to be charged from card/account | `String` | Required
 | email      |  This is the email of the customer | `String` | Required
 | phone      |  This is the phone number of the customer | `String` | Not Required
@@ -398,6 +403,175 @@ render() {
 | page      |  This sets the current state of payment page based on the payment type currently implemented ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda']  | `String` | Required ('If no value is set, card page is set by default')
 | production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
+
+## Sample Transaction Verification Method Using Nodejs BackEnd
+
+### `NOTE:` For best practices, it is always advisable to verify transactions to be sure the response data returned corresponds with what was initially passed and also to get the full data of a transaction.
+
+### Below shows sample code on how this can be done using Nodejs Backend
+
+#### Prerequisites
+
+- `express`
+- `body-parser`
+- `request`
+
+#### How it works
+
+- Create your backend project directory
+- From inside your backend project directory, Open your terminal and run `npm init` to create your `package.json` file.
+- Install the packages above `npm install express --save`, `npm install body-parser --save` and `npm install request --save`.
+- Create your `index.js` file and copy the code snippet below to set this up.
+
+```node
+var express = require("express");
+var bodyParser = require("body-parser");
+var app = express();
+var request = require("request");
+var port = process.env.PORT || 3000;
+
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+app.use(bodyParser.json())
+
+
+app.post('/api', function(req, res){
+    console.log(req.body.txref);
+    request.post(
+        {
+            url:'https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/verify',
+            json: {
+            txref:req.body.txref, // This is the transaction you get from your react native app
+            SECKEY: "PASS-YOUR-RAVE-SECRET-HERE"
+                },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        },
+      function(error, response, body){
+        if (error) {
+            return console.error('Error Occurred:', error);
+        }
+        console.log(response.statusCode);
+        console.log(body);
+        res.send(body);
+      });
+});
+
+app.listen(port, err => {
+    if(err) {
+        console.error(err);
+    }else {
+        console.log('App listening on port %s', port);
+    }
+})
+```
+
+- Save the file above, run `node index.js` command from your terminal to serve your verify api, you should now see `App listening on port 3000` on your terminal which means your app is running to receive data from your react native app.
+
+- Now you can go back to your react native app directory and create a file where you link this to your app, e.g you can create a directory `constant` and create a file inside it called `api.js`.
+
+- You will need to link the backend verify api with your app on this file `api.js` by adding the code snippet below:
+```node
+export const fetchResponse = (transRef) => {
+
+    var url = "http://192.168.88.48/api"; // you will need to pass your backend verify api here
+    var request = { 
+        method : "POST",
+        body: JSON.stringify({
+            "txref": transRef
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    fetch(url, request) 
+    .then(res => console.log('Success:', JSON.stringify(res.json())))
+    .catch(error => console.log('Error:', JSON.stringify(error)));
+}
+
+```
+
+- Now you can go to react native `App.js` file to pass the transaction reference from the successful charge response to this function `fetchResponse(transRef)`, as shown in the code snippet below.
+
+```node
+import React from 'react';
+import Rave from 'react-native-rave';
+import { StyleSheet, Text, View } from 'react-native';
+import { fetchResponse } from './constants/api';
+
+export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
+  }
+
+  onSuccess(data) {
+    console.log("success", data);
+    if ((typeof data.data) == "object") {
+      if((typeof data.data.txRef) != "undefined"){
+        fetchResponse(data.data.txRef);
+      }else{
+        fetchResponse(data.data.tx.txRef);
+      }
+    }else{
+      fetchResponse(data.txRef);
+    }
+  }
+
+  onFailure(data) {
+    console.log("error", data);
+  }
+
+    render() {
+    return ( <Rave amount = "100"
+      country = "NG"
+      currency = "NGN"
+      email = "dodez@xgmailoo.com"
+      firstname = "Oluwole"
+      lastname = "Adebiyi"
+      publickey = "FLWPUBK-*********************************-X"
+      encryptionkey = "**********************"
+      paymenttype = "card"
+      meta = {
+        [{
+          metaname: "color",
+          metavalue: "red"
+        }, {
+          metaname: "storelocation",
+          metavalue: "ikeja"
+        }]
+      }
+      production = {
+        false  // Set production value to false if you are using ravesandbox public and private keys or test enviroment, Set to true if you are ready to go live
+      }
+      onSuccess = {
+        res => this.onSuccess(res)
+      }
+      onFailure = {
+        e => this.onFailure(e)
+      }
+      />
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
+
+- The above steps and code sample just shows and explains how you can handle this with nodejs backend, please note that you can implement this with any backend language of your choice.
+
 
 
 ## `NOTE:`

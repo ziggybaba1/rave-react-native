@@ -157,29 +157,23 @@ export default class index extends Component {
               }
             )
           }
-          this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
-            this.props.onSuccess(resp);
-            if (resp.data.status.toUpperCase() === "SUCCESSFUL" && resp.data.chargecode === "00") {
-              Alert.alert(
-                '',
-                'Transaction Successfully Completed',
-                [{
-                    text: 'Ok',
-                    onPress: () => this.setState({
-                      loading: false,
-                      phonenumber: "",
-                      network: "Select Network"
-                    })
-                  },
-                ], {
-                  cancelable: false
-                }
-              )
-            }
-          }).catch((error) => {
-            this.props.onFailure(error);
-          })
-        }
+          this.props.onSuccess(res);
+            Alert.alert(
+              '',
+              'Transaction Successfully Completed',
+              [{
+                  text: 'Ok',
+                  onPress: () => this.setState({
+                    loading: false,
+                    phonenumber: "",
+                    network: "Select Network"
+                  })
+                },
+              ], {
+                cancelable: false
+              }
+            )
+          }
     }).catch((e) => {
       this.setState({
         loading: false

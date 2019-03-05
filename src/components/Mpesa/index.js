@@ -67,61 +67,27 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        // verify the status of the response if it is successful by passing the transaction response from the initial charge to the verify endpoint
-        this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
-          this.props.onSuccess(resp);
-          if (resp.data.status.toUpperCase() === "SUCCESSFUL" && resp.data.currency === "KES"){
-            Alert.alert(
-              '',
-              resp.data.chargemessage,
-              [{
-                  text: 'Ok',
-                  onPress: () => this.setState({
-                    loading: false,
-                    phonenumber: ''
-                  })
-                },
-              ], {
-                cancelable: false
-              }
-            )
-          }else {
-             Alert.alert(
-              '',
-              resp.data.chargemessage,
-              [{
-                text: 'Retry',
+        this.props.onSuccess(res);
+          Alert.alert(
+            '',
+            res.data.chargeResponseMessage,
+            [{
+                text: 'Ok',
                 onPress: () => this.setState({
-                  loading: false
+                  loading: false,
+                  phonenumber: ''
                 })
-              }, ], {
-                cancelable: false
-              }
-            )
-          }
-        }).catch((error) => {
-          this.props.onFailure(error);
-        })
-      }else if (res.data.status.toUpperCase() === "PENDING" &&  res.data.currency === "KES") {
+              },
+            ], {
+              cancelable: false
+            }
+          )
+      }else{
         Alert.alert(
           '',
           'Transaction ' + res.data.status + ' validation',
           [{
             text: 'Ok',
-            onPress: () => this.setState({
-              loading: false,
-              phonenumber: ''
-            })
-          }, ], {
-            cancelable: false
-          }
-        )
-      }else {
-        Alert.alert(
-          '',
-          'KES Transaction only is allowed',
-          [{
-            text: 'Retry',
             onPress: () => this.setState({
               loading: false,
               phonenumber: ''

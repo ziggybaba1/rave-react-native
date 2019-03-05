@@ -3,15 +3,15 @@ import encryption from './encryption';
 import Axios from 'axios';
 
 export default class RaveUssd {
-  constructor({ publicKey, secretKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, paymenttype, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_ussd = true, meta }) {
+  constructor({ publicKey, encryptionKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, paymenttype, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_ussd = true, meta }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
     this.getPublicKey = function () {
       return publicKey;
     }
-    this.getSecretKey = function () {
-      return secretKey;
+    this.getEncryptionKey = function () {
+      return encryptionKey;
     }
     this.getCountry = function () {
       return country;
@@ -67,7 +67,7 @@ export default class RaveUssd {
       
 
       return new Promise((resolve, reject) => {
-        var client = encryption({ payload, secretkey: this.getSecretKey() });
+        var client = encryption({ payload, encryptionkey: this.getEncryptionKey() });
 
         Axios({
           url: this.baseUrl + 'flwv3-pug/getpaidx/api/charge',
@@ -127,28 +127,28 @@ export default class RaveUssd {
     })
   }
 
-  verifyTransaction(txref) {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/v2/verify',
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          txref,
-          SECKEY: this.getSecretKey()
-        },
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
+  // verifyTransaction(txref) {
+  //   return new Promise((resolve, reject) => {
+  //     Axios({
+  //       url: this.baseUrl + 'flwv3-pug/getpaidx/api/v2/verify',
+  //       method: 'post',
+  //       headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       data: {
+  //         txref,
+  //         SECKEY: this.getSecretKey()
+  //       },
+  //     })
+  //       .then(function (response) {
+  //         resolve(response.data);
+  //       })
+  //       .catch(function (error) {
+  //         reject(error.response.data);
+  //       });
+  //   })
+  // }
 
   listBanks() {
     return new Promise((resolve, reject) => {
