@@ -282,7 +282,7 @@ render() {
 
 ### Uganda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money)
+`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money).  Ensure to set currency to UGX
 
 #### 1.  import Rave Component 
 
