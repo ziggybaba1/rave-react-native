@@ -1,7 +1,7 @@
 {
   "name": "react-native-rave",
   "main": "Rave.js",
-  "version": "0.1.1",
+  "version": "2.0.0",
   "author": "Oluwole Adebiyi, Tofunmi Kupoluyi",
   "license": "MIT",
   "dependencies": {
