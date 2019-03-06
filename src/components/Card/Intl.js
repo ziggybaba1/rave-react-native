@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 export default class IntlModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { address: '', city: '', state: '', zipcode: '', country: '', addressErr: 'none', cityErr: 'none', stateErr: 'none', zipcodeErr: 'none', countryErr: 'none' };
+    this.state = { address: '', city: '', state: '', zipcode: '', country: '', addressErr: 'none', cityErr: 'none', stateErr: 'none', zipcodeErr: 'none', countryErr: 'none', cardErr: '#fff' };
     this.submit = this.submit.bind(this)
   }
 
@@ -18,31 +18,36 @@ export default class IntlModal extends Component {
 
       if (this.state.address.length < 1) {
         this.setState({
-          addressErr: 'flex'
+          addressErr: 'flex',
+          cardErr: '#f5a623'
         })
       }
 
       if (this.state.city.length < 1) {
         this.setState({
-          cityErr: 'flex'
+          cityErr: 'flex',
+          cardErr: '#f5a623'
         })
       }
 
       if (this.state.state.length < 1) {
         this.setState({
-          stateErr: 'flex'
+          stateErr: 'flex',
+          cardErr: '#f5a623'
         })
       }
 
       if (this.state.zipcode.length < 1) {
         this.setState({
-          zipcodeErr: 'flex'
+          zipcodeErr: 'flex',
+          cardErr: '#f5a623'
         })
       }
 
       if (this.state.country.length < 1) {
         this.setState({
-          countryErr: 'flex'
+          countryErr: 'flex',
+          cardErr: '#f5a623'
         })
       }
       return false
@@ -75,8 +80,13 @@ export default class IntlModal extends Component {
         color: "#ACACAC"
       },
       input: {
-        borderBottomWidth: 2,
-        borderBottomColor: this.props.secondarycolor
+        paddingVertical: 10,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: this.state.cardErr,
+        backgroundColor: '#ffffff',
+        height: 76,
+
       }
     });
     
@@ -87,17 +97,17 @@ export default class IntlModal extends Component {
         visible={this.props.intlModal}
         onRequestClose={() => console.log()}>
         <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-          <KeyboardAwareScrollView enableAutomaticScroll={true} extraHeight={180} style={{ backgroundColor: "white", width: "100%", paddingVertical: 60, paddingHorizontal: 30 }}>
+          <KeyboardAwareScrollView enableAutomaticScroll={true} extraHeight={180} style={{ backgroundColor: "#f2f2f2", width: "100%", paddingVertical: 60, paddingHorizontal: 30 }}>
           
             <Text style={{ textAlign: "center", fontWeight: 'bold', fontSize: 17 }}>Enter your billing details address</Text>
 
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Address</Text>
               <View style={styles.input}>
+              <Text style={{ color: '#999999', fontSize: 16, paddingHorizontal: 10 }}>ADDRESS</Text>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
-                    placeholder="Address eg 20 Saltlake Eldorado"
+                    placeholder="20 Saltlake Eldorado"
                     style={{ fontSize: 13, paddingHorizontal: 10, width: '100%' }}
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(address) => this.setState({ address })}
@@ -105,15 +115,15 @@ export default class IntlModal extends Component {
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.addressErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid address</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.addressErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid address</Text> */}
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>City</Text>
               <View style={styles.input}>
+              <Text style={{ color: '#999999', fontSize: 16, paddingHorizontal: 10 }}>CITY</Text>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
-                    placeholder="City eg Livingstone"
+                    placeholder="Livingstone"
                     style={{ fontSize: 13, paddingHorizontal: 10, width: '100%' }}
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(city) => this.setState({ city })}
@@ -121,15 +131,15 @@ export default class IntlModal extends Component {
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.cityErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid city</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.cityErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid city</Text> */}
             </View>
             
             <View style={styles.formGroup}>
-              <Text style={styles.label}>State</Text>
               <View style={styles.input}>
+              <Text style={{ color: '#999999', fontSize: 16, paddingHorizontal: 10 }}>STATE</Text>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
-                    placeholder="State eg CA"
+                    placeholder="CA"
                     style={{ fontSize: 13, paddingHorizontal: 10, width: '100%' }}
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(state) => this.setState({ state })}
@@ -137,15 +147,15 @@ export default class IntlModal extends Component {
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.stateErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid state</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.stateErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid state</Text> */}
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Zip Code</Text>
               <View style={styles.input}>
+              <Text style={{ color: '#999999', fontSize: 16, paddingHorizontal: 10 }}>ZIP CODE</Text>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
-                    placeholder="Zip Code eg 928302"
+                    placeholder="928302"
                     style={{ fontSize: 13, paddingHorizontal: 10, width: '100%' }}
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(zipcode) => this.setState({ zipcode })}
@@ -153,15 +163,15 @@ export default class IntlModal extends Component {
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.zipcodeErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid zip code</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.zipcodeErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid zip code</Text> */}
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Country</Text>
               <View style={styles.input}>
+              <Text style={{ color: '#999999', fontSize: 16, paddingHorizontal: 10 }}>COUNTRY</Text>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
-                    placeholder="Country eg US"
+                    placeholder="US"
                     style={{ fontSize: 13, paddingHorizontal: 10, width: '100%' }}
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(country) => this.setState({ country })}
@@ -169,7 +179,7 @@ export default class IntlModal extends Component {
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.countryErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid country</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.countryErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid country</Text> */}
             </View>
 
 

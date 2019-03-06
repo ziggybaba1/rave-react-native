@@ -1,33 +1,36 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
+
 import PropTypes from 'prop-types';
-import CardAccountHeader from 'react-native-rave/src/components/payment-headers/CardAccountHeader';
-import CardMpesaHeader from 'react-native-rave/src/components/payment-headers/CardMpesaHeader';
-import CardMmoneyHeader from 'react-native-rave/src/components/payment-headers/CardMmoneyHeader';
-import CardUgMobileMoneyHeader from 'react-native-rave/src/components/payment-headers/CardUgMobileMoneyHeader';
+import MpesaHeader from 'react-native-rave/src/components/payment-headers/MpesaHeader';
+import MmoneyHeader from 'react-native-rave/src/components/payment-headers/MmoneyHeader';
+import AccountHeader from './src/components/payment-headers/AccountHeader';
+import CardHeader from './src/components/payment-headers/CardHeader';
+import UgMmoneyHeader from 'react-native-rave/src/components/payment-headers/UgMmoneyHeader'
 import Card from './src/components/Card';
-import Account from './src/components/Account';
+import Account from 'react-native-rave/src/components/Account';
 import Mpesa from './src/components/Mpesa';
 import Mmoney from './src/components/Mmoney';
-import UgandaMobileMoney from './src/components/UgandaMobileMoney';
+import UgMmoney from './src/components/UgandaMobileMoney';
 // import Ussd from './src/components/Ussd';
 import RavePayment from './library/RavePayment';
 import RaveMpesa from './library/RaveMpesa';
 import RaveUssd from './library/RaveUssd';
 import RaveMmoney from './library/RaveMmoney';
-import RaveUgandaMobileMoney from './library/RaveUgandaMobileMoney';
+import Home from './src/components/Home';
+
 
 
 export default class Rave extends React.Component {
   constructor(props) {
     super(props);
-    this.rave = new RavePayment({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, subaccounts: props.subaccounts, meta: props.meta, redirectUrl: props.redirecturl});
-    this.ravempesa = new RaveMpesa({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.raveugandamobilemoney = new RaveUgandaMobileMoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.rave = new RavePayment({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, subaccounts: props.subaccounts, meta: props.meta, redirectUrl: props.redirecturl });
+    this.ravempesa = new RaveMpesa({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_mpesa: props.is_mpesa, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_ussd: props.is_ussd, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.raveussd = new RaveUssd({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, phone: props.phone, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.state = { page: props.page };
+    this.state = { page: props.page, bottomOne: 1, bottomTwo: 90, colorOne: '#000', colorTwo: '#000' };
     this.getPage = this.getPage.bind(this);
+
   }
 
   // this method gets the page data and sets its state based on the data gotten
@@ -37,79 +40,149 @@ export default class Rave extends React.Component {
     })
   }
   render() {
-    let page, header, paymentHeader, singlePageHeader;
-    header = <View></View>;
-    paymentHeader = this.props.paymenttype.charAt(0).toUpperCase();
-    paymentHeader = paymentHeader + this.props.paymenttype.substr(1);
-    singlePageHeader = <Text style={{ fontSize: 22, textAlign: 'center', paddingTop: 20, paddingVertical: 10, color: this.props.secondarycolor, fontWeight: "bold", borderBottomColor: this.props.secondarycolor, borderBottomWidth: 2}}>{(paymentHeader) == "Mobilemoneygh" ? 'Mobile Money' : (paymentHeader) == "Mobilemoneyuganda" ? 'Uganda Mobile Money' : paymentHeader}</Text>;
+    let page, header1, header2;
+    var { height } = Dimensions.get('window');
+    header1 = <View></View>;
+    header2 = <View></View>
 
-    if (this.props.paymenttype == 'both' && this.props.currency == 'NGN') {
-      header = <CardAccountHeader page={this.getPage} />;
+    if (this.props.country == 'KE' && this.props.currency == 'KES') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mpesa') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+      if (this.state.page == "mpesa") {
+        header1 = <MpesaHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Mpesa rave={this.ravempesa} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else if (this.state.page == "card") {
+        header1 = <MpesaHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else {
+        header1 = <MpesaHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />
+        page = <Home />;
+      }
+    } else if (this.props.country == 'GH' && this.props.currency == 'GHS') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mobilemoneygh') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+      if (this.state.page == "mobilemoneygh") {
+        header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Mmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else if (this.state.page == "card") {
+        header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else {
+        header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Home />;
+      }
+    } else if (this.props.currency == 'UGX') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mobilemoneyuganda') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+      if (this.state.page == "mobilemoneyuganda") {
+        header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <UgMmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else if (this.state.page == "card") {
+        header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else {
+        header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Home />;
+      }
+    } else {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+
+      } else if (this.state.page == 'account') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+
+      } else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+
       if (this.state.page == "card") {
         page = <Card rave={this.rave} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      // }else if (this.state.page == "ussd") {
-      //   page = <Ussd rave={this.raveussd} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }else {
+        header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+
+        // }else if (this.state.page == "ussd") {
+        //   page = <Ussd rave={this.raveussd} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else if (this.state.page == "account") {
         page = <Account rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+
+      } else {
+        page = <Home onClose={this.props.onClose} />;
+        header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+
       }
-    } else if (this.props.paymenttype == "account") {
-      header = singlePageHeader;
-      page = <Account rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-    } else if (this.props.paymenttype == 'both' && this.props.currency == 'KES') {
-      header = <CardMpesaHeader page={this.getPage} />;
-      if (this.state.page == "mpesa") {
-        page = <Mpesa rave={this.ravempesa} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }else {
-        page = <Card rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }
-    } else if (this.props.paymenttype == 'both' && this.props.currency == 'GHS') {
-      header = <CardMmoneyHeader page={this.getPage} />;
-      if (this.state.page == "mobilemoneygh") {
-        page = <Mmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }else {
-        page = <Card rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }
-    }else if (this.props.paymenttype == 'both' && this.props.currency == 'UGX') {
-        header = <CardUgMobileMoneyHeader page={this.getPage} />;
-        if (this.state.page == "mobilemoneyuganda") {
-          page = <UgandaMobileMoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-        }else {
-          page = <Card rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-        }
-    } else if (this.props.paymenttype == 'mpesa' && this.props.currency == 'KES') {
-      header = singlePageHeader;
-      if (this.state.page == "mpesa") {
-        page = <Mpesa rave={this.ravempesa} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }
-    } else if (this.props.paymenttype == 'mobilemoneygh' && this.props.currency == 'GHS') {
-      header = singlePageHeader;
-      if (this.state.page == "mobilemoneygh") {
-        page = <Mmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }
-    } else if (this.props.paymenttype == 'mobilemoneyuganda' && this.props.currency == 'UGX') {
-      header = singlePageHeader;
-      if (this.state.page == "mobilemoneyuganda") {
-        page = <UgandaMobileMoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-      }
-    // } else if (this.props.paymenttype == "ussd") {
-    //     header = <CardAccountHeader page={this.getPage} />;
-    //     if (this.state.page == "ussd"){
-    //       page = <Ussd rave={this.raveussd} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-    //     } else if (this.state.page == "card") {
-    //       page = <Card rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-    //     }else {
-    //       page = <Account rave={this.rave} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-    //     }
-    } else {
-      header = <Text style={{ fontSize: 22, textAlign: 'center', paddingVertical: 15, color: this.props.secondarycolor, fontWeight: "bold", borderBottomColor: this.props.secondarycolor, borderBottomWidth: 2}}>Card</Text>;
-      page = <Card rave={this.rave} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
     }
-    
+
+
+
     // This returns the header and body of the payment page to the users based on the selected payment type and page state
     return (
       <View style={styles.container}>
-        {header}
         {page}
+        {header1}
+        {header2}
       </View>
     )
   }
@@ -121,6 +194,7 @@ Rave.propTypes = {
   amount: PropTypes.string.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onFailure: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   country: PropTypes.string,
   currency: PropTypes.string,
   email: PropTypes.string.isRequired,
@@ -130,16 +204,14 @@ Rave.propTypes = {
   secretkey: PropTypes.string.isRequired,
   txref: PropTypes.string,
   primarycolor: PropTypes.string,
-  secondarycolor: PropTypes.string, 
-  paymenttype: PropTypes.string.isRequired,
+  secondarycolor: PropTypes.string,
   production: PropTypes.bool,
   subaccounts: PropTypes.array,
   meta: PropTypes.array,
-  page: PropTypes.string,
   redirecturl: PropTypes.string
 }
 
-let transactionReference = "txref-"+Date.now();
+let transactionReference = "txref-" + Date.now();
 
 
 // Props to set default payload parameters if none is set
@@ -149,16 +221,17 @@ Rave.defaultProps = {
   txref: transactionReference,
   primarycolor: '#F5A623',
   secondarycolor: '#12122D',
-  paymenttype: 'both',
   production: false,
   meta: [],
-  page: "card",
   redirecturl: "https://rave-loader.herokuapp.com/index.html"
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    position: 'relative',
     backgroundColor: '#fff',
-    alignItems: 'center'
+    justifyContent: 'center',
+    width: '100%'
   }
 });
