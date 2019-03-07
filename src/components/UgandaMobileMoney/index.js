@@ -9,7 +9,7 @@ export default class index extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {phonenumber: (this.props.phone == null) ? '' : this.props.phone, status: "", chargeResponseMessage: '', phonenumberErr: 'none', flwRef: "", loading: false, phone: (this.props.phone == null) ? '' : this.props.phone };
+    this.state = {phonenumber: (this.props.phone == null) ? '' : this.props.phone, status: "", chargeResponseMessage: '', phonenumberErr: 'none', flwRef: "", inputErr: '#fff', loading: false, phone: (this.props.phone == null) ? '' : this.props.phone };
 
     this.pay = this.pay.bind(this);
     this.check = this.check.bind(this);
@@ -20,11 +20,12 @@ export default class index extends Component {
   // Performs a check on the state of the network, phone, voucher fields, if they are filled as required
   check() {
     this.setState({
-      phonenumberErr: 'none'
+      phonenumberErr: 'none', inputErr: '#fff'
     })
     if (this.state.phonenumber.length < 3) {
       this.setState({
         phonenumberErr: 'flex',
+        inputErr: this.props.primarycolor
       })
     }else if (Number(this.props.amount) < 10 ) {
         Alert.alert(
@@ -128,23 +129,35 @@ export default class index extends Component {
     const styles = StyleSheet.create({
       container: {
         paddingHorizontal: 25,
-        marginTop: 40,
-        paddingBottom: 50,
-        height: '100%'
+        paddingTop: 120,
+        height: '100%',
+        backgroundColor: '#f2f2f2' 
       },
       label: {
-        color: "#ACACAC"
+        color: "#12122c",
+        fontWeight: '400',
+        textAlign: 'center',
+        paddingBottom: 20
       },
       input: {
-        borderBottomWidth: 2,
-        borderBottomColor: this.props.secondarycolor
+        borderColor: this.state.inputErr,
+        borderWidth: 1,
+        borderRadius: 5,
+        backgroundColor: '#fff',
+        shadowColor: '#ccc',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 7,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        elevation: 2
       },
       formGroup: {
         marginBottom: 20,
       }
     });
 
-    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY</Text>;
+    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY {this.props.currency} {this.props.amount}</Text>;
     
   
     if (this.state.loading) {
@@ -158,7 +171,7 @@ export default class index extends Component {
         <KeyboardAwareScrollView keyboardShouldPersistTaps='always'>
           <View style={{ flex: 1 }}>
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Phone Number</Text>
+            <Text style={[styles.label, { fontSize: 20, marginVertical: 10 }]}>Enter your phone number</Text>
               <View style={styles.input}>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput

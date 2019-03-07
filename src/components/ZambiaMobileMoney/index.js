@@ -9,7 +9,7 @@ export default class index extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {phonenumber: (this.props.phone == null) ? '' : this.props.phone, status: "", chargeResponseMessage: '', phonenumberErr: 'none', flwRef: "", loading: false, phone: (this.props.phone == null) ? '' : this.props.phone };
+    this.state = {phonenumber: (this.props.phone == null) ? '' : this.props.phone, status: "", chargeResponseMessage: '', phonenumberErr: 'none', flwRef: "", inputErr: '#fff', loading: false, phone: (this.props.phone == null) ? '' : this.props.phone };
 
     this.pay = this.pay.bind(this);
     this.check = this.check.bind(this);
@@ -128,16 +128,28 @@ export default class index extends Component {
     const styles = StyleSheet.create({
       container: {
         paddingHorizontal: 25,
-        marginTop: 40,
-        paddingBottom: 50,
-        height: '100%'
+        paddingTop: 120,
+        height: '100%',
+        backgroundColor: '#f2f2f2' 
       },
       label: {
-        color: "#ACACAC"
+        color: "#12122c",
+        fontWeight: '400',
+        textAlign: 'center',
+        paddingBottom: 20
       },
       input: {
-        borderBottomWidth: 2,
-        borderBottomColor: this.props.secondarycolor
+        borderColor: this.state.inputErr,
+        borderWidth: 1,
+        borderRadius: 5,
+        backgroundColor: '#fff',
+        shadowColor: '#ccc',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 7,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        elevation: 2
       },
       formGroup: {
         marginBottom: 20,
@@ -152,7 +164,7 @@ export default class index extends Component {
       btnText = <ActivityIndicator size="small" color={this.props.secondarycolor} />
 
     }
-    // this returns the Uganda Mobile Money payment form
+    // this returns the Zambia Mobile Money payment form
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <KeyboardAwareScrollView keyboardShouldPersistTaps='always'>

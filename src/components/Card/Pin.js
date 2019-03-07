@@ -24,6 +24,7 @@ export default class PinModal extends Component {
 
               <View style={styles.formGroup}>
                 <Text style={styles.label}>Pin</Text>
+                <Text style={{ color: '#999999', fontSize: 16 }}>CARD NUMBER</Text>
               <View style={{
                 borderBottomWidth: 2,
                 borderBottomColor: this.props.secondarycolor}}>

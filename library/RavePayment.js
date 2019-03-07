@@ -3,7 +3,7 @@ import encryption from './encryption';
 import Axios from 'axios';
 
 export default class RavePayment {
-  constructor({ publicKey, encryptionKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, paymenttype, email, firstname, lastname, meta, subaccounts, redirectUrl }) {
+  constructor({ publicKey, encryptionKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, meta, subaccounts, redirectUrl }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -22,10 +22,6 @@ export default class RavePayment {
     this.getTransactionReference = function () {
       return txRef;
     }
-    this.getPaymentType = function () {
-      return paymenttype;
-    }
-
     this.getAmount = function () {
       return amount;
     }
@@ -38,15 +34,16 @@ export default class RavePayment {
     this.getLastname = function () {
       return lastname;
     }
-    this.getMeta = function () {
+    this.getSubaccounts = function () {
+      return subaccounts;
+    }
+    this.getMetadata = function () {
       return meta;
     }
     this.getRedirectUrl = function () {
       return redirectUrl;
     }
-    this.getSubaccounts = function () {
-      return subaccounts;
-    }
+
 
     this.charge = function (payload) {
       //insert constant data
@@ -55,14 +52,12 @@ export default class RavePayment {
       payload.country = this.getCountry();
       payload.txRef = this.getTransactionReference();
       payload.amount = this.getAmount();
-      payload.paymenttype = this.getPaymentType();
       payload.email = this.getEmail();
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
-      payload.meta = this.getMeta();
+      payload.subaccounts = this.getSubaccounts(); 
+      payload.meta = this.getMetadata();     
       payload.redirect_url = this.getRedirectUrl();
-      payload.subaccounts = this.getSubaccounts();
-      
 
       return new Promise((resolve, reject) => {
         var client = encryption({ payload, encryptionkey: this.getEncryptionKey() });

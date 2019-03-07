@@ -3,7 +3,7 @@ import encryption from 'react-native-rave/library/encryption';
 import Axios from 'axios';
 
 export default class RaveUgandaMobileMoney {
-  constructor({ publicKey, encryptionKey, production = false, currency = "UGX", country = "NG", txRef = "txref-" + Date.now(), network = "UGX", amount, paymenttype, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_ug = true, meta }) {
+  constructor({ publicKey, encryptionKey, production = false, currency = "UGX", country = "NG", txRef = "txref-" + Date.now(), network = "UGX", amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_ug = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -26,10 +26,6 @@ export default class RaveUgandaMobileMoney {
       return amount;
     }
 
-    this.getPaymentType = function () {
-      return paymenttype;
-    }
-
     this.getNetwork = function () {
       return network;
     }
@@ -49,9 +45,6 @@ export default class RaveUgandaMobileMoney {
     this.getUgandaMobileMoney = function () {
       return is_mobile_money_ug;
     }
-    this.getMeta = function () {
-      return meta;
-    }
 
 
     this.charge = function (payload) {
@@ -61,14 +54,12 @@ export default class RaveUgandaMobileMoney {
       payload.country = this.getCountry();
       payload.txRef = this.getTransactionReference();
       payload.amount = this.getAmount();
-      payload.paymenttype = this.getPaymentType();
       payload.network = this.getNetwork();
       payload.orderRef = this.getOrderReference();
       payload.email = this.getEmail();
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
       payload.is_mobile_money_ug = this.getUgandaMobileMoney();
-      payload.meta = this.getMeta();
       
 
       return new Promise((resolve, reject) => {

@@ -1,11 +1,11 @@
 # Rave By Flutterwave React Native Component
 This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave.com)
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/rnapp.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1551801430/rave-react-native/rnapphome.png" style="text-align: center; max-height: 400;" alt="Rave React Native App">
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752764/rave-react-native/GhMoney-Mpesa.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1551801445/rave-react-native/momo.png" style="text-align: center; max-height: 400;" alt="Mobile Money and Mpesa">
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544536889/rave-react-native/Uganda_Mobile_Money.png" style="text-align: center; max-height: 400;" alt="Uganda Mobile Money">
+<!-- <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1544536889/rave-react-native/Uganda_Mobile_Money.png" style="text-align: center; max-height: 400;" alt="Uganda Mobile Money"> -->
 
 ## Table Of Content
 
@@ -108,7 +108,8 @@ You can pull in react-native-rave into app with the steps below;
 
 ## Usage
 
-### Card Payments
+
+### Payments
 
 #### 1.  import Rave Component 
 
@@ -116,13 +117,14 @@ You can pull in react-native-rave into app with the steps below;
 import Rave from 'react-native-rave';
 ```
 
-#### 2. Set your success and failure methods
+#### 2. Set your success, failure and close methods
 
 ```javascript
  constructor(props) {
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -134,9 +136,14 @@ import Rave from 'react-native-rave';
   onFailure(data) {
     console.log("error", data);
   }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
+  }
 ```
 
-#### 3. Use component with the card payment props
+#### 3. Use component (ensure to set currency for the desired payment method to display)
 
 ```javascript
 render() {
@@ -150,65 +157,11 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
-        paymenttype="card" // or set to both for card and account transactions
-        page="card"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
-        />
-  );
-}
-```
-
-### Account Payments
-
-#### 1.  import Rave Component 
-
-```javascript
-import Rave from 'react-native-rave';
-```
-
-#### 2. Set your success and failure methods
-
-```javascript
- constructor(props) {
-    super(props);
-    this.onSuccess = this.onSuccess.bind(this);
-    this.onFailure = this.onFailure.bind(this);
-  }
-
-  onSuccess(data) {
-    console.log("success", data);
-    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
-
-  }
-
-  onFailure(data) {
-    console.log("error", data);
-  }
-```
-
-#### 3. Use component with the account payment props
-
-```javascript
-render() {
-  return (
-    <Rave 
-        amount="500" 
-        country="NG" 
-        currency="NGN" 
-        email="test@mail.com" 
-        firstname="Oluwole" 
-        lastname="Adebiyi" 
-        publickey="FLWPUBK-**************************-X" 
-        encryptionkey="****************"
-        paymenttype="account" // or set to both for card and account transactions
-        page="account"
-        meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
-        onSuccess={res => this.onSuccess(res)} 
-        onFailure={e => this.onFailure(e)}
+        onClose={e => this.onClose(e)}
         />
   );
 }
@@ -216,7 +169,7 @@ render() {
 
 ### Mpesa
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa).
+`Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa). Ensure to set currency to KES and country to KE
 
 #### 1.  import Rave Component 
 
@@ -231,6 +184,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -241,6 +195,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -258,19 +217,19 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
-        paymenttype="mpesa" // or set to both for card and mpesa transactions
-        page="mpesa"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
+        onClose={e => this.onClose(e)}
         />
   );
 }
 ```
 ### Ghana Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney)
+`Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney). Ensure to set currency to GHS and country to GH
+
 
 #### 1.  import Rave Component 
 
@@ -285,6 +244,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -295,6 +255,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -312,12 +277,11 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
-        paymenttype="mobilemoneygh" // or set to both for card and mobile money transactions
-        page="mobilemoneygh"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
+        onClose={e => this.onClose(e)}
         />
   );
 }
@@ -325,7 +289,7 @@ render() {
 
 ### Uganda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money)
+`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money).  Ensure to set currency to UGX
 
 #### 1.  import Rave Component 
 
@@ -340,6 +304,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -349,6 +314,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -366,12 +336,11 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
-        paymenttype="mobilemoneyuganda" // or set to both for card and uganda mobile money transactions
-        page="mobilemoneyuganda"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
+        onClose={e => this.onClose(e)}
         />
   );
 }
@@ -394,6 +363,7 @@ import Rave from 'react-native-rave';
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onSuccess(data) {
@@ -403,6 +373,11 @@ import Rave from 'react-native-rave';
 
   onFailure(data) {
     console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
   }
 ```
 
@@ -420,12 +395,11 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
-        paymenttype = "both" //set this payment type to mobilemoneyzambia for Zambia Mobile transaction to be performed, if not, account transaction would performed
-        page = "mobilemoneyzambia" //set this to display Zambia Mobile Money as the payment page of the transaction you want to perform, if not card payment page will display by default
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
         production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
+        onClose={e => this.onClose(e)}
         />
   );
 }
@@ -449,16 +423,15 @@ render() {
 | lastname      |  This is the lastname of the customer | `String` | Required
 | onSuccess      |  This is the function that receives data for a successful transaction | `Function` | Required
 | onFailure      |  This is the function that receives data for a failed transaction | `Function` | Required
+| onClose      |  This is the function that closes the payment window, it controls the screen that displays after payment | `Function` | Required
 | country      |  This is the country you are transacting from eg. NG, GH,KE, ZA | `String` | Not Required (defaults to NG)
 | currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, EUR, ZAR, ZMW | `String` | Not Required (defaults to NGN)
 | txref      |  This is a unique reference for the transaction | `String` | Not Required (will be generated automatically)
 | primarycolor      |  This is to override the primary colour of the component | `String` | Not Required
 | secondarycolor      |  This is to override the secondary colour of the component | `String` | Not Required
-| paymenttype      |  This is the payment type ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda', 'mobilemoneyzambia'] | `String` | Required ('if non set, it sets a default payment type to both')
-| page      |  This sets the current state of payment page based on the payment type currently implemented ['both','card', 'account', 'mpesa', 'mobilemoneygh', 'mobilemoneyuganda', 'mobilemoneyzambia']  | `String` | Required ('If no value is set, card page is set by default')
 | production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
-| subaccounts      |  This is can be used to implement `subaccount` or [split payments](https://developer.flutterwave.com/docs/split-payment) flow and it needs to be passed as an array of objects to the payload e.g [{ id: "RS_AFSHH367289NEESI2GH23", transaction_charge_type: "flat_subaccount", transaction_charge: "200" }, { id: "RS_AFSHH367289NEESI2GH23", transaction_charge_type: "flat_subaccount", transaction_charge: "200" }]  | `Array of Objects` | Not Required
+| subaccounts      |  This is can be used to implement `subaccount` or [split payments](https://developer.flutterwave.com/docs/split-payment) flow and it needs to be passed as an array of objects to the payload e.g [{ id: "RS_AFSHH367289NEESI2GH23", transaction_charge_type: "flat_subaccount", transaction_charge: "200" }, { id: "RS_AFSHH367289NEESIGSHJ78D", transaction_charge_type: "flat_subaccount", transaction_charge: "100" }]  | `Array of Objects` | Not Required
 
 ## Sample Transaction Verification Method Using Nodejs BackEnd
 

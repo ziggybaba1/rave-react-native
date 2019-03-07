@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default class Header extends Component {
   render() {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   textContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   text: {
     color: '#fff',
