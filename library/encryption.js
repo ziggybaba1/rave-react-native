@@ -1,5 +1,5 @@
-var encryption = ({ payload, secretkey }) => {
-  var key = getKey(secretkey);
+var encryption = ({ payload, encryptionkey }) => {
+  var key = encryptionkey;
   
   var stringifyPayload = JSON.stringify(payload);
   var encryption = encrypt(key, stringifyPayload);
@@ -8,16 +8,16 @@ var encryption = ({ payload, secretkey }) => {
 }
 
 // this is the getKey function that generates an encryption Key for you by passing your Secret Key as a parameter.
-function getKey(seckey) {
-  var md5 = require('md5');
-  var keymd5 = md5(seckey);
-  var keymd5last12 = keymd5.substr(-12);
+// function getKey(seckey) {
+//   var md5 = require('md5');
+//   var keymd5 = md5(seckey);
+//   var keymd5last12 = keymd5.substr(-12);
 
-  var seckeyadjusted = seckey.replace('FLWSECK-', '');
-  var seckeyadjustedfirst12 = seckeyadjusted.substr(0, 12);
+//   var seckeyadjusted = seckey.replace('FLWSECK-', '');
+//   var seckeyadjustedfirst12 = seckeyadjusted.substr(0, 12);
 
-  return seckeyadjustedfirst12 + keymd5last12;
-}
+//   return seckeyadjustedfirst12 + keymd5last12;
+// }
 
 // This is the encryption function that encrypts your payload by passing the stringified format and your encryption Key.
 function encrypt(key, text) {

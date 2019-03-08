@@ -170,9 +170,7 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
-          this.props.onSuccess(resp);
-          if (resp.data.status.toUpperCase() === "SUCCESSFUL" && resp.data.chargecode === "00") {
+          this.props.onSuccess(res);
             Alert.alert(
               '',
               'Transaction Successful',
@@ -191,10 +189,6 @@ export default class index extends Component {
                 })
               }]
             )
-          }
-        }).catch((error) => {
-          this.props.onFailure(error);
-        })
       } else {
         this.setState({
           loading: false
@@ -218,11 +212,7 @@ export default class index extends Component {
     })
 
     if (data.status == "successful") {
-      this.props.rave.verifyTransaction(data.txRef).then((resp) => {
-        this.props.onSuccess(resp);
-      }).catch((error) => {
-        this.props.onFailure(error);
-      })
+        this.props.onSuccess(data);
     }
     else {
       this.props.onFailure(data);
@@ -259,11 +249,7 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
-          this.props.onSuccess(resp);
-        }).catch((error) => {
-          this.props.onFailure(error);
-        })
+        this.props.onSuccess(res);
       }
       else if (res.data.chargeResponseCode === "02" && res.data.authurl.toUpperCase() === "NO-URL") {
         this.setState({

@@ -3,15 +3,15 @@ import encryption from './encryption';
 import Axios from 'axios';
 
 export default class RaveMpesa {
-  constructor({ publicKey, secretKey, production = false, currency = "KES", country = "KE", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, is_mpesa = true, is_mpesa_lipa = true }) {
+  constructor({ publicKey, encryptionKey, production = false, currency = "KES", country = "KE", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, is_mpesa = true, is_mpesa_lipa = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
     this.getPublicKey = function () {
       return publicKey;
     }
-    this.getSecretKey = function () {
-      return secretKey;
+    this.getEncryptionKey = function () {
+      return encryptionKey;
     }
     this.getCountry = function () {
       return country;
@@ -57,7 +57,7 @@ export default class RaveMpesa {
       
 
       return new Promise((resolve, reject) => {
-        var client = encryption({ payload, secretkey: this.getSecretKey() });
+        var client = encryption({ payload, encryptionkey: this.getEncryptionKey() });
 
         Axios({
           url: this.baseUrl + 'flwv3-pug/getpaidx/api/charge',
@@ -117,27 +117,27 @@ export default class RaveMpesa {
     })
   }
 
-  verifyTransaction(txref) {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/v2/verify',
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          txref,
-          SECKEY: this.getSecretKey()
-        },
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
+  // verifyTransaction(txref) {
+  //   return new Promise((resolve, reject) => {
+  //     Axios({
+  //       url: this.baseUrl + 'flwv3-pug/getpaidx/api/v2/verify',
+  //       method: 'post',
+  //       headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       data: {
+  //         txref,
+  //         SECKEY: this.getSecretKey()
+  //       },
+  //     })
+  //       .then(function (response) {
+  //         resolve(response.data);
+  //       })
+  //       .catch(function (error) {
+  //         reject(error.response.data);
+  //       });
+  //   })
+  // }
 
 }

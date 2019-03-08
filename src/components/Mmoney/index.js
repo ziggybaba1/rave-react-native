@@ -157,23 +157,23 @@ export default class index extends Component {
               }
             )
           }
-      }else if(res.data.status === "successful"){
-        Alert.alert(
-          '',
-          'Transaction Successfully Completed',
-          [{
-              text: 'Ok',
-              onPress: () => this.setState({
-                loading: false,
-                phonenumber: "",
-                network: "Select Network"
-              })
-            },
-          ], {
-            cancelable: false
+          this.props.onSuccess(res);
+            Alert.alert(
+              '',
+              'Transaction Successfully Completed',
+              [{
+                  text: 'Ok',
+                  onPress: () => this.setState({
+                    loading: false,
+                    phonenumber: "",
+                    network: "Select Network"
+                  })
+                },
+              ], {
+                cancelable: false
+              }
+            )
           }
-        )
-      }
     }).catch((e) => {
       this.setState({
         loading: false

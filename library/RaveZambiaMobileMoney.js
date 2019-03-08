@@ -1,9 +1,9 @@
 import React from 'react'
-import encryption from './encryption';
+import encryption from 'react-native-rave/library/encryption';
 import Axios from 'axios';
 
-export default class RaveUssd {
-  constructor({ publicKey, encryptionKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_ussd = true}) {
+export default class RaveUgandaMobileMoney {
+  constructor({ publicKey, encryptionKey, production = false, currency = "ZMW", country = "NG", txRef = "txref-" + Date.now(), network = "MTN", amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_ug = true }) {
     var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
     this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
 
@@ -25,6 +25,11 @@ export default class RaveUssd {
     this.getAmount = function () {
       return amount;
     }
+
+    this.getNetwork = function () {
+      return network;
+    }
+
     this.getOrderReference = function () {
       return orderRef;
     }
@@ -37,8 +42,8 @@ export default class RaveUssd {
     this.getLastname = function () {
       return lastname;
     }
-    this.getUssd = function () {
-      return is_ussd;
+    this.getUgandaMobileMoney = function () {
+      return is_mobile_money_ug;
     }
 
 
@@ -49,11 +54,12 @@ export default class RaveUssd {
       payload.country = this.getCountry();
       payload.txRef = this.getTransactionReference();
       payload.amount = this.getAmount();
+      payload.network = this.getNetwork();
       payload.orderRef = this.getOrderReference();
       payload.email = this.getEmail();
       payload.firstname = this.getFirstname();
       payload.lastname = this.getLastname();
-      payload.is_ussd = this.getUssd();
+      payload.is_mobile_money_ug = this.getUgandaMobileMoney();
       
 
       return new Promise((resolve, reject) => {
@@ -89,6 +95,31 @@ export default class RaveUssd {
       }).catch((e) => {
         reject(e);
       })
+    })
+  }
+
+  getCardFees({ amount, currency, card6 }) {
+    return new Promise((resolve, reject) => {
+      Axios({
+        url: this.baseUrl + 'flwv3-pug/getpaidx/api/fee',
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        data: {
+          PBFPubKey: this.getPublicKey(),
+          amount,
+          currency,
+          card6
+        },
+      })
+        .then(function (response) {
+          resolve(response.data);
+        })
+        .catch(function (error) {
+          reject(error.response.data);
+        });
     })
   }
 
@@ -139,25 +170,6 @@ export default class RaveUssd {
   //       });
   //   })
   // }
-
-  listBanks() {
-    return new Promise((resolve, reject) => {
-      Axios({
-        url: this.baseUrl + 'flwv3-pug/getpaidx/api/flwpbf-banks.js?json=1',
-        method: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error.response.data);
-        });
-    })
-  }
 
 
 }

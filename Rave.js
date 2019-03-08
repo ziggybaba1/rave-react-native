@@ -2,21 +2,25 @@ import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 
 import PropTypes from 'prop-types';
-import MpesaHeader from 'react-native-rave/src/components/payment-headers/MpesaHeader';
-import MmoneyHeader from 'react-native-rave/src/components/payment-headers/MmoneyHeader';
+import MpesaHeader from './src/components/payment-headers/MpesaHeader';
+import MmoneyHeader from './src/components/payment-headers/MmoneyHeader';
 import AccountHeader from './src/components/payment-headers/AccountHeader';
 import CardHeader from './src/components/payment-headers/CardHeader';
-import UgMmoneyHeader from 'react-native-rave/src/components/payment-headers/UgMmoneyHeader'
+import UgMmoneyHeader from './src/components/payment-headers/UgMmoneyHeader'
+import ZMmoneyHeader from './src/components/payment-headers/ZMmobileMoneyHeader'
 import Card from './src/components/Card';
-import Account from 'react-native-rave/src/components/Account';
+import Account from './src/components/Account';
 import Mpesa from './src/components/Mpesa';
 import Mmoney from './src/components/Mmoney';
 import UgMmoney from './src/components/UgandaMobileMoney';
+import ZMmoney from './src/components/ZambiaMobileMoney';
 // import Ussd from './src/components/Ussd';
 import RavePayment from './library/RavePayment';
 import RaveMpesa from './library/RaveMpesa';
 import RaveUssd from './library/RaveUssd';
 import RaveMmoney from './library/RaveMmoney';
+import RaveUgandaMobileMoney from './library/RaveUgandaMobileMoney';
+import RaveZambiaMobileMoney from './library/RaveZambiaMobileMoney';
 import Home from './src/components/Home';
 
 
@@ -24,10 +28,12 @@ import Home from './src/components/Home';
 export default class Rave extends React.Component {
   constructor(props) {
     super(props);
-    this.rave = new RavePayment({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, subaccounts: props.subaccounts, meta: props.meta, redirectUrl: props.redirecturl });
-    this.ravempesa = new RaveMpesa({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_mpesa: props.is_mpesa, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_ussd: props.is_ussd, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
-    this.raveussd = new RaveUssd({ publicKey: props.publickey, secretKey: props.secretkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, phone: props.phone, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.rave = new RavePayment({ publicKey: props.publickey, encryptionKey: props.encryptionkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, subaccounts: props.subaccounts, meta: props.meta, redirectUrl: props.redirecturl });
+    this.ravempesa = new RaveMpesa({ publicKey: props.publickey, encryptionKey: props.encryptionkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_mpesa: props.is_mpesa, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.ravemmoney = new RaveMmoney({ publicKey: props.publickey, encryptionKey: props.encryptionkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, is_ussd: props.is_ussd, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.raveugandamobilemoney = new RaveUgandaMobileMoney({ publicKey: props.publickey, encryptionKey: props.encryptionkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.ravezambiamobilemoney = new RaveZambiaMobileMoney({ publicKey: props.publickey, encryptionKey: props.encryptionkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
+    this.raveussd = new RaveUssd({ publicKey: props.publickey, encryptionKey: props.encryptionkey, production: props.production, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, phone: props.phone, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.state = { page: props.page, bottomOne: 1, bottomTwo: 90, colorOne: '#000', colorTwo: '#000' };
     this.getPage = this.getPage.bind(this);
 
@@ -125,7 +131,7 @@ export default class Rave extends React.Component {
       if (this.state.page == "mobilemoneyuganda") {
         header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
-        page = <UgMmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        page = <UgMmoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
       } else if (this.state.page == "card") {
         header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
@@ -135,6 +141,36 @@ export default class Rave extends React.Component {
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
         page = <Home />;
       }
+    }else if (this.props.currency == 'ZMW') {
+        if (this.state.page == 'home') {
+          this.state.bottomOne = 1;
+          this.state.bottomTwo = 90;
+          this.state.colorOne = '#000';
+          this.state.colorTwo = '#000';
+        } else if (this.state.page == 'mobilemoneyzambia') {
+          this.state.bottomOne = height - 110;
+          this.state.bottomTwo = 1;
+          this.state.colorOne = '#F5A623';
+          this.state.colorTwo = '#000';
+        } else if (this.state.page == 'card') {
+          this.state.bottomOne = 1;
+          this.state.bottomTwo = height - 110;
+          this.state.colorOne = '#000';
+          this.state.colorTwo = '#F5A623';
+        }
+        if (this.state.page == "mobilemoneyzambia") {
+          header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+          page = <ZMmoney rave={this.ravezambiamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        } else if (this.state.page == "card") {
+          header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+          page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        } else {
+          header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+          page = <Home />;
+        }
     } else {
       if (this.state.page == 'home') {
         this.state.bottomOne = 1;
@@ -201,7 +237,7 @@ Rave.propTypes = {
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   publickey: PropTypes.string.isRequired,
-  secretkey: PropTypes.string.isRequired,
+  encryptionkey: PropTypes.string.isRequired,
   txref: PropTypes.string,
   primarycolor: PropTypes.string,
   secondarycolor: PropTypes.string,
