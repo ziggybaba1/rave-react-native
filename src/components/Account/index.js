@@ -327,6 +327,8 @@ export default class index extends Component {
 
     let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY {this.props.currency} {this.props.amount}</Text>;
 
+    let otpBtnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>Confirm OTP</Text>;
+
     let zenith;
     if (this.state.accountbank == '057') {
       zenith = <View style={styles.formGroup}>
@@ -366,6 +368,7 @@ export default class index extends Component {
 
       btnText = <ActivityIndicator size="small" color={this.props.secondarycolor} />
 
+      otpBtnText = <ActivityIndicator size="small" color={this.props.secondarycolor}/>
     }
 
     let access = <Image source={require('../../assets/icons/access.png')} />;
@@ -453,7 +456,7 @@ export default class index extends Component {
 
             <TouchableOpacity onPress={this.confirmOtp} style={{ width: "100%" }} disabled={(this.state.loading == false) ? false : true}>
               <View style={{ backgroundColor: this.props.primarycolor, paddingVertical: 15, borderRadius: 5, opacity: (this.state.loading == false) ? 1 : 0.6 }}>
-                <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold" }}>Confirm OTP</Text>
+              {otpBtnText}
               </View>
             </TouchableOpacity>
 
