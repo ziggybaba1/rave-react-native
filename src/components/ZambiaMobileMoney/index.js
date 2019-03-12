@@ -20,11 +20,13 @@ export default class index extends Component {
   // Performs a check on the state of the network, phone, voucher fields, if they are filled as required
   check() {
     this.setState({
-      phonenumberErr: 'none'
+      phonenumberErr: 'none',
+      inputErr: '#fff'
     })
     if (this.state.phonenumber.length < 3) {
       this.setState({
         phonenumberErr: 'flex',
+        inputErr: this.props.primarycolor
       })
     }else if (Number(this.props.amount) < 10 ) {
         Alert.alert(
@@ -156,7 +158,7 @@ export default class index extends Component {
       }
     });
 
-    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY</Text>;
+    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>PAY {this.props.currency} {this.props.amount}</Text>;
     
   
     if (this.state.loading) {
@@ -170,7 +172,7 @@ export default class index extends Component {
         <KeyboardAwareScrollView keyboardShouldPersistTaps='always'>
           <View style={{ flex: 1 }}>
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Phone Number</Text>
+            <Text style={[styles.label, { fontSize: 20, marginVertical: 10 }]}>Enter your phone number</Text>
               <View style={styles.input}>
                 <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
                   <TextInput
@@ -184,7 +186,7 @@ export default class index extends Component {
                   />
                 </View>
               </View>
-              <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.phonenumberErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid phone number</Text>
+              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.phonenumberErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid phone number</Text> */}
             </View>
           </View>
 
