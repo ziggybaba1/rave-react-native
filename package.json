@@ -2,8 +2,12 @@
   "name": "react-native-rave",
   "main": "Rave.js",
   "version": "2.0.0",
-  "author": "Oluwole Adebiyi, Tofunmi Kupoluyi",
+  "author": "Oluwole Adebiyi, Tofunmi Kupoluyi,Flutterwave Developers",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Flutterwave/rave-react-native"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "card-validator": "^5.0.0",
