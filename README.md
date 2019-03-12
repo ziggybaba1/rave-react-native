@@ -421,6 +421,7 @@ render() {
 | phone      |  This is the phone number of the customer | `String` | Not Required
 | firstname      |  This is the firstname of the customer | `String` | Required
 | lastname      |  This is the lastname of the customer | `String` | Required
+| threeDsOverride      |  This can be used to force the authentication model to be 3DSecure | `Number` | Not Required (It expects 1 to be passed as its value)
 | onSuccess      |  This is the function that receives data for a successful transaction | `Function` | Required
 | onFailure      |  This is the function that receives data for a failed transaction | `Function` | Required
 | onClose      |  This is the function that closes the payment window, it controls the screen that displays after payment | `Function` | Required
