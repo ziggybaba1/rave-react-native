@@ -24,8 +24,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 ### Prerequisites
 
-- [Rave Test Public And Encryption Keys](https://ravesandbox.flutterwave.com/dashboard/settings/apis)
-- [Rave Live Public And Encryption Keys](https://rave.flutterwave.com/dashboard/settings/apis)
+- [Rave Public And Encryption Keys](https://rave.flutterwave.com/dashboard/settings/apis)
 - [Node](https://nodejs.org/en/)
 - [NPM](https://www.npmjs.com/get-npm)
 - [React Native](https://facebook.github.io/react-native/docs/getting-started.html)
@@ -45,10 +44,16 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 > To Implement Rave By Flutterwave easily with React Native
 
-- Go to [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis) to get your **`LIVE`** public and encryption key
-- Go to [Flutterwave Rave Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) to get your **`TEST`** public and encryption key
+- You can get your Public, Secret and your Encryption Keys on your account by clicking this link >>> [Flutterwave Rave Live](https://rave.flutterwave.com/dashboard/settings/apis).
 
-`NOTE: ` Set the production option to `true` or `false` depending on your deployment environment.
+- To get your **`TEST`** public, secret and encryption keys click on the `Live Mode` Toggle button to switch to Test account and `Test Mode` Toggle button to switch to live.
+
+- This is shown in the screenshots displayed below.
+
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1553697794/rave-react-native/rave-live-account.png" style="text-align: center; max-height: 400;" alt="Rave Live Account">
+
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1553697793/rave-react-native/rave-test-account.png" style="text-align: center; max-height: 400;" alt="Rave Test Account">
+
 
 ## How It Works
 
@@ -158,7 +163,6 @@ render() {
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
         onClose={e => this.onClose(e)}
@@ -218,7 +222,6 @@ render() {
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
         onClose={e => this.onClose(e)}
@@ -278,7 +281,6 @@ render() {
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
         onClose={e => this.onClose(e)}
@@ -337,7 +339,6 @@ render() {
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
         meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
         onClose={e => this.onClose(e)}
@@ -395,8 +396,7 @@ render() {
         lastname="Adebiyi" 
         publickey="FLWPUBK-**************************-X" 
         encryptionkey="****************"
-        meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]}
-        production={false} 
+        meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]} 
         onSuccess={res => this.onSuccess(res)} 
         onFailure={e => this.onFailure(e)}
         onClose={e => this.onClose(e)}
@@ -414,8 +414,8 @@ render() {
 
 | props        | parameter           | type | required  |
 | ------------- |:-------------:| -----:| -----:|
-| publickey      |  This is the publickey gotten from your [Live](https://rave.flutterwave.com/dashboard/settings/apis) or [Test](https://ravesandbox.flutterwave.com/dashboard/settings/apis) dashboard | `String` | Required
-| encryptionkey      |  This is the encryption key that can be gotten from your [Live](https://rave.flutterwave.com/dashboard/settings/apis) or [Test](https://rave.flutterwave.com/dashboard/settings/apis)
+| publickey      |  This is the publickey gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
+| encryptionkey      |  This is the encryption key that can be gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | amount      |  This is the amount to be charged from card/account | `String` | Required
 | email      |  This is the email of the customer | `String` | Required
 | phone      |  This is the phone number of the customer | `String` | Not Required
@@ -425,12 +425,11 @@ render() {
 | onSuccess      |  This is the function that receives data for a successful transaction | `Function` | Required
 | onFailure      |  This is the function that receives data for a failed transaction | `Function` | Required
 | onClose      |  This is the function that closes the payment window, it controls the screen that displays after payment | `Function` | Required
-| country      |  This is the country you are transacting from eg. NG, GH,KE, ZA | `String` | Not Required (defaults to NG)
-| currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, EUR, ZAR, ZMW | `String` | Not Required (defaults to NGN)
+| country      |  This is the country you are transacting from eg. NG, GH,KE, ZA | `String` | Required (if none passed defaults to NG)
+| currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, EUR, ZAR, ZMW | `String` | (if none passed defaults to NGN)
 | txref      |  This is a unique reference for the transaction | `String` | Not Required (will be generated automatically)
 | primarycolor      |  This is to override the primary colour of the component | `String` | Not Required
 | secondarycolor      |  This is to override the secondary colour of the component | `String` | Not Required
-| production      |   Set to `true` if you want your transactions to run in the production environment otherwise set to `false`. Defaults to false  | `Boolean` | Not Required ('defaults to false')
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
 | subaccounts      |  This is can be used to implement `subaccount` or [split payments](https://developer.flutterwave.com/docs/split-payment) flow and it needs to be passed as an array of objects to the payload e.g [{ id: "RS_AFSHH367289NEESI2GH23", transaction_charge_type: "flat_subaccount", transaction_charge: "200" }, { id: "RS_AFSHH367289NEESIGSHJ78D", transaction_charge_type: "flat_subaccount", transaction_charge: "100" }]  | `Array of Objects` | Not Required
 
@@ -575,9 +574,6 @@ export default class App extends React.Component {
           metaname: "storelocation",
           metavalue: "ikeja"
         }]
-      }
-      production = {
-        false  // Set production value to false if you are using ravesandbox public and private keys or test enviroment, Set to true if you are ready to go live
       }
       onSuccess = {
         res => this.onSuccess(res)

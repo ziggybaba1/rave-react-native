@@ -3,9 +3,9 @@ import encryption from './encryption';
 import Axios from 'axios';
 
 export default class RavePayment {
-  constructor({ publicKey, encryptionKey, production = false, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, meta, threeDsOverride, subaccounts, redirectUrl }) {
-    var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
-    this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
+  constructor({ publicKey, encryptionKey, currency = "NGN", country = "NG", txRef = "txref-" + Date.now(), amount, email, firstname, lastname, meta, threeDsOverride, subaccounts, redirectUrl }) {
+    var baseUrlMap = "https://api.ravepay.co/"
+    this.baseUrl = baseUrlMap;
 
     this.getPublicKey = function () {
       return publicKey;
