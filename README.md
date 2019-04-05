@@ -52,7 +52,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1553697794/rave-react-native/rave-live-account.png" style="text-align: center; max-height: 400;" alt="Rave Live Account">
 
-<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1553697793/rave-react-native/rave-test-account.png" style="text-align: center; max-height: 400;" alt="Rave Test Account">
+<img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1554490083/rave-react-native/rave-test-account.png" style="text-align: center; max-height: 400;" alt="Rave Test Account">
 
 
 ## How It Works
