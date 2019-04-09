@@ -108,6 +108,7 @@ You can pull in react-native-rave into app with the steps below;
 - Ghana Mobile Money Payments
 - Uganda Mobile Money Payments
 - Zambia Mobile Money Payments
+- Rwanda Mobile Money Payments
 - USSD Payments
 
 
@@ -405,6 +406,65 @@ render() {
 }
 ```
 
+### Rwanda Mobile Money
+
+`Note:` Rave currently allows merchants use two (2) payment methods in Zambia (card and rwanda mobile money)
+
+#### 1.  import Rave Component 
+
+```javascript
+import Rave from 'react-native-rave';
+```
+
+#### 2. Set your success and failure methods
+
+```javascript
+ constructor(props) {
+    super(props);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
+    this.onClose = this.onClose.bind(this);
+  }
+
+  onSuccess(data) {
+    console.log("success", data);
+    // You can get the transaction reference from successful transaction charge response returned and handle your transaction verification here
+  }
+
+  onFailure(data) {
+    console.log("error", data);
+  }
+
+  onClose() {
+    //navigate to the desired screen on rave close
+
+  }
+```
+
+#### 3. Use component with the Rwanda Mobile Money payment props
+
+```javascript
+render() {
+  return (
+    <Rave 
+        amount="10" 
+        country="NG" 
+        currency="RWF" 
+        email="test@mail.com" 
+        firstname="Oluwole" 
+        lastname="Adebiyi" 
+        publickey="FLWPUBK-**************************-X" 
+        encryptionkey="****************"
+        meta={[{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]} 
+        onSuccess={res => this.onSuccess(res)} 
+        onFailure={e => this.onFailure(e)}
+        onClose={e => this.onClose(e)}
+        />
+  );
+}
+```
+
+
 ### USSD Payments
 
 `Note:` This is still in development.
@@ -426,7 +486,7 @@ render() {
 | onFailure      |  This is the function that receives data for a failed transaction | `Function` | Required
 | onClose      |  This is the function that closes the payment window, it controls the screen that displays after payment | `Function` | Required
 | country      |  This is the country you are transacting from eg. NG, GH,KE, ZA | `String` | Required (if none passed defaults to NG)
-| currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, EUR, ZAR, ZMW | `String` | (if none passed defaults to NGN)
+| currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, EUR, ZAR, ZMW, RWF | `String` | (if none passed defaults to NGN)
 | txref      |  This is a unique reference for the transaction | `String` | Not Required (will be generated automatically)
 | primarycolor      |  This is to override the primary colour of the component | `String` | Not Required
 | secondarycolor      |  This is to override the secondary colour of the component | `String` | Not Required
