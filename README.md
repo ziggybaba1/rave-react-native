@@ -408,7 +408,7 @@ render() {
 
 ### Rwanda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Zambia (card and rwanda mobile money)
+`Note:` Rave currently allows merchants use two (2) payment methods in Rwanda (card and rwanda mobile money)
 
 #### 1.  import Rave Component 
 
