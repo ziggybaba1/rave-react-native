@@ -79,7 +79,7 @@ export default class Rave extends React.Component {
       } else {
         header1 = <MpesaHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />
-        page = <Home />;
+        page = <Home onClose={this.props.onClose} />;
       }
     } else if (this.props.country == 'GH' && this.props.currency == 'GHS') {
       if (this.state.page == 'home') {
@@ -109,7 +109,7 @@ export default class Rave extends React.Component {
       } else {
         header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
-        page = <Home />;
+        page = <Home onClose={this.props.onClose} />;
       }
     } else if (this.props.currency == 'UGX') {
       if (this.state.page == 'home') {
@@ -139,7 +139,7 @@ export default class Rave extends React.Component {
       } else {
         header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
-        page = <Home />;
+        page = <Home onClose={this.props.onClose} />;
       }
     }else if (this.props.currency == 'ZMW') {
         if (this.state.page == 'home') {
@@ -169,7 +169,7 @@ export default class Rave extends React.Component {
         } else {
           header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
           header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
-          page = <Home />;
+          page = <Home onClose={this.props.onClose} />;
         }
     } else {
       if (this.state.page == 'home') {
