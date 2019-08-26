@@ -247,7 +247,9 @@ export default class index extends Component {
       // Check for suggested auth
       if (res.data.status.toUpperCase() === "SUCCESSFUL") {
         this.setState({
-          loading: false
+          loading: false,
+          "accountnumber": "",
+          "phonenumber": "",
         })
         this.props.onSuccess(res);
       }

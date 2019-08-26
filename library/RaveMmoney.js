@@ -3,9 +3,9 @@ import encryption from 'react-native-rave/library/encryption';
 import Axios from 'axios';
 
 export default class RaveMmoney {
-  constructor({ publicKey, encryptionKey, production = false, currency = "GHS", country = "GH", txRef = "txref-" + Date.now(), amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_gh = true }) {
-    var baseUrlMap = ["https://ravesandboxapi.flutterwave.com/", "https://api.ravepay.co/"]
-    this.baseUrl = (production) ? baseUrlMap[1] : baseUrlMap[0];
+  constructor({ publicKey, encryptionKey, currency = "GHS", country = "GH", txRef = "txref-" + Date.now(), amount, orderRef = "orderref_" + Date.now(), email, firstname, lastname, is_mobile_money_gh = true }) {
+    var baseUrlMap = "https://api.ravepay.co/"
+    this.baseUrl = baseUrlMap;
 
     this.getPublicKey = function () {
       return publicKey;
