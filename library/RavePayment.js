@@ -46,7 +46,9 @@ export default class RavePayment {
     this.getRedirectUrl = function () {
       return redirectUrl;
     }
-
+    this.getPaymentPlan = function () {
+      return paymentPlan;
+    }
 
     this.charge = function (payload) {
       //insert constant data
@@ -62,6 +64,7 @@ export default class RavePayment {
       payload["3DS_OVERRIDE"] = this.getThreeDsOverride();
       payload.meta = this.getMetadata();     
       payload.redirect_url = this.getRedirectUrl();
+      payload.payment_plan = this.getPaymentPlan();
 
       return new Promise((resolve, reject) => {
         var client = encryption({ payload, encryptionkey: this.getEncryptionKey() });

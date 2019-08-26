@@ -40,7 +40,6 @@ export default class Rave extends React.Component {
     this.raveussd = new RaveUssd({ publicKey: props.publickey, encryptionKey: props.encryptionkey, currency: props.currency, country: props.country, txRef: props.txref, amount: props.amount, phone: props.phone, email: props.email, firstname: props.firstname, lastname: props.lastname, meta: props.meta });
     this.state = { page: props.page, bottomOne: 1, bottomTwo: 90, colorOne: '#000', colorTwo: '#000' };
     this.getPage = this.getPage.bind(this);
-
   }
 
   // this method gets the page data and sets its state based on the data gotten
@@ -278,7 +277,8 @@ Rave.propTypes = {
   subaccounts: PropTypes.array,
   threeDsOverride: PropTypes.number,
   meta: PropTypes.array,
-  redirecturl: PropTypes.string
+  redirecturl: PropTypes.string,
+  paymentplan: PropTypes.number
 }
 
 let transactionReference = "txref-" + Date.now();

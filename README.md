@@ -488,6 +488,7 @@ render() {
 | country      |  This is the country you are transacting from eg. NG, GH,KE, ZA | `String` | Required (if none passed defaults to NG)
 | currency      |  This is the currency you want to charge the customer eg. NGN, GHS, KES, UGX, USD, GBP, EUR, ZAR, ZMW, RWF | `String` | (if none passed defaults to NGN)
 | txref      |  This is a unique reference for the transaction | `String` | Not Required (will be generated automatically)
+| paymentplan   | This is the payment plan ID which will subscribe a user to a plan | `Number`  | Not Required
 | primarycolor      |  This is to override the primary colour of the component | `String` | Not Required
 | secondarycolor      |  This is to override the secondary colour of the component | `String` | Not Required
 | meta      |  This is additional information that can be sent to the server eg [{ metaname: "color", metavalue: "red" }, { metaname: "storelocation", metavalue: "ikeja" }]  | `Array of Objects` | Not Required
