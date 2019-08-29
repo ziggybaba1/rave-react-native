@@ -488,7 +488,7 @@ render() {
 | publickey      |  This is the publickey gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | encryptionkey      |  This is the encryption key that can be gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | amount      |  This is the amount to be charged from card/account | `String` | Required 
-| amount      |  This is the amount to be charged from card/account | `String` | Required  
+| paymentOption      |  This is the payment method you want availiable to the customer eg. card, mobilemoneygh, mobilemoneyuganda, mobilemoneyzambia | `String` | (if none passed, defaults to card) 
 | email      |  This is the email of the customer | `String` | Required |
 | phone      |  This is the phone number of the customer | `String` | Not Required |
 | firstname      |  This is the firstname of the customer | `String` | Required |
