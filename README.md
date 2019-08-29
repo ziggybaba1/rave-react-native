@@ -158,6 +158,7 @@ render() {
         amount="500" 
         country="NG" 
         currency="NGN" 
+        paymentOption:""
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -174,7 +175,9 @@ render() {
 
 ### Mpesa
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa). Ensure to set currency to KES and country to KE
+`Note:` Rave allows merchants to set payment method to Mpesa only by setting paymentOption to mpsesa, only the mpesa payment option would be availiable. merchants can also set paymentOption to card,mpsesa inorder to accept both card and Mpsesa as payment methods. 
+
+`Note:` leaving paymentOption empty sets the default payment method to card.
 
 #### 1.  import Rave Component 
 
@@ -232,7 +235,9 @@ render() {
 ```
 ### Ghana Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney). Ensure to set currency to GHS and country to GH
+`Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be availiable. merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Ghana mobile money as payment methods. 
+
+'Note:' leaving paymentOption empty sets the default payment method to card
 
 
 #### 1.  import Rave Component 
@@ -292,7 +297,9 @@ render() {
 
 ### Uganda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money).  Ensure to set currency to UGX
+`Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyuganda inorder to accept both card and Uganda mobilemoney as payment methods. 
+
+'Note:' leaving paymentOption empty sets the default payment method to card
 
 #### 1.  import Rave Component 
 
@@ -350,7 +357,9 @@ render() {
 
 ### Zambia Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Zambia (card and zambia mobile money)
+`Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyzambia inorder to accept both card and Zambia mobilemoney as payment methods. 
+
+'Note:' leaving paymentOption empty sets the default payment method to card
 
 #### 1.  import Rave Component 
 
@@ -408,7 +417,9 @@ render() {
 
 ### Rwanda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Rwanda (card and rwanda mobile money)
+`Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Rwanda mobilemoney as payment methods. 
+
+'Note:' leaving paymentOption empty sets the default payment method to card
 
 #### 1.  import Rave Component 
 
@@ -476,10 +487,10 @@ render() {
 | ------------- |:-------------:| -----:| -----:|
 | publickey      |  This is the publickey gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | encryptionkey      |  This is the encryption key that can be gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
-| amount      |  This is the amount to be charged from card/account | `String` | Required
-| email      |  This is the email of the customer | `String` | Required
-| phone      |  This is the phone number of the customer | `String` | Not Required
-| firstname      |  This is the firstname of the customer | `String` | Required
+| amount      |  This is the amount to be charged from card/account | `String` | Required  
+| email      |  This is the email of the customer | `String` | Required |
+| phone      |  This is the phone number of the customer | `String` | Not Required |
+| firstname      |  This is the firstname of the customer | `String` | Required |
 | lastname      |  This is the lastname of the customer | `String` | Required
 | threeDsOverride      |  This can be used to force the authentication model to be 3DSecure | `Number` | Not Required (It expects 1 to be passed as its value)
 | onSuccess      |  This is the function that receives data for a successful transaction | `Function` | Required
