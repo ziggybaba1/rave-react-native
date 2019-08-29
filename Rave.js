@@ -163,6 +163,58 @@ export default class Rave extends React.Component {
       }
     } 
     
+    
+    else if (this.props.country == 'GH' && this.props.currency == 'GHS' && this.props.paymentOption == 'mobilemoneygh') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mobilemoneygh') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      }
+      if (this.state.page == "mobilemoneygh") {
+        header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Mmoney rave={this.ravemmoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else {
+        header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Home onClose={this.props.onClose} />;
+      }
+    } 
+    else if (this.props.country == 'GH') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mobilemoneygh') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+      if (this.state.page == "card") {
+        // header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header1 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+        page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else {
+        // header1 = <MmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header1 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+        page = <Home onClose={this.props.onClose} />;
+      }
+    } 
+    
+    
 
 
     else if (this.props.currency == 'UGX' && this.props.paymentOption == 'card,mobilemoneyuganda') {
