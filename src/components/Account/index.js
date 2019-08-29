@@ -49,7 +49,7 @@ export default class index extends Component {
         )
       })
       if (this.mounted) {
-        this.setState({ banks, accountbank: response[0].bankcode })
+        this.setState({ banks, accountbank: response[5].bankcode })
       }
     }).catch((e) => {
       console.log(e);

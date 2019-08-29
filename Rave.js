@@ -54,7 +54,7 @@ export default class Rave extends React.Component {
     header1 = <View></View>;
     header2 = <View></View>
 
-    if (this.props.country == 'KE' && this.props.currency == 'KES') {
+    if (this.props.country == 'KE' && this.props.currency == 'KES' && this.props.paymentOption == 'card,mpesa') {
       if (this.state.page == 'home') {
         this.state.bottomOne = 1;
         this.state.bottomTwo = 90;
@@ -84,7 +84,54 @@ export default class Rave extends React.Component {
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />
         page = <Home onClose={this.props.onClose} />;
       }
-    } else if (this.props.country == 'GH' && this.props.currency == 'GHS') {
+    } 
+    
+    if (this.props.country == 'KE' && this.props.currency == 'KES' && this.props.paymentOption == 'mpesa') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mpesa') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      }
+      if (this.state.page == "mpesa") {
+        header1 = <MpesaHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;       
+        page = <Mpesa rave={this.ravempesa} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      
+      } else {
+        header1 = <MpesaHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />
+        page = <Home />;
+      }
+    }
+
+    if (this.props.country == 'KE' && this.props.currency == 'KES') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+      if (this.state.page == "card") {
+        header1 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      } else {
+        header1= <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />
+        page = <Home />;
+      }
+    }
+
+    
+    else if (this.props.country == 'GH' && this.props.currency == 'GHS' && this.props.paymentOption == 'card,mobilemoneygh') {
       if (this.state.page == 'home') {
         this.state.bottomOne = 1;
         this.state.bottomTwo = 90;
@@ -114,7 +161,11 @@ export default class Rave extends React.Component {
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
         page = <Home onClose={this.props.onClose} />;
       }
-    } else if (this.props.currency == 'UGX') {
+    } 
+    
+
+
+    else if (this.props.currency == 'UGX' && this.props.paymentOption == 'card,mobilemoneyuganda') {
       if (this.state.page == 'home') {
         this.state.bottomOne = 1;
         this.state.bottomTwo = 90;
@@ -144,7 +195,60 @@ export default class Rave extends React.Component {
         header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
         page = <Home onClose={this.props.onClose} />;
       }
-    }else if (this.props.currency == 'ZMW') {
+
+      
+
+
+      
+
+    }
+    
+    else if (this.props.currency == 'UGX' && this.props.paymentOption == 'mobilemoneyuganda') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      }else if (this.state.page == 'mobilemoneyuganda') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      }
+      if (this.state.page == "mobilemoneyuganda") {
+        header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <UgMmoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      }else {
+        header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Home />;
+      }
+    }
+    else if (this.props.currency == 'UGX') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      }else if (this.state.page == 'card') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = height - 110;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#F5A623';
+      }
+      if (this.state.page == "card") {
+        // header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header1 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+        page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      }else {
+        // header1 = <UgMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+        page = <Home />;
+      }
+    }
+    
+    else if (this.props.currency == 'ZMW' && this.props.paymentOption == 'card,mobilemoneyzambia') {
         if (this.state.page == 'home') {
           this.state.bottomOne = 1;
           this.state.bottomTwo = 90;
@@ -174,7 +278,57 @@ export default class Rave extends React.Component {
           header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
           page = <Home onClose={this.props.onClose} />;
         }
-      } else if (this.props.currency == 'RWF') {
+      } 
+      
+      
+      else if (this.props.currency == 'ZMW' && this.props.paymentOption == 'mobilemoneyzambia') {
+        if (this.state.page == 'home') {
+          this.state.bottomOne = 1;
+          this.state.bottomTwo = 90;
+          this.state.colorOne = '#000';
+          this.state.colorTwo = '#000';
+        } else if (this.state.page == 'mobilemoneyzambia') {
+          this.state.bottomOne = height - 110;
+          this.state.bottomTwo = 1;
+          this.state.colorOne = '#F5A623';
+          this.state.colorTwo = '#000';
+        } if (this.state.page == "mobilemoneyzambia") {
+          header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+          page = <ZMmoney rave={this.ravezambiamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        } else {
+          header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+          page = <Home />;
+        }
+    }
+  
+      else if (this.props.currency == 'ZMW') {
+        if (this.state.page == 'home') {
+          this.state.bottomOne = 1;
+          this.state.bottomTwo = 90;
+          this.state.colorOne = '#000';
+          this.state.colorTwo = '#000';
+        }else if (this.state.page == 'card') {
+          this.state.bottomOne = 1;
+          this.state.bottomTwo = height - 110;
+          this.state.colorOne = '#000';
+          this.state.colorTwo = '#F5A623';
+        }
+         if (this.state.page == "card") {
+          header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+          page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+        } else {
+          // header1 = <ZMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+          header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+          page = <Home />;
+        }
+      }
+      
+      
+      
+      else if (this.props.currency == 'RWF' && this.props.paymentOption == 'card,mobilemoneygh') {
         if (this.state.page == 'home') {
           this.state.bottomOne = 1;
           this.state.bottomTwo = 90;
@@ -204,7 +358,60 @@ export default class Rave extends React.Component {
           header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
           page = <Home onClose={this.props.onClose}/>;
         }
+    } 
+
+    else if (this.props.currency == 'RWF' && this.props.paymentOption == 'mobilemoneygh') {
+      if (this.state.page == 'home') {
+        this.state.bottomOne = 1;
+        this.state.bottomTwo = 90;
+        this.state.colorOne = '#000';
+        this.state.colorTwo = '#000';
+      } else if (this.state.page == 'mobilemoneygh') {
+        this.state.bottomOne = height - 110;
+        this.state.bottomTwo = 1;
+        this.state.colorOne = '#F5A623';
+        this.state.colorTwo = '#000';
+      } 
+      if (this.state.page == "mobilemoneygh") {
+        header1 = <RwMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <RwMmoney rave={this.raveugandamobilemoney} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
+      }else {
+        header1 = <RwMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        page = <Home onClose={this.props.onClose}/>;
+      }
+  } 
+
+  else if (this.props.currency == 'RWF') {
+    if (this.state.page == 'home') {
+      this.state.bottomOne = 1;
+      this.state.bottomTwo = 90;
+      this.state.colorOne = '#000';
+      this.state.colorTwo = '#000';
+    } else if (this.state.page == 'mobilemoneygh') {
+      this.state.bottomOne = height - 110;
+      this.state.bottomTwo = 1;
+      this.state.colorOne = '#F5A623';
+      this.state.colorTwo = '#000';
+    } else if (this.state.page == 'card') {
+      this.state.bottomOne = 1;
+      this.state.bottomTwo = height - 110;
+      this.state.colorOne = '#000';
+      this.state.colorTwo = '#F5A623';
+    }
+     else if (this.state.page == "card") {
+      // header1 = <RwMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+      header1 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+      page = <Card rave={this.rave} phone={this.props.phone} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
     } else {
+      // header1 = <RwMmoneyHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+      header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomOne} colorTwo={this.state.colorTwo} />;
+      page = <Home onClose={this.props.onClose}/>;
+    }
+}    
+    
+    else {
       if (this.state.page == 'home') {
         this.state.bottomOne = 1;
         this.state.bottomTwo = 90;
@@ -266,6 +473,7 @@ Rave.propTypes = {
   onClose: PropTypes.func.isRequired,
   country: PropTypes.string,
   currency: PropTypes.string,
+  paymentOption:PropTypes.string,
   email: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
@@ -288,6 +496,7 @@ let transactionReference = "txref-" + Date.now();
 Rave.defaultProps = {
   country: "NG",
   currency: "NGN",
+  paymentOption:'',
   txref: transactionReference,
   primarycolor: '#F5A623',
   secondarycolor: '#12122D',
