@@ -151,6 +151,10 @@ import Rave from 'react-native-rave';
 
 #### 3. Use component (ensure to set currency for the desired payment method to display)
 
+`Note:` Rave allows merchants can also set paymentOption to account, inorder to accept only the Account payment methods. 
+
+`Note:` leaving paymentOption empty sets the default payment method to card only.
+
 ```javascript
 render() {
   return (
@@ -158,7 +162,7 @@ render() {
         amount="500" 
         country="NG" 
         currency="NGN" 
-        paymentOption:""
+        paymentOption:"card,account"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -177,7 +181,7 @@ render() {
 
 `Note:` Rave allows merchants to set payment method to Mpesa only by setting paymentOption to mpsesa, only the mpesa payment option would be availiable. merchants can also set paymentOption to card,mpsesa inorder to accept both card and Mpsesa as payment methods. 
 
-`Note:` leaving paymentOption empty sets the default payment method to card.
+`Note:` leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -220,6 +224,7 @@ render() {
         amount="10" 
         country="KE" 
         currency="KES" 
+        paymentOption:"card,mpesa"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -237,7 +242,7 @@ render() {
 
 `Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be availiable. merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Ghana mobile money as payment methods. 
 
-'Note:' leaving paymentOption empty sets the default payment method to card
+'Note:' leaving paymentOption empty sets the default payment method to card only.
 
 
 #### 1.  import Rave Component 
@@ -281,6 +286,7 @@ render() {
         amount="10" 
         country="GH" 
         currency="GHS" 
+        paymentOption:"card,mobilemoneygh"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -299,7 +305,7 @@ render() {
 
 `Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyuganda inorder to accept both card and Uganda mobilemoney as payment methods. 
 
-'Note:' leaving paymentOption empty sets the default payment method to card
+'Note:' leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -341,6 +347,7 @@ render() {
         amount="10" 
         country="NG" 
         currency="UGX" 
+        paymentOption:"card,mobilemoneyuganda"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -359,7 +366,7 @@ render() {
 
 `Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyzambia inorder to accept both card and Zambia mobilemoney as payment methods. 
 
-'Note:' leaving paymentOption empty sets the default payment method to card
+'Note:' leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -401,6 +408,7 @@ render() {
         amount="10" 
         country="NG" 
         currency="ZMW" 
+        paymentOption:"card,mobilemoneyzambia"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -419,7 +427,7 @@ render() {
 
 `Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Rwanda mobilemoney as payment methods. 
 
-'Note:' leaving paymentOption empty sets the default payment method to card
+'Note:' leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -461,6 +469,7 @@ render() {
         amount="10" 
         country="NG" 
         currency="RWF" 
+        paymentOption:"card,mobilemoneygh"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 

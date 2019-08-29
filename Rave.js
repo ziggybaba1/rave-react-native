@@ -522,7 +522,7 @@ else if(this.props.paymentOption == 'card,account') {
     this.state.colorTwo = '#F5A623';
   }
 
-  if (this.state.page == "account") {
+  if (this.state.page == "card") {
     page = <Card rave={this.rave} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
     header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
     header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
@@ -559,8 +559,8 @@ else if(this.props.paymentOption == 'card,account') {
 
       if (this.state.page == "card") {
         page = <Card rave={this.rave} primarycolor={this.props.primarycolor} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
-        header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
-        header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
+        // header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;
+        header1 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />;
 
         // }else if (this.state.page == "ussd") {
         //   page = <Ussd rave={this.raveussd} primarycolor={this.props.primarycolor} phone={this.props.phone} secondarycolor={this.props.secondarycolor} amount={this.props.amount} currency={this.props.currency} onSuccess={res => this.props.onSuccess(res)} onFailure={e => this.props.onFailure(e)} />;
