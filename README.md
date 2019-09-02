@@ -151,6 +151,10 @@ import Rave from 'react-native-rave';
 
 #### 3. Use component (ensure to set currency for the desired payment method to display)
 
+`Note:` Rave allows merchants can also set paymentOption to account, inorder to accept only the Account payment methods. 
+
+`Note:` Leaving paymentOption empty sets the default payment method to card only.
+
 ```javascript
 render() {
   return (
@@ -158,6 +162,7 @@ render() {
         amount="500" 
         country="NG" 
         currency="NGN" 
+        paymentOption:"card,account"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -174,7 +179,9 @@ render() {
 
 ### Mpesa
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Kenya (card and Mpesa). Ensure to set currency to KES and country to KE
+`Note:` Rave allows merchants to set payment method to Mpesa only by setting paymentOption to mpsesa, only the mpesa payment option would be availiable. merchants can also set paymentOption to card,mpsesa inorder to accept both card and Mpsesa as payment methods. 
+
+`Note:` Leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -217,6 +224,7 @@ render() {
         amount="10" 
         country="KE" 
         currency="KES" 
+        paymentOption:"card,mpesa"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -232,7 +240,9 @@ render() {
 ```
 ### Ghana Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Ghana (card and mobilemoney). Ensure to set currency to GHS and country to GH
+`Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be availiable. merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Ghana mobile money as payment methods. 
+
+'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
 
 #### 1.  import Rave Component 
@@ -276,6 +286,7 @@ render() {
         amount="10" 
         country="GH" 
         currency="GHS" 
+        paymentOption:"card,mobilemoneygh"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -292,7 +303,9 @@ render() {
 
 ### Uganda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Uganda (card and uganda mobile money).  Ensure to set currency to UGX
+`Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyuganda inorder to accept both card and Uganda mobilemoney as payment methods. 
+
+'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -334,6 +347,7 @@ render() {
         amount="10" 
         country="NG" 
         currency="UGX" 
+        paymentOption:"card,mobilemoneyuganda"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -350,7 +364,9 @@ render() {
 
 ### Zambia Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Zambia (card and zambia mobile money)
+`Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyzambia inorder to accept both card and Zambia mobilemoney as payment methods. 
+
+'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -392,6 +408,7 @@ render() {
         amount="10" 
         country="NG" 
         currency="ZMW" 
+        paymentOption:"card,mobilemoneyzambia"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -408,7 +425,9 @@ render() {
 
 ### Rwanda Mobile Money
 
-`Note:` Rave currently allows merchants use two (2) payment methods in Rwanda (card and rwanda mobile money)
+`Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Rwanda mobilemoney as payment methods. 
+
+'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
 #### 1.  import Rave Component 
 
@@ -450,6 +469,7 @@ render() {
         amount="10" 
         country="NG" 
         currency="RWF" 
+        paymentOption:"card,mobilemoneygh"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -476,10 +496,11 @@ render() {
 | ------------- |:-------------:| -----:| -----:|
 | publickey      |  This is the publickey gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | encryptionkey      |  This is the encryption key that can be gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
-| amount      |  This is the amount to be charged from card/account | `String` | Required
-| email      |  This is the email of the customer | `String` | Required
-| phone      |  This is the phone number of the customer | `String` | Not Required
-| firstname      |  This is the firstname of the customer | `String` | Required
+| amount      |  This is the amount to be charged from card/account | `String` | Required 
+| paymentOption      |  This is the payment method you want availiable to the customer eg. card, mobilemoneygh, mobilemoneyuganda, mobilemoneyzambia | `String` | (if none passed, defaults to card) 
+| email      |  This is the email of the customer | `String` | Required |
+| phone      |  This is the phone number of the customer | `String` | Not Required |
+| firstname      |  This is the firstname of the customer | `String` | Required |
 | lastname      |  This is the lastname of the customer | `String` | Required
 | threeDsOverride      |  This can be used to force the authentication model to be 3DSecure | `Number` | Not Required (It expects 1 to be passed as its value)
 | onSuccess      |  This is the function that receives data for a successful transaction | `Function` | Required
