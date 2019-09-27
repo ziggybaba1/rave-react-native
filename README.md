@@ -162,7 +162,7 @@ render() {
         amount="500" 
         country="NG" 
         currency="NGN" 
-        paymentOption:"card,account"
+        paymentOption="card,account"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
