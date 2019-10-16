@@ -865,7 +865,7 @@ app.post("/webhook-url", function (req, res) {
 - Now let's make our webhook url from our local server available to public on the internet with `ngrok`, we are using this method for this project.
   `Note:` This can also be achieved by making your webhook url available to live cloud services like `heroku`, `AWS`, `netlify` and `so on`.
 
-- Firstm we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
+- First, we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
 
   <p align="center">
     <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752763/rave-react-native/ngrok-dashboard-auth.png" style="max-height: 400;" alt="ngrok authorization token">
