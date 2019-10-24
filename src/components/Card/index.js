@@ -271,7 +271,7 @@ export default class index extends Component {
     this.setState({
       // intlModal: false
       loading: true
-    })
+    });
 
     this.props.rave
       .avsCharge(
@@ -291,7 +291,7 @@ export default class index extends Component {
       .then(response => {
         if (response.data.chargeResponseCode === "02") {
           if (response.data.authModelUsed.toUpperCase() === "VBVSECURECODE") {
-            this.setState({ vbvModal: true, vbvurl: response.data.authurl });
+            this.setState({ pinModal: true, vbvurl: response.data.authurl });
           }
         } else {
           this.props.onSuccess(response);
@@ -411,7 +411,10 @@ export default class index extends Component {
             } else if (
               res.data.authModelUsed.toUpperCase() === "VBVSECURECODE"
             ) {
-              this.setState({ vbvModal: true, vbvurl: res.data.authurl });
+              this.setState({
+                vbvModal: true,
+                vbvurl: res.data.authurl
+              });
             }
           } else {
             this.setState({
@@ -601,13 +604,57 @@ export default class index extends Component {
 
     var numberValidation = valid.number(this.state.cardno);
 
-    let btnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }} >PAY {this.props.currency} {this.props.amount}</Text>;
+    let btnText = (
+      <Text
+        style={{
+          fontSize: 13,
+          textAlign: "center",
+          fontWeight: "bold",
+          color: this.props.secondarycolor
+        }}
+      >
+        PAY {this.props.currency} {this.props.amount}
+      </Text>
+    );
 
-    let pinBtnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>Confirm PIN</Text>;
+    let pinBtnText = (
+      <Text
+        style={{
+          fontSize: 13,
+          textAlign: "center",
+          fontWeight: "bold",
+          color: this.props.secondarycolor
+        }}
+      >
+        Confirm PIN
+      </Text>
+    );
 
-    let otpBtnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>Confirm OTP</Text>;
+    let otpBtnText = (
+      <Text
+        style={{
+          fontSize: 13,
+          textAlign: "center",
+          fontWeight: "bold",
+          color: this.props.secondarycolor
+        }}
+      >
+        Confirm OTP
+      </Text>
+    );
 
-    let avsBtnText = <Text style={{ fontSize: 13, textAlign: "center", fontWeight: "bold", color: this.props.secondarycolor }}>ENTER</Text>;
+    let avsBtnText = (
+      <Text
+        style={{
+          fontSize: 13,
+          textAlign: "center",
+          fontWeight: "bold",
+          color: this.props.secondarycolor
+        }}
+      >
+        ENTER
+      </Text>
+    );
 
     if (!numberValidation.isPotentiallyValid) {
       card = <Image source={require("../../assets/icons/cardnull.png")} />;
@@ -629,10 +676,18 @@ export default class index extends Component {
     }
 
     if (this.state.loading) {
-      btnText = <ActivityIndicator size="small" color={this.props.secondarycolor} />;
-      pinBtnText = <ActivityIndicator size="small" color={this.props.secondarycolor} />;
-      otpBtnText = <ActivityIndicator size="small" color={this.props.secondarycolor} />;
-      avsBtnText = <ActivityIndicator size="small" color={this.props.secondarycolor} />;
+      btnText = (
+        <ActivityIndicator size="small" color={this.props.secondarycolor} />
+      );
+      pinBtnText = (
+        <ActivityIndicator size="small" color={this.props.secondarycolor} />
+      );
+      otpBtnText = (
+        <ActivityIndicator size="small" color={this.props.secondarycolor} />
+      );
+      avsBtnText = (
+        <ActivityIndicator size="small" color={this.props.secondarycolor} />
+      );
     }
 
     let web = (
@@ -648,7 +703,7 @@ export default class index extends Component {
       web = (
         <WebView
           source={{ uri: this.state.vbvurl }}
-          scalesPageToFit={false}
+          useWebKit={true}
           style={{ padding: "50%" }}
           onNavigationStateChange={this._onNavigationStateChange.bind(this)}
           javaScriptEnabled={true}
@@ -687,8 +742,20 @@ export default class index extends Component {
                 </View>
               </View>
 
-              <TouchableOpacity onPress={this.confirmPin} style={{ width: "100%", marginTop: 20 }} disabled={this.state.loading == false ? false : true}>
-                <View style={{ backgroundColor: this.props.primarycolor,paddingVertical: 15, borderRadius: 5, marginTop: 20, opacity: this.state.loading == false ? 1 : 0.6 }}>
+              <TouchableOpacity
+                onPress={this.confirmPin}
+                style={{ width: "100%", marginTop: 20 }}
+                disabled={this.state.loading == false ? false : true}
+              >
+                <View
+                  style={{
+                    backgroundColor: this.props.primarycolor,
+                    paddingVertical: 15,
+                    borderRadius: 5,
+                    marginTop: 20,
+                    opacity: this.state.loading == false ? 1 : 0.6
+                  }}
+                >
                   {pinBtnText}
                 </View>
               </TouchableOpacity>
@@ -728,8 +795,18 @@ export default class index extends Component {
                 </View>
               </View>
 
-              <TouchableOpacity onPress={this.confirmOtp} style={{ width: "100%", marginTop: 20 }}>
-                <View style={{ backgroundColor: this.props.primarycolor,paddingVertical: 15, borderRadius: 5, opacity: this.state.loading == false ? 1 : 0.6 }}>
+              <TouchableOpacity
+                onPress={this.confirmOtp}
+                style={{ width: "100%", marginTop: 20 }}
+              >
+                <View
+                  style={{
+                    backgroundColor: this.props.primarycolor,
+                    paddingVertical: 15,
+                    borderRadius: 5,
+                    opacity: this.state.loading == false ? 1 : 0.6
+                  }}
+                >
                   {otpBtnText}
                 </View>
               </TouchableOpacity>
@@ -884,9 +961,20 @@ export default class index extends Component {
               </View>
             </View>
 
-            <TouchableOpacity onPress={this.submit} style={{ width: "100%", marginTop: 30 }} disabled={this.state.loading == false ? false : true}>
-              <View style={{ backgroundColor: this.props.primarycolor,paddingVertical: 15, borderRadius: 5, opacity: this.state.loading == false ? 1 : 0.6 }}>
-              {avsBtnText}  
+            <TouchableOpacity
+              onPress={this.submit}
+              style={{ width: "100%", marginTop: 30 }}
+              disabled={this.state.loading == false ? false : true}
+            >
+              <View
+                style={{
+                  backgroundColor: this.props.primarycolor,
+                  paddingVertical: 15,
+                  borderRadius: 5,
+                  opacity: this.state.loading == false ? 1 : 0.6
+                }}
+              >
+                {avsBtnText}
               </View>
             </TouchableOpacity>
           </View>

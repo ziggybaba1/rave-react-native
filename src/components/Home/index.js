@@ -35,7 +35,8 @@ export default class index extends Component {
             }
         });
         let lockIcon, closeIcon;
-        lockIcon = <Image style={{ marginRight: 15, marginTop: 5 }} source={require('../../assets/icons/path0.png')} />;
+        lockIcon = <Icon name="md-lock" style={{ color: "#d1d1d1", marginTop: 10, marginRight: 0 }} />;
+        
         closeIcon = <Icon name='md-close-circle' style={{ color: '#d1d1d1', marginTop: 0, marginRight: 0 }} />;
         return (
             <KeyboardAvoidingView behavior="padding" enabled>
