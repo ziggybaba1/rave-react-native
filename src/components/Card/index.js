@@ -703,23 +703,12 @@ export default class index extends Component {
       web = (
         <WebView
           source={{ uri: this.state.vbvurl }}
-          scalesPageToFit={true}
-          style={{ flex: 1 }}
+          useWebKit={true}
+          style={{ padding: "50%" }}
           onNavigationStateChange={this._onNavigationStateChange.bind(this)}
           javaScriptEnabled={true}
         />
       );
-
-      if (Platform.Version >= "13") {
-        web = (
-          <WebView
-            source={{ uri: this.state.vbvurl }}
-            useWebKit={true}
-            onNavigationStateChange={this._onNavigationStateChange.bind(this)}
-            javaScriptEnabled={true}
-          />
-        );
-      }
     }
     let page;
     if (this.state.pinModal) {
