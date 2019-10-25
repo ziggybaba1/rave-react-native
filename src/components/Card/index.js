@@ -291,7 +291,7 @@ export default class index extends Component {
       .then(response => {
         if (response.data.chargeResponseCode === "02") {
           if (response.data.authModelUsed.toUpperCase() === "VBVSECURECODE") {
-            this.setState({ pinModal: true, vbvurl: response.data.authurl });
+            this.setState({ vbvModal: true, vbvurl: response.data.authurl });
           }
         } else {
           this.props.onSuccess(response);
@@ -824,6 +824,9 @@ export default class index extends Component {
               <Text style={[styles.label, { fontSize: 18, marginVertical: 5 }]}>
                 Please enter billing address details to continue transaction
               </Text>
+            </View>
+
+            <View style={{ flexGrow: 1, maxWidth: "100%" }}>
               <View style={styles.input}>
                 <Text
                   style={{
@@ -848,14 +851,23 @@ export default class index extends Component {
                   />
                 </View>
               </View>
-              {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.addressErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid address</Text> */}
             </View>
+
+            {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.addressErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid address</Text> */}
 
             <View style={{ marginTop: 10 }}>
               <View style={{ flexDirection: "row", width: "100%" }}>
-                <View style={{ flexGrow: 1, width: "50%" }}>
+                <View style={{ flexGrow: 1, maxWidth: "50%" }}>
                   <View style={[styles.input, { borderBottomLeftRadius: 3 }]}>
-                    <Text style={{ color: "#999999", fontSize: 16 }}>CITY</Text>
+                    <Text
+                      style={{
+                        color: "#999999",
+                        fontSize: 16,
+                        paddingHorizontal: 10
+                      }}
+                    >
+                      CITY
+                    </Text>
                     <View style={{ paddingVertical: 3, flexDirection: "row" }}>
                       <TextInput
                         placeholder="Livingstone"
@@ -870,8 +882,10 @@ export default class index extends Component {
                       />
                     </View>
                   </View>
+
                   {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.cityErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid city</Text> */}
                 </View>
+
                 <View style={{ flexGrow: 1, paddingLeft: 1, maxWidth: "50%" }}>
                   <View style={[styles.input, { borderBottomRightRadius: 3 }]}>
                     <Text
