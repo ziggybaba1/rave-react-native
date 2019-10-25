@@ -151,7 +151,7 @@ import Rave from 'react-native-rave';
 
 #### 3. Use component (ensure to set currency for the desired payment method to display)
 
-`Note:` Rave allows merchants can also set paymentOption to account, inorder to accept only the Account payment methods. 
+`Note:` Rave allows merchants can also set paymentOption to account, in order to accept only the Account payment methods. 
 
 `Note:` Leaving paymentOption empty sets the default payment method to card only.
 
@@ -162,7 +162,7 @@ render() {
         amount="500" 
         country="NG" 
         currency="NGN" 
-        paymentOption:"card,account"
+        paymentOption="card,account"
         email="test@mail.com" 
         firstname="Oluwole" 
         lastname="Adebiyi" 
@@ -179,7 +179,7 @@ render() {
 
 ### Mpesa
 
-`Note:` Rave allows merchants to set payment method to Mpesa only by setting paymentOption to mpsesa, only the mpesa payment option would be availiable. merchants can also set paymentOption to card,mpsesa inorder to accept both card and Mpsesa as payment methods. 
+`Note:` Rave allows merchants to set payment method to Mpesa only by setting paymentOption to mpsesa, only the mpesa payment option would be available. Merchants can also set paymentOption to card,mpsesa in order to accept both card and Mpsesa as payment methods. 
 
 `Note:` Leaving paymentOption empty sets the default payment method to card only.
 
@@ -240,7 +240,7 @@ render() {
 ```
 ### Ghana Mobile Money
 
-`Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be availiable. merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Ghana mobile money as payment methods. 
+`Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be available. merchants can also set paymentOption to card,mobilemoneygh in order to accept both card and Ghana mobile money as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -303,7 +303,7 @@ render() {
 
 ### Uganda Mobile Money
 
-`Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyuganda inorder to accept both card and Uganda mobilemoney as payment methods. 
+`Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be available, merchants can also set paymentOption to card,mobilemoneyuganda in order to accept both card and Uganda mobilemoney as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -364,7 +364,7 @@ render() {
 
 ### Zambia Mobile Money
 
-`Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneyzambia inorder to accept both card and Zambia mobilemoney as payment methods. 
+`Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be available, merchants can also set paymentOption to card,mobilemoneyzambia in order to accept both card and Zambia mobilemoney as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -425,7 +425,7 @@ render() {
 
 ### Rwanda Mobile Money
 
-`Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be availiable, merchants can also set paymentOption to card,mobilemoneygh inorder to accept both card and Rwanda mobilemoney as payment methods. 
+`Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be available, merchants can also set paymentOption to card,mobilemoneygh in order to accept both card and Rwanda mobilemoney as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -497,7 +497,7 @@ render() {
 | publickey      |  This is the publickey gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | encryptionkey      |  This is the encryption key that can be gotten from your [Rave Dashboard](https://rave.flutterwave.com/dashboard/settings/apis) | `String` | Required
 | amount      |  This is the amount to be charged from card/account | `String` | Required 
-| paymentOption      |  This is the payment method you want availiable to the customer eg. card, mobilemoneygh, mobilemoneyuganda, mobilemoneyzambia | `String` | (if none passed, defaults to card) 
+| paymentOption      |  This is the payment method you want available to the customer eg. card, mobilemoneygh, mobilemoneyuganda, mobilemoneyzambia | `String` | (if none passed, defaults to card) 
 | email      |  This is the email of the customer | `String` | Required |
 | phone      |  This is the phone number of the customer | `String` | Not Required |
 | firstname      |  This is the firstname of the customer | `String` | Required |
@@ -530,7 +530,7 @@ render() {
 #### How it works
 
 - Create your backend project directory
-- From inside your backend project directory, Open your terminal and run `npm init` to create your `package.json` file.
+- From inside your backend project directory, open your terminal and run `npm init` to create your `package.json` file.
 - Install the packages above `npm install express --save`, `npm install body-parser --save` and `npm install request --save`.
 - Create your `index.js` file and copy the code snippet below to set this up.
 
@@ -689,12 +689,12 @@ const styles = StyleSheet.create({
   </p>
 
 
-### If you encounter any of the error above when trying to load the rave react native SDK in your App, it is occurs in newer versions of react native.
+### If you encounter any of the error above when trying to load the rave react native SDK in your App, and it occurs in newer versions of react native.
 
 > ### FIX:
 - To fix the issue, simply open your react native app node modules folder and locate rave react native module.
 - Next thing you need to do is to locate the node modules folder inside the rave react native module folder.
-- After locating it, Simply delete it and the issue would be resolved.
+- After locating it, simply delete it and the issue would be resolved.
 
 ### See Screenshots Below:
 
@@ -710,7 +710,7 @@ const styles = StyleSheet.create({
 - Ensure you have `node` and `npm`, if not [refer to this for guide](#installation).
 - Next register and download `ngrok` [here](https://ngrok.com/download).
 - Extract the downloaded `ngrok` zip file.
-- Set your extracted ngrok file to be globally available i.e set it to the environment variable by following this steps:
+- Set your extracted ngrok file to be globally available i.e set it to the environment variable by following these steps:
   - For Windows Users - On the search box on the taskbar of your desktop, search for System (control panel).
   - Click the advanced settings and then click on the environment settings, like this:
 
@@ -727,14 +727,14 @@ const styles = StyleSheet.create({
 - For MacOS users, to have ngrok up and running on your machine, follow the process:
   - Download `ngrok` [here](https://ngrok.com/download)
   - Extract/Unzip it to your Applications directory
-  - Create a symlink to ngrok with this commands from your terminal:
+  - Create a symlink to ngrok with these commands from your terminal:
     -  cd into your local bin directory
 
         `cd /usr/local/bin`
     - create symlink
     
     `ln -s /project/ngrok ngrok`
-    - now cd into your project directory and reference it like this from you terminal
+    - now cd into your project directory and reference it like this from your terminal
     - /project/ngrok `[your-port-number]`
 
 - To ensure this successfully done, enter the command `ngrok -v` in your Terminal, it should return the version of ngrok you are currently running.
@@ -760,7 +760,7 @@ const styles = StyleSheet.create({
   </p>
 
 
-- Next we add the following code into our `app.js` file.
+- Next, we add the following code into our `app.js` file.
 
 ```
 
@@ -865,7 +865,7 @@ app.post("/webhook-url", function (req, res) {
 - Now let's make our webhook url from our local server available to public on the internet with `ngrok`, we are using this method for this project.
   `Note:` This can also be achieved by making your webhook url available to live cloud services like `heroku`, `AWS`, `netlify` and `so on`.
 
-- First we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
+- First, we need to login to your [`ngrok`](#https://dashboard.ngrok.com/user/login) dashboard to get your authorization token, from here:
 
   <p align="center">
     <img src="https://res.cloudinary.com/flutterwavedeveloper/image/upload/v1540752763/rave-react-native/ngrok-dashboard-auth.png" style="max-height: 400;" alt="ngrok authorization token">
