@@ -199,6 +199,7 @@ export default class index extends Component {
               }
             );
           } else if (this.state.network === "Vodafone") {
+            this.props.onSuccess(res);
             Alert.alert(
               "",
               "Transaction Processing",
