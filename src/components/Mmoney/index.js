@@ -133,7 +133,7 @@ export default class index extends Component {
           if (this.state.network === "MTN") {
             Alert.alert(
               "Follow the instruction below to complete your MTN transaction",
-              "1. Dial *170#\n2. Choose Option 7: Wallet\n3. Choose Option 3: My Approvals\n4. Enter your MOMO pin to retrieve your pending approval list\n5. Choose a pending transaction\n6. Choose option 1 to approve\n7. Tap button to continue",
+              "1. Dial *170#\n2. Choose Option 6: Wallet\n3. Choose Option 3: My Approvals\n4. Enter your MOMO pin to retrieve your pending approval list\n5. Choose a pending transaction\n6. Choose option 1 to approve\n7. Tap button to continue",
               [
                 {
                   text: "Ok",
@@ -360,13 +360,16 @@ export default class index extends Component {
             1. Dial * 110# to generate your transaction voucher.
           </Text>
           <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            2.Select Option 6, to generate the voucher.
+            2.Select 4 to make payments.
           </Text>
           <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            3.Enter your PIN in next prompt.
+            3.Then choose 4 to generate voucher code .
           </Text>
           <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            4.Input the voucher generated in the payment modal.
+            4.Confirm your pin.
+          </Text>
+          <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
+            5.Check your messages for the voucher code.
           </Text>
         </View>
       );
