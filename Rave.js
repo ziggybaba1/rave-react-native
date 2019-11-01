@@ -195,6 +195,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else if (this.state.page == "card") {
@@ -224,6 +225,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -245,7 +247,9 @@ export default class Rave extends React.Component {
         );
         page = <Home onClose={this.props.onClose} />;
       }
-    } else if (
+    }
+
+    else if (
       this.props.country == "KE" &&
       this.props.currency == "KES" &&
       this.props.paymentOption == "mpesa"
@@ -280,6 +284,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -294,7 +299,9 @@ export default class Rave extends React.Component {
         // header2 = <CardHeader page={this.getPage} showTwo={this.show} bottomTwo={this.state.bottomTwo} colorTwo={this.state.colorTwo} />
         page = <Home onClose={this.props.onClose} />;
       }
-    } else if (this.props.country == "KE" && this.props.currency == "KES") {
+    }
+
+    else if (this.props.country == "KE" && this.props.currency == "KES") {
       if (this.state.page == "home") {
         this.state.bottomOne = 1;
         this.state.bottomTwo = 90;
@@ -325,6 +332,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -386,6 +394,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else if (this.state.page == "card") {
@@ -415,6 +424,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -472,6 +482,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -523,6 +534,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -584,6 +596,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else if (this.state.page == "card") {
@@ -613,6 +626,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -669,6 +683,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -715,6 +730,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -776,6 +792,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else if (this.state.page == "card") {
@@ -805,6 +822,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -861,6 +879,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -907,6 +926,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -968,6 +988,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else if (this.state.page == "card") {
@@ -997,6 +1018,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -1053,6 +1075,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -1103,6 +1126,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
       } else {
@@ -1140,6 +1164,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
         header1 = (
@@ -1165,6 +1190,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
         header1 = (
@@ -1216,6 +1242,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
         header1 = (
@@ -1248,6 +1275,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
         header1 = (
@@ -1308,6 +1336,7 @@ export default class Rave extends React.Component {
             currency={this.props.currency}
             onSuccess={res => this.props.onSuccess(res)}
             onFailure={e => this.props.onFailure(e)}
+            txref={this.props.txref}
           />
         );
         // header1 = <AccountHeader page={this.getPage} showOne={this.show} bottomOne={this.state.bottomOne} colorOne={this.state.colorOne} />;

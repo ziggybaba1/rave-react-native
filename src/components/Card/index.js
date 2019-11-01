@@ -139,19 +139,36 @@ export default class index extends Component {
             expirymonth: "",
             expiryyear: ""
           });
-          this.props.onSuccess(response);
+          // console.log("three");
+          this.props.onSuccess({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
         } else {
           this.setState({
             loading: false
           });
-          this.props.onFailure(response);
+          // console.log("fail - three");
+          this.props.onFailure({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
         }
       })
       .catch(e => {
         this.setState({
           loading: false
         });
-        this.props.onFailure(e);
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       });
   }
 
@@ -176,7 +193,14 @@ export default class index extends Component {
             expirymonth: "",
             expiryyear: ""
           });
-          this.props.onSuccess(res);
+          // console.log("four");
+          // console.log("props: " + JSON.stringify(this.props));
+          this.props.onSuccess({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
           Alert.alert(
             "",
             "Transaction Successful",
@@ -229,14 +253,26 @@ export default class index extends Component {
               cancelable: false
             }
           );
-          this.props.onFailure(res);
+          // console.log("fail - four");
+          this.props.onFailure({
+            txref: res.data.tx.txRef,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
         }
       })
       .catch(e => {
         this.setState({
           loading: false
         });
-        this.props.onFailure(e);
+        // console.log("fail - four.4");
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       });
   }
 
@@ -247,7 +283,27 @@ export default class index extends Component {
       loading: false
     });
 
-    if (data.status == "successful") {
+    // original code
+    // if (data.status == "successful") {
+    //   this.setState({
+    //     cardno: "",
+    //     cvv: "",
+    //     expirymonth: "",
+    //     expiryyear: "",
+    //     billingzip: "",
+    //     billingcity: "",
+    //     billingaddress: "",
+    //     billingstate: "",
+    //     billingcountry: "",
+    //     vbvModal: false,
+    //     intlModal: false
+    //   });
+    //   this.props.onSuccess(data);
+    // } else {
+    //   this.props.onFailure(data);
+    // }
+
+    if (data) {
       this.setState({
         cardno: "",
         cvv: "",
@@ -261,9 +317,19 @@ export default class index extends Component {
         vbvModal: false,
         intlModal: false
       });
-      this.props.onSuccess(data);
+      this.props.onSuccess({
+        txref: this.props.txref,
+        status: "pendingVerification",
+        amount: this.props.amount,
+        nextAction: "verify"
+      });
     } else {
-      this.props.onFailure(data);
+      this.props.onFailure({
+        txref: data,
+        status: "pendingVerification",
+        amount: this.state.amount,
+        nextAction: "verify"
+      });
     }
   }
 
@@ -294,14 +360,27 @@ export default class index extends Component {
             this.setState({ vbvModal: true, vbvurl: response.data.authurl });
           }
         } else {
-          this.props.onSuccess(response);
+          // console.log("one");
+          
+          this.props.onSuccess({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
         }
       })
       .catch(e => {
         this.setState({
           loading: false
         });
-        this.props.onFailure(e);
+        // console.log("fail - one");
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       });
   }
 
@@ -391,7 +470,13 @@ export default class index extends Component {
               expirymonth: "",
               expiryyear: ""
             });
-            this.props.onSuccess(res);
+            // console.log("two");
+            this.props.onSuccess({
+              txref: this.props.txref,
+              status: "pendingVerification",
+              amount: this.props.amount,
+              nextAction: "verify"
+            });
           } else if (res.data.chargeResponseCode === "02") {
             if (
               res.data.authModelUsed.toUpperCase() === "ACCESS_OTP" ||
@@ -420,7 +505,13 @@ export default class index extends Component {
             this.setState({
               loading: false
             });
-            this.props.onFailure(res);
+            // console.log("fail - two");
+            this.props.onFailure({
+              txref: this.props.txRef,
+              status: "pendingVerification",
+              amount: this.props.amount,
+              nextAction: "verify"
+            });
           }
         }
       })
@@ -428,7 +519,13 @@ export default class index extends Component {
         this.setState({
           loading: false
         });
-        this.props.onFailure(e);
+        // console.log("fail - two.2");
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       });
   }
 
@@ -472,7 +569,12 @@ export default class index extends Component {
           this.setState({
             loading: false
           });
-          this.props.onFailure(err);
+          this.props.onFailure({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
         });
     }
   }
@@ -480,11 +582,19 @@ export default class index extends Component {
   _onNavigationStateChange(webViewState) {
     // check if it's the redirected url
     if (webViewState.url.includes("txRef")) {
-      // if (webViewState.url.includes("https://ravenative.herokuapp.com/")) {
       // convert to JSON and pass back for validation.
+      // ToDo: Get the Transaction Reference Here
+      // ToDo: Do a Requery
+      // ToDo: Return the Data from the requery
+      var txref = JSON.parse(
+        this.getParameterByName("response", webViewState.url)
+      ).txRef;
+      // console.log("full response: " + res);
+
       this.confirmVBV(
         false,
-        JSON.parse(this.getParameterByName("response", webViewState.url))
+        // ToDo: Put the response from requery here
+        txref
       );
     }
   }
@@ -815,7 +925,13 @@ export default class index extends Component {
         );
       }
     } else if (this.state.vbvModal) {
-      page = <View style={{ flex: 1, width: "100%" }}>{web}</View>;
+      page = (
+        <View
+          style={{ flex: 1, width: "100%" }}
+        >
+          {web}
+        </View>
+      );
     } else if (this.state.intlModal) {
       page = (
         <KeyboardAwareScrollView keyboardShouldPersistTaps="always">

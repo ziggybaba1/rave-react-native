@@ -65,7 +65,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-          this.props.onSuccess(res);
+          this.props.onSuccess({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
           Alert.alert(
           '',
           'A push notification has been sent to your phone, please complete the transaction by following the instructions',
@@ -85,7 +90,12 @@ export default class index extends Component {
       this.setState({
         loading: false
       })
-      this.props.onFailure(e);
+      this.props.onFailure({
+        txref: this.props.txref,
+        status: "pendingVerification",
+        amount: this.props.amount,
+        nextAction: "verify"
+      });
     })
   }
 
@@ -118,7 +128,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.onFailure(err);
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       })
     }
   }
@@ -183,6 +198,7 @@ export default class index extends Component {
                     underlineColorAndroid='rgba(0,0,0,0)'
                     onChangeText={(phonenumber) => this.setState({phonenumber})}
                     value={this.state.phonenumber}
+                    autoFocus
                   />
                 </View>
               </View>

@@ -16,7 +16,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 - [Payment Options](#payment-options)
 - [Usage](#usage)
 - [Parameters Table](#parameters-table)
-- [Sample Transaction Verification Method Using Nodejs BackEnd](#sample-transaction-verification-method-using-nodejs-backend)
+- [Sample Transaction Verification Method Using Nodejs BackEnd](#sample-transaction-verification-method-using-nodejs-backEnd)
 - [Setting Up a Simple Webhook with NodeJs and ngrok to receive Rave Webhook request](#setting-up-a-simple-webhook-with-nodejs-and-ngrok-to-receive-rave-webhook-request)
 - [Contributions](#contributions)
 
@@ -34,9 +34,9 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 > To use rave react native SDK in your application, you need to have `Node` and `npm` downloaded and installed on your machine.
 
-- [Click Here](https://nodejs.org/en/) to download and install `Node` to your machine. `npm` is always automatically installed when you install `Node`.
+- [Click Here](https://nodejs.org/en/) to download and install `Node` to your machine, `npm` is always automatically installed when you install `Node`.
 
-- To ensure you have `Node` and `npm` installed, enter the following command into your terminal/command prompt: `node -v` and `npm -v` respectively.
+- To ensure you have `Node` and `npm` installed, enter the following command into your terminal/command prompt `node -v` and `npm -v` respectively.
 
 - To run `react native` on your machine you can use `npm install -g expo-cli` to install [Expo CLI](https://expo.io/) a command line utility to get you started quickly or use this command `npm install -g react-native-cli` to install the [react native CLI](https://facebook.github.io/react-native/docs/getting-started.html).
 
@@ -59,7 +59,7 @@ This is the react native SDK for Rave By [Flutterwave.](https://rave.flutterwave
 
 This is a simple demonstration of how to set up a simple react native app and integrate `rave react native SDK` into it.
 
-Using the [Expo CLI](https://expo.io/) command line utility, enter the following command to get started:
+Using the [Expo CLI](https://expo.io/) command line utility, Enter the following command to get started:
 
   - `expo init AwesomeProject`
   - `cd AwesomeProject`
@@ -83,7 +83,7 @@ Using the [Expo CLI](https://expo.io/) command line utility, enter the following
 
 ### Integrating Rave React Native
 
-You can pull in react-native-rave into app with the steps below:
+You can pull in react-native-rave into app with the steps below;
 
 - Change directory into your current project directory from your terminal and enter this command:
   > npm install react-native-rave --save
@@ -101,7 +101,7 @@ You can pull in react-native-rave into app with the steps below:
 
 ## Payment Options
 
-### The payment options include:
+### The payment options includes:
 - Card Payments
 - Account Payments
 - Mpesa 
@@ -240,7 +240,7 @@ render() {
 ```
 ### Ghana Mobile Money
 
-`Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be available. Merchants can also set paymentOption to card,mobilemoneygh in order to accept both card and Ghana mobile money as payment methods. 
+`Note:` By setting paymentOption to mobilemoneygh, only the Ghana mobile money payment option would be available. merchants can also set paymentOption to card,mobilemoneygh in order to accept both card and Ghana mobile money as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -303,7 +303,7 @@ render() {
 
 ### Uganda Mobile Money
 
-`Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be available. Merchants can also set paymentOption to card,mobilemoneyuganda in order to accept both card and Uganda mobile money as payment methods. 
+`Note:` By setting paymentOption to mobilemoneyuganda, only the Uganda mobile money payment option would be available, merchants can also set paymentOption to card,mobilemoneyuganda in order to accept both card and Uganda mobilemoney as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -364,7 +364,7 @@ render() {
 
 ### Zambia Mobile Money
 
-`Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be available. Merchants can also set paymentOption to card,mobilemoneyzambia in order to accept both card and Zambia mobile money as payment methods. 
+`Note:`  By setting paymentOption to mobilemoneyzambia, only the Rwanda mobile money payment option would be available, merchants can also set paymentOption to card,mobilemoneyzambia in order to accept both card and Zambia mobilemoney as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -425,7 +425,7 @@ render() {
 
 ### Rwanda Mobile Money
 
-`Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be available. Merchants can also set paymentOption to card,mobilemoneygh in order to accept both card and Rwanda mobile money as payment methods. 
+`Note:` By setting paymentOption to mobilemoneygh, only the Rwanda mobile money payment option would be available, merchants can also set paymentOption to card,mobilemoneygh in order to accept both card and Rwanda mobilemoney as payment methods. 
 
 'Note:' Leaving paymentOption empty sets the default payment method to card only.
 
@@ -580,7 +580,7 @@ app.listen(port, err => {
 })
 ```
 
-- Save the file above. Run `node index.js` command from your terminal to serve your verify api. You should now see `App listening on port 3000` on your terminal which means your app is running to receive data from your react native app.
+- Save the file above, run `node index.js` command from your terminal to serve your verify api, you should now see `App listening on port 3000` on your terminal which means your app is running to receive data from your react native app.
 
 - Now you can go back to your react native app directory and create a file where you link this to your app, e.g you can create a directory `constant` and create a file inside it called `api.js`.
 
@@ -678,7 +678,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-- The above steps and code sample just shows and explains how you can handle this with nodejs backend. Please note that you can implement this with any backend language of your choice.
+- The above steps and code sample just shows and explains how you can handle this with nodejs backend, please note that you can implement this with any backend language of your choice.
 
 
 
@@ -737,7 +737,7 @@ const styles = StyleSheet.create({
     - now cd into your project directory and reference it like this from your terminal
     - /project/ngrok `[your-port-number]`
 
-- To ensure this is successfully done, enter the command `ngrok -v` in your Terminal. It should return the version of ngrok you are currently running.
+- To ensure this successfully done, enter the command `ngrok -v` in your Terminal, it should return the version of ngrok you are currently running.
 
 - Next create a new project directory, change directory into it and create a new project file like this:
 
@@ -815,7 +815,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 /* 
 
-Set your webhook url that will be listening for webhook requests from rave server.
+Set your webhook url that will be listening for webhook requests from rave server,
 This is required to receive requests from rave server, verify the data received from the server 
 and give your customer value.
 
