@@ -138,7 +138,12 @@ export default class index extends Component {
                 {
                   text: "Ok",
                   onPress: () => {
-                    this.props.onSuccess(res);
+                    this.props.onSuccess({
+                      txref: this.props.txref,
+                      status: "pendingVerification",
+                      amount: this.props.amount,
+                      nextAction: "verify"
+                    });
                     Alert.alert(
                       "",
                       "Transaction Processing",
@@ -172,7 +177,12 @@ export default class index extends Component {
                 {
                   text: "Ok",
                   onPress: () => {
-                    this.props.onSuccess(res);
+                    this.props.onSuccess({
+                      txref: this.props.txref,
+                      status: "pendingVerification",
+                      amount: this.props.amount,
+                      nextAction: "verify"
+                    });
                     Alert.alert(
                       "",
                       "Transaction Proccessing",
@@ -199,7 +209,12 @@ export default class index extends Component {
               }
             );
           } else if (this.state.network === "Vodafone") {
-            this.props.onSuccess(res);
+            this.props.onSuccess({
+              txref: this.props.txref,
+              status: "pendingVerification",
+              amount: this.props.amount,
+              nextAction: "verify"
+            });
             Alert.alert(
               "",
               "Transaction Processing",
@@ -242,7 +257,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         });
-        this.props.onFailure(e);
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       });
   }
 
@@ -286,7 +306,12 @@ export default class index extends Component {
           this.setState({
             loading: false
           });
-          this.props.onFailure(err);
+          this.props.onFailure({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
         });
     }
   }
@@ -360,16 +385,13 @@ export default class index extends Component {
             1. Dial * 110# to generate your transaction voucher.
           </Text>
           <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            2.Select 4 to make payments.
+            2.Select Option 6, to generate the voucher.
           </Text>
           <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            3.Then choose 4 to generate voucher code .
+            3.Enter your PIN in next prompt.
           </Text>
           <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            4.Confirm your pin.
-          </Text>
-          <Text style={{ color: "#999999", fontSize: 10, fontWeight: "bold" }}>
-            5.Check your messages for the voucher code.
+            4.Input the voucher generated in the payment modal.
           </Text>
         </View>
       );
@@ -465,6 +487,7 @@ export default class index extends Component {
                     autoCorrect={false}
                     editable={this.state.loading ? false : true}
                     keyboardType="phone-pad"
+                    autoFocus
                     style={{
                       fontSize: 16,
                       paddingHorizontal: 10,

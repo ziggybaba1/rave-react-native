@@ -122,8 +122,8 @@ export default class index extends Component {
 
     this.props.rave.initiatecharge(payload).then((res) => {
       // Check if the charge is successful
-          console.log(payload);
-          console.log(res);
+          // console.log(payload);
+          // console.log(res);
       if (res.data.status.toUpperCase() === "SUCCESSFUL") {
         this.props.rave.verifyTransaction(res.data.txRef).then((resp) => {
           this.props.onSuccess(resp);

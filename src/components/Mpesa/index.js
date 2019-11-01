@@ -69,7 +69,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.onSuccess(res);
+        this.props.onSuccess({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
           Alert.alert(
             '',
             res.data.chargeResponseMessage,
@@ -103,7 +108,12 @@ export default class index extends Component {
       this.setState({
         loading: false
       })
-      this.props.onFailure(e);
+      this.props.onFailure({
+        txref: this.props.txref,
+        status: "pendingVerification",
+        amount: this.props.amount,
+        nextAction: "verify"
+      });
       Alert.alert(
         e.status,
         e.message,
@@ -149,7 +159,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.onFailure(err);
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       })
     }
   }
@@ -200,39 +215,57 @@ export default class index extends Component {
     // this returns the Mpesa payment form
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-        <KeyboardAwareScrollView keyboardShouldPersistTaps='always'>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <View style={{ flex: 1 }}>
             <View style={styles.formGroup}>
-            <Text style={[styles.label, { fontSize: 20 }]}>Please enter your mpesa number</Text>
+              <Text style={[styles.label, { fontSize: 20 }]}>
+                Please enter your mpesa number
+              </Text>
               <View style={styles.input}>
-              <Text style={{ color: '#999999', fontSize: 16 }}>PHONE NUMBER</Text>
-                <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
+                <Text style={{ color: "#999999", fontSize: 16 }}>
+                  PHONE NUMBER
+                </Text>
+                <View style={{ paddingVertical: 10, flexDirection: "row" }}>
                   <TextInput
                     autoCorrect={false}
-                    editable={(this.state.loading) ? false : true}
+                    editable={this.state.loading ? false : true}
                     keyboardType="phone-pad"
-                    style={{ fontSize: 16, paddingHorizontal: 10, minWidth: "95%" }}
-                    underlineColorAndroid='rgba(0,0,0,0)'
-                    onChangeText={(phonenumber) => this.setState({phonenumber})}
+                    style={{
+                      fontSize: 16,
+                      paddingHorizontal: 10,
+                      minWidth: "95%"
+                    }}
+                    underlineColorAndroid="rgba(0,0,0,0)"
+                    onChangeText={phonenumber => this.setState({ phonenumber })}
                     value={this.state.phonenumber}
-                    placeholder='0926420185'
+                    placeholder="0926420185"
+                    autoFocus
                   />
                 </View>
               </View>
               {/* <Text style={{ color: '#EE312A', fontSize: 10, display: this.state.phonenumberErr, fontWeight: 'bold', marginTop: 5 }}>Enter a valid phone number</Text> */}
             </View>
-            
-
           </View>
 
-          <TouchableOpacity onPress={this.pay} style={{ width: "100%", marginTop: 30 }} disabled={(this.state.loading == false) ? false : true}>
-            <View style={{ backgroundColor: this.props.primarycolor, paddingVertical: 15, borderRadius: 5, opacity: (this.state.loading == false) ? 1 : 0.6 }}>
+          <TouchableOpacity
+            onPress={this.pay}
+            style={{ width: "100%", marginTop: 30 }}
+            disabled={this.state.loading == false ? false : true}
+          >
+            <View
+              style={{
+                backgroundColor: this.props.primarycolor,
+                paddingVertical: 15,
+                borderRadius: 5,
+                opacity: this.state.loading == false ? 1 : 0.6
+              }}
+            >
               {btnText}
             </View>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       </KeyboardAvoidingView>
-    )
+    );
   }
 }
 

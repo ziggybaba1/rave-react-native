@@ -154,7 +154,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.onFailure(err);
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       })
     }
   }
@@ -170,7 +175,12 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-          this.props.onSuccess(res);
+          this.props.onSuccess({
+            txref: this.props.txref,
+            status: "pendingVerification",
+            amount: this.props.amount,
+            nextAction: "verify"
+          });
             Alert.alert(
               '',
               'Transaction Successful',
@@ -193,13 +203,23 @@ export default class index extends Component {
         this.setState({
           loading: false
         })
-        this.props.onFailure(res);
+        this.props.onFailure({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       }
     }).catch((e) => {
       this.setState({
         loading: false
       })
-      this.props.onFailure(e);
+      this.props.onFailure({
+        txref: this.props.txref,
+        status: "pendingVerification",
+        amount: this.props.amount,
+        nextAction: "verify"
+      });
     })
 
   }
@@ -212,10 +232,20 @@ export default class index extends Component {
     })
 
     if (data.status == "successful") {
-        this.props.onSuccess(data);
+        this.props.onSuccess({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
     }
     else {
-      this.props.onFailure(data);
+      this.props.onFailure({
+        txref: this.props.txref,
+        status: "pendingVerification",
+        amount: this.props.amount,
+        nextAction: "verify"
+      });
     }
   }
 
@@ -251,7 +281,12 @@ export default class index extends Component {
           "accountnumber": "",
           "phonenumber": "",
         })
-        this.props.onSuccess(res);
+        this.props.onSuccess({
+          txref: this.props.txref,
+          status: "pendingVerification",
+          amount: this.props.amount,
+          nextAction: "verify"
+        });
       }
       else if (res.data.chargeResponseCode === "02" && res.data.authurl.toUpperCase() === "NO-URL") {
         this.setState({
@@ -271,7 +306,12 @@ export default class index extends Component {
         loading: false
       })
 
-      this.props.onFailure(e);
+      this.props.onFailure({
+        txref: this.props.txref,
+        status: "pendingVerification",
+        amount: this.props.amount,
+        nextAction: "verify"
+      });
     })
 
   }
