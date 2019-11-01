@@ -140,9 +140,9 @@ export default class index extends Component {
                   onPress: () => {
                     this.props.onSuccess({
                       txref: this.props.txref,
-                      status: "pendingVerification",
+                      status: "pendingWebhookCallback",
                       amount: this.props.amount,
-                      nextAction: "verify"
+                      nextAction: "webhookCallback"
                     });
                     Alert.alert(
                       "",
@@ -179,9 +179,9 @@ export default class index extends Component {
                   onPress: () => {
                     this.props.onSuccess({
                       txref: this.props.txref,
-                      status: "pendingVerification",
+                      status: "pendingWebhookCallback",
                       amount: this.props.amount,
-                      nextAction: "verify"
+                      nextAction: "webhookCallback"
                     });
                     Alert.alert(
                       "",
@@ -211,9 +211,9 @@ export default class index extends Component {
           } else if (this.state.network === "Vodafone") {
             this.props.onSuccess({
               txref: this.props.txref,
-              status: "pendingVerification",
+              status: "pendingWebhookCallback",
               amount: this.props.amount,
-              nextAction: "verify"
+              nextAction: "webhookCallback"
             });
             Alert.alert(
               "",
