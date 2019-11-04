@@ -61,7 +61,7 @@ export default class index extends Component {
       this.state.network === "Tigo" ||
       this.state.network === "Vodafone"
     ) {
-      if (Number(this.props.amount) < 10) {
+      if (Number(this.props.amount) < 1) {
         Alert.alert(
           "Alert",
           "Amount can't be less than 1GHS",
