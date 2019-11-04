@@ -27,7 +27,7 @@ export default class index extends Component {
         phonenumberErr: 'flex',
         inputErr: this.props.primarycolor
       })
-    }else if (Number(this.props.amount) < 10 ) {
+    }else if (Number(this.props.amount) < 1 ) {
         Alert.alert(
           'Alert',
           'Amount can\'t be less than 1UGX',

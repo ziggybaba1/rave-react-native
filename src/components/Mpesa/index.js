@@ -30,10 +30,10 @@ export default class index extends Component {
         inputErr: this.props.primarycolor
       })
     }else{
-      if (Number(this.props.amount) < 10) {
+      if (Number(this.props.amount) < 1) {
         Alert.alert(
           'Alert',
-          'Amount can\'t be less than 10',
+          'Amount can\'t be less than 1KES',
           [{
             text: 'Cancel',
             onPress: () => this.setState({
