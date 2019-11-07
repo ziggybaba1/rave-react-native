@@ -10,13 +10,16 @@ import {
   TouchableOpacity,
   Image,
   Platform,
-  WebView
+  WebView,
+  Dimensions
 } from "react-native";
 
 //Scrollable view Library
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 var valid = require("card-validator");
+let {height, width} = Dimensions.get('window')
+
 
 export default class index extends Component {
   constructor(props) {
@@ -803,9 +806,12 @@ export default class index extends Component {
     let web = (
       <WebView
         source={{ uri: this.state.vbvurl }}
-        style={{ padding: "50%" }}
+        style={{ height: height, width, resizeMode: 'cover', flex: 1 }}
+   
         onNavigationStateChange={this._onNavigationStateChange.bind(this)}
         javaScriptEnabled={true}
+        contentContainerStyle={{ paddingBottom: 60}}
+        scrollEnabled={true}
       />
     );
 
@@ -817,6 +823,8 @@ export default class index extends Component {
           style={{ padding: "50%" }}
           onNavigationStateChange={this._onNavigationStateChange.bind(this)}
           javaScriptEnabled={true}
+          contentContainerStyle={{ paddingBottom: 60}}
+          scrollEnabled={true}
         />
       );
     }
