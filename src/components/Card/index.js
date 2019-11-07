@@ -349,7 +349,8 @@ export default class index extends Component {
   }
 
   // Sends payload to Flutterwave
-  charge() {
+  //to be sure amount will sent as payload because i had issue making payment because of not getting props.amount
+  charge(price) {
     //Set button to loading
     this.setState({
       loading: true
@@ -357,6 +358,7 @@ export default class index extends Component {
     // Initiate the charge
     this.props.rave
       .initiatecharge({
+        amount:price,
         cardno: this.state.cardno.replace(/\s/g, ""),
         cvv: this.state.cvv,
         expirymonth: this.state.expirymonth,
@@ -462,7 +464,7 @@ export default class index extends Component {
               },
               {
                 text: "Yes",
-                onPress: () => this.charge()
+                onPress: () => this.charge(resp.data.charge_amount)//I add charge amount here to be sure it is sent
               }
             ],
             { cancelable: false }
