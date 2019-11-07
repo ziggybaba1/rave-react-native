@@ -10,8 +10,11 @@ import {
   TouchableOpacity,
   Image,
   Platform,
-  WebView
 } from "react-native";
+
+import Spinner from 'react-native-loading-spinner-overlay';
+//React Native WebView Deprecated Using this
+import WebView from 'react-native-webview';
 
 //Scrollable view Library
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -49,6 +52,7 @@ export default class index extends Component {
       loading: false,
       otp: "",
       intl: {},
+      visible:1,
       checked: false,
       address: "",
       city: "",
@@ -567,7 +571,14 @@ export default class index extends Component {
       return true;
     }
   }
-
+showSpinner() {
+        console.log('Show Spinner');
+        this.setState({ visible:1 });
+    }
+hideSpinner() {
+        console.log('Hide Spinner');
+        this.setState({ visible:0 });
+    }
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -691,23 +702,43 @@ export default class index extends Component {
     }
 
     let web = (
+     <View>
+      {this.state.visible==1&&
+      <Spinner
+                    visible={true}
+                    textContent={'Loading...'}
+                    textStyle={{ color: '#0d5039' }}
+                />}
       <WebView
         source={{ uri: this.state.vbvurl }}
         style={{ padding: "50%" }}
         onNavigationStateChange={this._onNavigationStateChange.bind(this)}
+        onLoadStart={() => (this.showSpinner())}
+      onLoad={() => (this.hideSpinner())}
         javaScriptEnabled={true}
       />
+      </View>
     );
 
     if (Platform.OS === "ios") {
       web = (
+        <View>
+      {this.state.visible==1&&
+      <Spinner
+                    visible={true}
+                    textContent={'Loading...'}
+                    textStyle={{ color: '#0d5039' }}
+                />}
         <WebView
           source={{ uri: this.state.vbvurl }}
           useWebKit={true}
           style={{ padding: "50%" }}
           onNavigationStateChange={this._onNavigationStateChange.bind(this)}
+          onLoadStart={() => (this.showSpinner())}
+      onLoad={() => (this.hideSpinner())}
           javaScriptEnabled={true}
         />
+</View>
       );
     }
     let page;
