@@ -11,7 +11,8 @@ import {
   Image,
   Platform,
   WebView,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
 
 //Scrollable view Library
@@ -804,6 +805,9 @@ export default class index extends Component {
     }
 
     let web = (
+      <ScrollView
+      contentContainerStyle={{ paddingBottom: 50}}
+      >
       <WebView
         source={{ uri: this.state.vbvurl }}
         style={{ height: height, width, resizeMode: 'cover', flex: 1 }}
@@ -813,19 +817,26 @@ export default class index extends Component {
         contentContainerStyle={{ paddingBottom: 60}}
         scrollEnabled={true}
       />
+      </ScrollView>
     );
 
     if (Platform.OS === "ios") {
       web = (
-        <WebView
+        <ScrollView
+        contentContainerStyle={{ paddingBottom: 50}}
+        >
+             <WebView
           source={{ uri: this.state.vbvurl }}
           useWebKit={true}
-          style={{ padding: "50%" }}
+          
+           style={{ height: height, width, resizeMode: 'cover', flex: 1 }}
           onNavigationStateChange={this._onNavigationStateChange.bind(this)}
           javaScriptEnabled={true}
-          contentContainerStyle={{ paddingBottom: 60}}
+          
           scrollEnabled={true}
         />
+        </ScrollView>
+       
       );
     }
     let page;
