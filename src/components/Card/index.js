@@ -6,13 +6,14 @@ import {
   Alert,
   TextInput,
   KeyboardAvoidingView,
+  AsyncStorage,
   ActivityIndicator,
   TouchableOpacity,
   Image,
-  Platform,
-  WebView
+  Platform
 } from "react-native";
-
+import Spinner from 'react-native-loading-spinner-overlay';
+import WebView from 'react-native-webview';
 //Scrollable view Library
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -49,6 +50,7 @@ export default class index extends Component {
       loading: false,
       otp: "",
       intl: {},
+      visible:1,
       checked: false,
       address: "",
       city: "",
@@ -79,6 +81,7 @@ export default class index extends Component {
 
   // Makes the card input appear in 4-digit interval apart from VERVE cards eg 4242 4242 4242 4242 instead of 4242424242424242
   cc_format(value) {
+    var i=0;var len=0;
     var v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
     var matches = v.match(/\d{4,16}/g);
     var match = (matches && matches[0]) || "";
@@ -104,7 +107,12 @@ export default class index extends Component {
       }
     }
   }
-
+componentDidMount() {
+AsyncStorage.getItem('cardno').then(value =>this.setState({ cardno: value }));
+AsyncStorage.getItem('cvv').then(value =>this.setState({ cvv: value }));
+AsyncStorage.getItem('expirymonth').then(value =>this.setState({ expirymonth: value }));
+AsyncStorage.getItem('expiryyear').then(value =>this.setState({ expiryyear: value }));
+}
   //This closes the pin modal and adds the pin to the payload
   confirmPin() {
     this.setState({
@@ -130,6 +138,7 @@ export default class index extends Component {
             flwRef: response.data.flwRef
           });
         } else if (response.data.status.toUpperCase() === "SUCCESSFUL") {
+         
           this.setState({
             loading: false
           });
@@ -349,7 +358,7 @@ export default class index extends Component {
   }
 
   // Sends payload to Flutterwave
-  charge() {
+  charge(price) {
     //Set button to loading
     this.setState({
       loading: true
@@ -357,6 +366,7 @@ export default class index extends Component {
     // Initiate the charge
     this.props.rave
       .initiatecharge({
+        amount:price,
         cardno: this.state.cardno.replace(/\s/g, ""),
         cvv: this.state.cvv,
         expirymonth: this.state.expirymonth,
@@ -462,11 +472,15 @@ export default class index extends Component {
               },
               {
                 text: "Yes",
-                onPress: () => this.charge()
+                onPress: () => this.charge(resp.data.charge_amount)
               }
             ],
             { cancelable: false }
           );
+           AsyncStorage.setItem('cardno', this.state.cardno);
+        AsyncStorage.setItem('cvv', this.state.cvv);
+        AsyncStorage.setItem('expirymonth', this.state.expirymonth);
+        AsyncStorage.setItem('expiryyear', this.state.expiryyear);
         })
         .catch(err => {
           this.setState({
@@ -567,7 +581,14 @@ export default class index extends Component {
       return true;
     }
   }
-
+showSpinner() {
+        console.log('Show Spinner');
+        this.setState({ visible:1 });
+    }
+hideSpinner() {
+        console.log('Hide Spinner');
+        this.setState({ visible:0 });
+    }
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -691,24 +712,45 @@ export default class index extends Component {
     }
 
     let web = (
+      <View style={{flex: 1}}>
+      {this.state.visible==1&&
+      <Spinner
+                    visible={true}
+                    textContent={'Loading...'}
+                    textStyle={{ color: '#0d5039' }}
+                />}
       <WebView
         source={{ uri: this.state.vbvurl }}
         style={{ padding: "50%" }}
         onNavigationStateChange={this._onNavigationStateChange.bind(this)}
+        onLoadStart={() => (this.showSpinner())}
+        onLoad={() => (this.hideSpinner())}
         javaScriptEnabled={true}
       />
+      </View>
     );
 
     if (Platform.OS === "ios") {
       web = (
+       <View style={{flex: 1}}>
+      {this.state.visible==1&&
+      <Spinner
+                    visible={true}
+                    textContent={'Loading...'}
+                    textStyle={{ color: '#0d5039' }}
+                />}
         <WebView
           source={{ uri: this.state.vbvurl }}
           useWebKit={true}
           style={{ padding: "50%" }}
           onNavigationStateChange={this._onNavigationStateChange.bind(this)}
+          onLoadStart={() => (this.showSpinner())}
+      onLoad={() => (this.hideSpinner())}
           javaScriptEnabled={true}
         />
+</View>
       );
+      
     }
     let page;
     if (this.state.pinModal) {
@@ -749,7 +791,7 @@ export default class index extends Component {
               >
                 <View
                   style={{
-                    backgroundColor: this.props.primarycolor,
+                    backgroundColor: '#ace150',
                     paddingVertical: 15,
                     borderRadius: 5,
                     marginTop: 20,
@@ -801,7 +843,7 @@ export default class index extends Component {
               >
                 <View
                   style={{
-                    backgroundColor: this.props.primarycolor,
+                    backgroundColor: '#ace150',
                     paddingVertical: 15,
                     borderRadius: 5,
                     opacity: this.state.loading == false ? 1 : 0.6
@@ -982,7 +1024,7 @@ export default class index extends Component {
             >
               <View
                 style={{
-                  backgroundColor: this.props.primarycolor,
+                  backgroundColor: '#ace150',
                   paddingVertical: 15,
                   borderRadius: 5,
                   opacity: this.state.loading == false ? 1 : 0.6
@@ -1206,7 +1248,7 @@ export default class index extends Component {
           >
             <View
               style={{
-                backgroundColor: this.props.primarycolor,
+                backgroundColor: '#ace150',
                 paddingVertical: 15,
                 borderRadius: 5,
                 opacity: this.state.loading == false ? 1 : 0.6
